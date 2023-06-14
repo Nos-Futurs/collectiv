@@ -16,6 +16,7 @@ model User {
   createdAt         DateTime               @default(now())
   firstName         String
   lastName          String
+  password          String
   description       String
   region            String
   company           Company                @relation(fields: [companyId], references: [id]) // One to many relation with company
