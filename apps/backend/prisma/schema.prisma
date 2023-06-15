@@ -1,0 +1,124 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                Int                    @id @default(autoincrement())
+  email             String                 @unique
+  createdAt         DateTime               @default(now())
+  firstName         String
+  lastName          String
+  password          String
+  description       String
+  region            String
+  company           Company                @relation(fields: [companyId], references: [id]) // One to many relation with company
+  companyId         Int
+  tags              TagsOnUsers[] // many to many relation with tags
+  workingGroupOwned WorkingGroup[]
+  WorkingGroups     WorkingGroupsOnUsers[]
+}
+
+model Company {
+  id        Int               @id @default(autoincrement())
+  name      String            @unique
+  createdAt DateTime          @default(now())
+  region    String
+  users     User[]
+  tags      TagsOnCompanies[]
+}
+
+model Tag {
+  id            Int                   @id @default(autoincrement())
+  name          String                @unique
+  createdAt     DateTime              @default(now())
+  users         TagsOnUsers[]
+  events        TagsOnEvents[]
+  companies     TagsOnCompanies[]
+  workingGroups TagsOnWorkingGroups[]
+}
+
+model WorkingGroup {
+  id        Int                    @id @default(autoincrement())
+  name      String                 @unique
+  createdAt DateTime               @default(now())
+  updatedAt DateTime               @updatedAt
+  owner     User                   @relation(fields: [ownerId], references: [id])
+  ownerId   Int
+  users     WorkingGroupsOnUsers[]
+  tags      TagsOnWorkingGroups[]
+  Event     Event[]
+}
+
+model Event {
+  id             Int            @id @default(autoincrement())
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  startDate      DateTime
+  endDate        DateTime
+  workingGroup   WorkingGroup   @relation(fields: [workingGroupId], references: [id]) // One to many relation with workingGroup
+  workingGroupId Int
+  name           String
+  tags           TagsOnEvents[]
+}
+
+// /* -------------------------------------------------------------------------- */
+// /*                           MANY TO MANY RELATIONS                           */
+// /* -------------------------------------------------------------------------- */
+
+model TagsOnUsers {
+  tag        Tag      @relation(fields: [tagId], references: [id])
+  tagId      Int // relation scalar field (used in the `@relation` attribute above)
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int // relation scalar field (used in the `@relation` attribute above)
+  assignedAt DateTime @default(now())
+
+  @@id([tagId, userId])
+}
+
+model TagsOnCompanies {
+  tag        Tag      @relation(fields: [tagId], references: [id])
+  tagId      Int // relation scalar field (used in the `@relation` attribute above)
+  company    Company  @relation(fields: [companyId], references: [id])
+  companyId  Int // relation scalar field (used in the `@relation` attribute above)
+  assignedAt DateTime @default(now())
+
+  @@id([tagId, companyId])
+}
+
+model TagsOnEvents {
+  tag        Tag      @relation(fields: [tagId], references: [id])
+  tagId      Int // relation scalar field (used in the `@relation` attribute above)
+  event      Event    @relation(fields: [eventId], references: [id])
+  eventId    Int // relation scalar field (used in the `@relation` attribute above)
+  assignedAt DateTime @default(now())
+
+  @@id([tagId, eventId])
+}
+
+model TagsOnWorkingGroups {
+  tag            Tag          @relation(fields: [tagId], references: [id])
+  tagId          Int // relation scalar field (used in the `@relation` attribute above)
+  workingGroup   WorkingGroup @relation(fields: [workingGroupId], references: [id])
+  workingGroupId Int // relation scalar field (used in the `@relation` attribute above)
+  assignedAt     DateTime     @default(now())
+
+  @@id([tagId, workingGroupId])
+}
+
+model WorkingGroupsOnUsers {
+  workingGroup   WorkingGroup @relation(fields: [workingGroupId], references: [id])
+  workingGroupId Int // relation scalar field (used in the `@relation` attribute above)
+  user           User         @relation(fields: [userId], references: [id])
+  userId         Int // relation scalar field (used in the `@relation` attribute above)
+  assignedAt     DateTime     @default(now())
+
+  @@id([workingGroupId, userId])
+}
