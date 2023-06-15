@@ -5,7 +5,7 @@ import {
   Get,
   Param,
   Post,
-  Put,
+  Put
 } from '@nestjs/common';
 import { Tag, TagsOnUsers, User } from '@prisma/client';
 import PrismaService from '../database/prisma.service';
@@ -56,7 +56,7 @@ export class UserController {
   @Put(':id/remove-tag')
   async removeTag(
     @Param('id') id: string,
-    @Body() data: {tagId: number},
+    @Body() data: { tagId: number },
   ): Promise<TagsOnUsers> {
     return this.userService.removeTag(Number(id), data.tagId);
   }

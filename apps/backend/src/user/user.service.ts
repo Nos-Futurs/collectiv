@@ -6,6 +6,12 @@ import PrismaService from '../database/prisma.service';
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
+  async findOne(email: string): Promise<User | undefined> {
+    return this.prisma.user.findUnique({
+      where: { email },
+    });
+  }
+
   addTag(userId: number, tagId: number): Promise<User> {
     return this.prisma.user.update({
       where: { id: Number(userId) },
@@ -13,7 +19,7 @@ export class UserService {
         tags: {
           create: [
             {
-              tag : {
+              tag: {
                 connect: {
                   id: tagId,
                 },
@@ -27,7 +33,7 @@ export class UserService {
 
   removeTag(userId: number, tagId: number): Promise<TagsOnUsers> {
     return this.prisma.tagsOnUsers.delete({
-      where: { tagId_userId: { userId, tagId} },
+      where: { tagId_userId: { userId, tagId } },
     });
   }
 }
