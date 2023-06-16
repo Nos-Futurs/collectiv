@@ -7,7 +7,6 @@ export class UserService {
   constructor(private prisma: PrismaService) {}
 
   addTag(userId: number, tagId: number): Promise<User> {
-    console.log(tagId);
     return this.prisma.user.update({
       where: { id: Number(userId) },
       data: {
