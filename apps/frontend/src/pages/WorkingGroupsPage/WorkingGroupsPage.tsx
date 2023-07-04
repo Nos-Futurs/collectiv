@@ -1,11 +1,11 @@
-import type { Component } from 'solid-js';
-
+import type { Component } from "solid-js";
+import PageLayout from "../../layout/Layout";
 
 const LoginPage: Component = () => {
   return (
-    <div>
-      WorkingGroups Page - Hello World
-    </div>
+    <PageLayout id="working-groups">
+      <div>WorkingGroups Page - Hello World</div>
+    </PageLayout>
   );
 };
 

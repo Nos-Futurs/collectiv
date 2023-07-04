@@ -1,0 +1,10 @@
+
+@use "../../style/colours";
+
+#footer{
+    min-height: 150px;
+    background-color: colours.$purple;
+    position: absolute;
+    bottom: 0;
+    width: 100%
+}
