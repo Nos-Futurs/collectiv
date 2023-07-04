@@ -1,0 +1,6 @@
+@use "../../style/colours";
+
+#header{
+    min-height: 150px;
+    background-color: colours.$light-blue;
+}
