@@ -1,6 +1,23 @@
 @use "../../style/colours";
+@use "../../style/layouts";
+@use "../../style/spacings";
+@use "../../style/font-sizes";
 
-#header{
-    min-height: 150px;
-    background-color: colours.$green-blue;
+#header {
+  @include layouts.flex(row, center, center);
+  column-gap: spacings.$xxl;
+  min-height: 150px;
+  background-color: colours.$green-blue;
+
+  .selected {
+    background-color: colours.$light-blue;
+  }
+  .unselected {
+    background-color: colours.$grey;
+  }
+
+  a{
+    font-size: font-sizes.$s;
+    color: colours.$black;
+  }
 }

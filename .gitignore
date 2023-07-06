@@ -2,7 +2,7 @@
 node_modules/
 
 # dotenv environment variables file
-apps/backend/.env
+apps/**/.env
 .env.test
 
 # Nuxt.js build / generate output

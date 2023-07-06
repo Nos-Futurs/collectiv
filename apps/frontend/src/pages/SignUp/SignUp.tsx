@@ -1,27 +1,43 @@
 import { createSignal, type Component } from "solid-js";
 
 import './SignUp.scss';
+import { signup } from "../../api/authApi";
+import { useNavigate } from "@solidjs/router";
 
 const SignUp: Component = () => {
-  const [username, setUsername] = createSignal("");
+  const [lastName, setLastName] = createSignal("");
+  const [firstName, setFirstName] = createSignal("");
   const [password, setPassword] = createSignal("");
   const [email, setEmail] = createSignal("");
+  const navigate = useNavigate();
 
   const handleSignupSubmit = () => {
-    // Gérer la soumission du formulaire d'inscription ici
+      // navigate(AppRoutes.home.path);
+      signup(email(), firstName(), lastName(), password());
+      return false;
+    
   };
 
   return (
     <div class="container">
-        <form class="signup-form" onSubmit={handleSignupSubmit}>
+        <div id="signup-form">
           <h2 class="login-title">Créez votre compte</h2>
           <div class="form-group">
-            <label for="new-username">Nom d'utilisateur</label>
+            <label for="name">Nom</label>
             <input
-              id="new-username"
+              id="name"
               type="text"
-              value={username()}
-              onInput={(e: Event) => setUsername((e.target as HTMLInputElement).value)}
+              value={lastName()}
+              onInput={(e: Event) => setLastName((e.target as HTMLInputElement).value)}
+            />
+          </div>
+          <div class="form-group">
+            <label for="first-name">Prénom</label>
+            <input
+              id="first-name"
+              type="text"
+              value={firstName()}
+              onInput={(e: Event) => setFirstName((e.target as HTMLInputElement).value)}
             />
           </div>
           <div class="form-group">
@@ -43,12 +59,12 @@ const SignUp: Component = () => {
             />
           </div>
           <div class="button-container">
-            <button type="submit" id="signup-button">S'inscrire</button>
+            <button type="submit" id="signup-button" onClick={handleSignupSubmit}>S'inscrire</button>
             <a id="cancel-button" href="/login">
               Annuler
             </a>
           </div>
-        </form>
+        </div>
     </div>
   );
 };

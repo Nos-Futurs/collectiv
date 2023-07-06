@@ -10,7 +10,7 @@ interface HomeProps {
 
 const PageLayout: Component<HomeProps> = (props: HomeProps) => (
   <main id={props.id} class="page">
-    <Header />
+    <Header page={props.id}/>
     <div class="content">{props.children}</div>
     <Footer />
   </main>
