@@ -6,10 +6,11 @@ export async function signup(
   email: string,
   firstName: string,
   lastName: string,
-  password: string,
   region: string,
   description: string
+  password: string
 ): Promise<void> {
+  console.log(`${baseApiUrl}/auth/signup`);
   return axios({
     method: "post",
     url: `${baseApiUrl}/auth/signup`,
