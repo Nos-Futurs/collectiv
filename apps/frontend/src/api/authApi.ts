@@ -7,10 +7,9 @@ export async function signup(
   firstName: string,
   lastName: string,
   region: string,
-  description: string
+  description: string,
   password: string
 ): Promise<void> {
-  console.log(`${baseApiUrl}/auth/signup`);
   return axios({
     method: "post",
     url: `${baseApiUrl}/auth/signup`,
@@ -40,20 +39,4 @@ export async function login(
       password,
     },
   }).then(result => {console.log(result)});
-}
-
-export async function login(
-  username: string,
-  password: string,
-): Promise<void> {
-  console.log(`${baseApiUrl}/login`);
-  return axios({
-    method: "post",
-    url: `${baseApiUrl}/auth/signup`,
-    withCredentials: true,
-    data: {
-      username,
-      password,
-    },
-  });
 }
