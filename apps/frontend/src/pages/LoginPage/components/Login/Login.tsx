@@ -1,56 +1,51 @@
-import {
-  Setter,
-  type Component
-} from "solid-js";
-
-import { createStore } from 'solid-js/store';
+import { Setter, type Component, createSignal } from "solid-js";
 
 import "./Login.scss";
+import Input from "../../../../components/Input/Input";
+import { login } from "../../../../api/authApi";
+import { useNavigate } from "@solidjs/router";
 
 interface LoginProps {
-  setForgetPassword: Setter<boolean>
+  setForgetPassword: Setter<boolean>;
 }
 
 const Login: Component<LoginProps> = (props: LoginProps) => {
-  const [loginForm, setLoginForm] = createStore({ username: "", password: "" });
+  const [username, setUsername] = createSignal("");
+  const [password, setPassword] = createSignal("");
+  const navigate = useNavigate();
+
   const handleLoginSubmit = () => {
+    login(username(), password()).then(() => navigate("/registry"));
     // Gérer la soumission du formulaire de connexion ici
   };
 
   return (
     <div class="container">
-      <form
-        id="login-form"
-        onSubmit={handleLoginSubmit}
-      >
+      <div id="login-form">
         <h2 class="login-title">Identifiez-vous</h2>
-        <div class="form-group">
-          <label for="username">Nom d'utilisateur</label>
-          <input
-            id="username"
-            type="text"
-            value={loginForm.username}
-            onInput={(e: Event) =>
-              setLoginForm({username: (e.target as HTMLInputElement).value})
-            }
-          />
+        <Input
+          id="username"
+          type="email"
+          label="Email"
+          value={username}
+          setValue={setUsername}
+        />
+        <Input
+          id="password"
+          type="password"
+          label="Mot de passe"
+          value={password}
+          setValue={setPassword}
+        />
+        <div class="forgot-password-link" onClick={props.setForgetPassword}>
+          Mot de passe oublié ?
         </div>
         <div class="form-group">
-          <label for="password">Mot de passe</label>
-          <input
-            id="password"
-            type="password"
-            value={loginForm.password}
-            onInput={(e: Event) =>
-              setLoginForm({password: (e.target as HTMLInputElement).value})
-            }
-          />
-          <div class="forgot-password-link" onClick={props.setForgetPassword}>
-            Mot de passe oublié ?
-          </div>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="login-button">
+          <button
+            type="submit"
+            class="login-button"
+            onClick={handleLoginSubmit}
+          >
             S'identifier
           </button>
           <div class="form-group button-container">
@@ -59,7 +54,7 @@ const Login: Component<LoginProps> = (props: LoginProps) => {
             </a>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

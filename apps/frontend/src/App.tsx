@@ -9,10 +9,10 @@ const App: Component = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/login" component={LoginPage} /> 
-        <Route path="/signup" component={SignUp} /> 
-        <Route path="/registry" component={registryPage} /> 
-        <Route path="/working-groups" component={workingGroupsPage} /> 
+        <Route path="/login" component={LoginPage} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/registry" component={registryPage} />
+        <Route path="/working-groups" component={workingGroupsPage} />
       </Routes>
     </Router>
   );

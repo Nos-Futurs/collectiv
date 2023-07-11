@@ -1,8 +1,6 @@
 import { createSignal, type Component, Accessor, Setter } from "solid-js";
 
 import "./Input.scss";
-import { signup } from "../../api/authApi";
-import { useNavigate } from "@solidjs/router";
 
 interface InputProps {
   value: Accessor<string>;

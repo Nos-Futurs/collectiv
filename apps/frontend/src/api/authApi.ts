@@ -6,9 +6,10 @@ export async function signup(
   email: string,
   firstName: string,
   lastName: string,
-  password: string
+  password: string,
+  region: string,
+  description: string
 ): Promise<void> {
-  console.log(`${baseApiUrl}/auth/signup`);
   return axios({
     method: "post",
     url: `${baseApiUrl}/auth/signup`,
@@ -18,25 +19,24 @@ export async function signup(
       firstName,
       lastName,
       password,
-      description: "first api test",
-      region: "manche",
+      description,
+      region,
       companyId: 1,
     },
-  });
+  }).then((resp) => resp.data);;
 }
 
 export async function login(
   username: string,
   password: string,
 ): Promise<void> {
-  console.log(`${baseApiUrl}/login`);
   return axios({
     method: "post",
-    url: `${baseApiUrl}/auth/signup`,
+    url: `${baseApiUrl}/auth/login`,
     withCredentials: true,
     data: {
-      username,
+      email: username,
       password,
     },
-  });
+  }).then(result => {console.log(result)});
 }
