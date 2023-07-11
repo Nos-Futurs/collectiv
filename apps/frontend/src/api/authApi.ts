@@ -24,3 +24,19 @@ export async function signup(
     },
   });
 }
+
+export async function login(
+  username: string,
+  password: string,
+): Promise<void> {
+  console.log(`${baseApiUrl}/login`);
+  return axios({
+    method: "post",
+    url: `${baseApiUrl}/auth/signup`,
+    withCredentials: true,
+    data: {
+      username,
+      password,
+    },
+  });
+}

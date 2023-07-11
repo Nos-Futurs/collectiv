@@ -1,0 +1,16 @@
+@use "../../style/spacings";
+
+
+.form-group {
+    margin: spacings.$s 0 spacings.$xs 0;
+    textarea {
+        min-height: spacings.$xxl;
+        resize: vertical;
+    }
+}
+  
+label {
+    display: block;
+    margin-bottom: spacings.$xs;
+}
+  

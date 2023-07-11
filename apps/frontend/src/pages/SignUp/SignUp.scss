@@ -1,4 +1,5 @@
 @use "../../style/colours";
+@use "../../style/spacings";
 
 
 .container {
@@ -23,16 +24,6 @@
     margin-bottom: 16px;
     text-align: center;
 }
-  
-.form-group {
-    margin-bottom: 16px;
-}
-  
-label {
-    display: block;
-    margin-bottom: 8px;
-}
-  
 
 
 #signup-button {
@@ -48,10 +39,9 @@ label {
 
 .button-container {
     display: flex;
+    margin: spacings.$l 0 spacings.$s 0;
     justify-content: space-between;
 }
-
-
 
 .forgot-password-link {
     margin-top: 10px;
