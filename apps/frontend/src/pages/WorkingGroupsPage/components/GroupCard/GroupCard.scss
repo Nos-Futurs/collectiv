@@ -1,0 +1,14 @@
+@use "../../../../style/colours";
+@use "../../../../style/layouts";
+@use "../../../../style/spacings";
+
+
+#group-card {
+  @include layouts.flex(row, center, center);
+  background-color: white;
+  border: solid 1.5px colours.$dark-grey;
+  border-radius: 10px;
+  width: 100%;
+  min-height: 150px;
+  margin: spacings.$l 0;
+}

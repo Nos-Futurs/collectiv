@@ -4,9 +4,10 @@
 @use "../../style/font-sizes";
 
 #header {
-  @include layouts.flex(row, center, center);
-  column-gap: spacings.$xxl;
-  min-height: 150px;
+  @include layouts.flex(row, flex-start, center);
+  padding: 0 spacings.$xxl;
+  column-gap: spacings.$xl;
+  min-height: 100px;
   background-color: colours.$green-blue;
 
   .selected {
@@ -16,8 +17,17 @@
     background-color: colours.$grey;
   }
 
-  a{
+  a {
     font-size: font-sizes.$s;
     color: colours.$black;
+  }
+
+  #profil-button {
+    margin-left: auto;
+    height: 65px;
+  }
+  #profil {
+    max-width: 100%;
+    max-height: 100%;
   }
 }

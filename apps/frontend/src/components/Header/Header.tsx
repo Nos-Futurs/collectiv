@@ -1,7 +1,7 @@
-import { createSignal, type Component, createEffect } from "solid-js";
+import { type Component } from "solid-js";
+import profil from "../../assets/profil.svg";
 import "./Header.scss";
 import { A } from "@solidjs/router";
-
 
 interface HeaderProps {
   page: string;
@@ -22,6 +22,9 @@ const Header: Component<HeaderProps> = (props: HeaderProps) => {
       >
         Groupes de travail
       </A>
+      <button onClick={()=> {}} id="profil-button">
+        <img alt="profil" id="profil" src={profil} />
+      </button>
     </section>
   );
 };

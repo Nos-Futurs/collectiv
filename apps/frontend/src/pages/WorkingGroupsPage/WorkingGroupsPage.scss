@@ -1,0 +1,15 @@
+@use "../../style/colours";
+@use "../../style/spacings";
+
+#working-groups {
+  #divider {
+    border: solid 1.5px;
+    border-radius: 1px;
+    margin: spacings.$m spacings.$xl;
+    border-color: colours.$dark-grey;
+  }
+  #groups {
+    overflow-y: scroll;
+    padding: spacings.$m spacings.$xl;
+  }
+}

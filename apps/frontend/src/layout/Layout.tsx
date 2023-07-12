@@ -1,7 +1,6 @@
 import { Component, JSXElement } from 'solid-js';
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
-import './Layout.scss';
 
 interface HomeProps {
   id: string;
