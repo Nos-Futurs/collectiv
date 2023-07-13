@@ -1,6 +1,33 @@
 @use "../../style/colours";
+@use "../../style/layouts";
+@use "../../style/spacings";
+@use "../../style/font-sizes";
 
-#header{
-    min-height: 150px;
-    background-color: colours.$green-blue;
+#header {
+  @include layouts.flex(row, flex-start, center);
+  padding: 0 spacings.$xxl;
+  column-gap: spacings.$xl;
+  min-height: 100px;
+  background-color: colours.$green-blue;
+
+  .selected {
+    background-color: colours.$light-blue;
+  }
+  .unselected {
+    background-color: colours.$grey;
+  }
+
+  a {
+    font-size: font-sizes.$s;
+    color: colours.$black;
+  }
+
+  #profil-button {
+    margin-left: auto;
+    height: 65px;
+  }
+  #profil {
+    max-width: 100%;
+    max-height: 100%;
+  }
 }

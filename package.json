@@ -1,10 +1,13 @@
 {
-  "name": "collectiv",
+  "name": "@collectiv/monorepo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "pnpm -r --filter @collectiv/backend build && pnpm -r --filter @collectiv/frontend build",
+    "start:api": "pnpm -r --filter @collectiv/backend start:dev",
+    "start:web": "pnpm -r --filter @collectiv/frontend dev",
+    "start:dev": "pnpm start:api && start:web"
   },
   "keywords": [],
   "author": "",

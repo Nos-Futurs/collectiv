@@ -7,7 +7,7 @@
     height: 100vh;
 }
   
-form {
+#login-form {
     background-color: #f0f0f0;
     padding: 20px;
     border-radius: 8px;
@@ -22,16 +22,6 @@ form {
     margin-bottom: 16px;
     text-align: center;
 }
-  
-.form-group {
-    margin-bottom: 16px;
-}
-  
-label {
-    display: block;
-    margin-bottom: 8px;
-}
-
   
 .login-button {
     width: 100%;
@@ -91,10 +81,5 @@ label {
   
 .reset-password-button {
     margin-top: 20px;
-}
-  
-
-.email_address {
-    margin-top: 30px;
 }
   

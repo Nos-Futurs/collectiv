@@ -1,0 +1,10 @@
+@use "../../../../style/colours";
+@use "../../../../style/layouts";
+@use "../../../../style/spacings";
+@use "../../../../style/font-sizes";
+
+#search {
+  @include layouts.flex(row, flex-start, center);
+  margin: spacings.$xl spacings.$xl spacings.$m spacings.$xl;
+  min-height: 100px;
+}

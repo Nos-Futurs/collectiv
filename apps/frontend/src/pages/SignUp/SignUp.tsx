@@ -1,54 +1,80 @@
 import { createSignal, type Component } from "solid-js";
 
-import './SignUp.scss';
+import "./SignUp.scss";
+import { signup } from "../../api/authApi";
+import { useNavigate } from "@solidjs/router";
+import Input from "../../components/Input/Input";
 
 const SignUp: Component = () => {
-  const [username, setUsername] = createSignal("");
+  const [lastName, setLastName] = createSignal("");
+  const [firstName, setFirstName] = createSignal("");
   const [password, setPassword] = createSignal("");
   const [email, setEmail] = createSignal("");
+  const [region, setRegion] = createSignal("");
+  const [description, setDescription] = createSignal("");
+  const navigate = useNavigate();
 
   const handleSignupSubmit = () => {
-    // Gérer la soumission du formulaire d'inscription ici
+    signup(
+      email(),
+      firstName(),
+      lastName(),
+      password(),
+      region(),
+      description()
+    ).then(() => {
+      navigate("/login");
+    });
+    return false;
   };
 
   return (
     <div class="container">
-        <form class="signup-form" onSubmit={handleSignupSubmit}>
-          <h2 class="login-title">Créez votre compte</h2>
-          <div class="form-group">
-            <label for="new-username">Nom d'utilisateur</label>
-            <input
-              id="new-username"
-              type="text"
-              value={username()}
-              onInput={(e: Event) => setUsername((e.target as HTMLInputElement).value)}
-            />
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              id="email"
-              type="email"
-              value={email()}
-              onInput={(e: Event) => setEmail((e.target as HTMLInputElement).value)}
-            />
-          </div>
-          <div class="form-group">
-            <label for="new-password">Mot de passe</label>
-            <input
-              id="new-password"
-              type="password"
-              value={password()}
-              onInput={(e: Event) => setPassword((e.target as HTMLInputElement).value)}
-            />
-          </div>
-          <div class="button-container">
-            <button type="submit" id="signup-button">S'inscrire</button>
-            <a id="cancel-button" href="/login">
-              Annuler
-            </a>
-          </div>
-        </form>
+      <div id="signup-form">
+        <h2 class="login-title">Créez votre compte</h2>
+        <Input
+          label="Nom"
+          id="lastName"
+          value={lastName}
+          setValue={setLastName}
+        />
+        <Input
+          label="Prénom"
+          id="firstName"
+          value={firstName}
+          setValue={setFirstName}
+        />
+        <Input
+          label="Email"
+          id="email"
+          value={email}
+          setValue={setEmail}
+          type="email"
+        />
+        <Input
+          label="Mot de passe"
+          id="password"
+          value={password}
+          setValue={setPassword}
+          type="password"
+        />
+        <Input label="Région" id="area" value={region} setValue={setRegion} />
+        <Input
+          label="Description"
+          id="description"
+          value={description}
+          setValue={setDescription}
+          largeInput={true}
+        />
+        <div class="button-container">
+          <button type="submit" id="signup-button" onClick={handleSignupSubmit}>
+            S'inscrire
+          </button>
+          <a id="cancel-button" href="/login">
+            Annuler
+          </a>
+        </div>
+      </div>
     </div>
   );
 };
