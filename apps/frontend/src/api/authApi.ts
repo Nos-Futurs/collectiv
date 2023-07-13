@@ -6,9 +6,9 @@ export async function signup(
   email: string,
   firstName: string,
   lastName: string,
-  password: string,
   region: string,
-  description: string
+  description: string,
+  password: string
 ): Promise<void> {
   return axios({
     method: "post",

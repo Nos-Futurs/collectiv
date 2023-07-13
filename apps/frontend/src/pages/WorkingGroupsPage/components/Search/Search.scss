@@ -5,6 +5,5 @@
 
 #search {
   @include layouts.flex(row, flex-start, center);
-  margin: spacings.$xl spacings.$xl spacings.$m spacings.$xl;
-  min-height: 100px;
+  padding: spacings.$xl spacings.$xl spacings.$m spacings.$xl;
 }
