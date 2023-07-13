@@ -5,6 +5,11 @@
 
 #header {
   @include layouts.flex(row, flex-start, center);
+  display: flex;
+  position: sticky;
+  right: 0;
+  z-index: 1;
+  top: 0;
   padding: 0 spacings.$xxl;
   column-gap: spacings.$xl;
   min-height: 100px;

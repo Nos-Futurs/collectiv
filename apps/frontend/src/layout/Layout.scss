@@ -1,0 +1,12 @@
+@use "../style/layouts";
+
+.page {
+  width: 100%;
+  max-height: 100%;
+
+  .content {
+    @include layouts.flex(column, stretch, stretch);
+    width: 100%;
+    height: calc(100vh - (200px));
+  }
+}
