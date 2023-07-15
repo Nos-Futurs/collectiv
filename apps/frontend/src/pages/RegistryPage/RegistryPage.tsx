@@ -1,8 +1,8 @@
 import { For, type Component, createSignal } from "solid-js";
 import UserCard from "./components/UserCard/UserCard";
 import PageLayout from "../../layout/Layout";
-import { useNavigate } from "@solidjs/router";
 
+import SearchBar from "../../components/SearchBar/SearchBar"
 import "./RegistryPage.scss"
 // Aller chercher les utilisateurs dans le back
 
@@ -10,7 +10,19 @@ import "./RegistryPage.scss"
 
 const RegistryPage: Component = () => {
   const users=[{
-    firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]
+    firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
+    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
+    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
+    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
+    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
+    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
+    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
+    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
+    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
+    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
+    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
+    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
+    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"],
   }]
   const [searchQuery, setSearchQuery] = createSignal("");
   const [selectedTags, setSelectedTags] = createSignal<string[]>([]);
@@ -53,23 +65,15 @@ const RegistryPage: Component = () => {
 
   return (  
     <PageLayout id="registry-page" protected={true}>
-      <header>
-
-      </header>
-
-      
-    
       <div id="search-bar">
-        <input
-        id="search-input"
-          type="text"
-          value={searchQuery()}
-          onInput={handleSearch}
-          placeholder="Rechercher"
-        />
+        <SearchBar 
+        onClick={() => {}} />
       </div>
-    
-
+      {/* <input
+          value={searchQuery()} 
+          onInput={handleSearch}
+          /> */}
+      
       <div id="tags-container">
         <For each={["Travail", "Lieu", "Sport"]} fallback={<div>Loading tags...</div>}>
           {(tag) => (
@@ -95,12 +99,6 @@ const RegistryPage: Component = () => {
           )}
         </For>
       </div>
-      
-
-      
-      <footer>
-
-      </footer>
     </PageLayout>
   );
 };
