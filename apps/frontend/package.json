@@ -21,7 +21,6 @@
     "axios": "^1.4.0",
     "rimraf": "^3.0.2",
     "sass": "^1.63.4",
-    "shared-types-collectiv": "workspace:^",
     "solid-js": "^1.6.10"
   }
 }

@@ -7,8 +7,8 @@ import {
   createSignal,
   useContext,
 } from "solid-js";
-import { User } from "shared-types-collectiv";
 import { getMe } from "../api/userApi";
+import { User } from "./User";
 
 interface AuthProviderProps {
   children: JSX.Element;
