@@ -1,12 +1,14 @@
-import { createSignal, type Component, For } from "solid-js";
+import { createSignal, type Component, For, createResource } from "solid-js";
 import "./WorkingGroupsPage.scss";
 import PageLayout from "../../layout/Layout";
 import SwitchButton from "../../components/buttons/SwitchButton/SwitchButton";
 import Search from "./components/Search/Search";
 import GroupCard from "./components/GroupCard/GroupCard";
+//import { getGroups } from "../../api/workingGroupsApi";
 
 const LoginPage: Component = () => {
   const [myGroups, setMyGroups] = createSignal(false);
+  //const [groups] = createResource(getGroups);
 
   const mockGroups = [
     {

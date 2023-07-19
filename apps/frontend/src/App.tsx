@@ -4,16 +4,19 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import registryPage from "./pages/RegistryPage/RegistryPage";
 import SignUp from "./pages/SignUp/SignUp";
 import workingGroupsPage from "./pages/WorkingGroupsPage/WorkingGroupsPage";
+import { UserProvider } from "./context/authContext";
 
 const App: Component = () => {
   return (
     <Router>
-      <Routes>
-        <Route path="/login" component={LoginPage} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/registry" component={registryPage} />
-        <Route path="/working-groups" component={workingGroupsPage} />
-      </Routes>
+      <UserProvider>
+        <Routes>
+          <Route path="/login" component={LoginPage} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/registry" component={registryPage} />
+          <Route path="/working-groups" component={workingGroupsPage} />
+        </Routes>
+      </UserProvider>
     </Router>
   );
 };

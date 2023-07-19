@@ -1,0 +1,5 @@
+packages:
+  # executable/launchable applications
+  - "apps/*"
+  # component or function libraries
+  - "shared-types-collectiv"

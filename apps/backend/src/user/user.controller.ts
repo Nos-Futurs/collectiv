@@ -5,11 +5,13 @@ import {
   Get,
   Param,
   Post,
-  Put
+  Put,
+  Req
 } from '@nestjs/common';
 import { Tag, TagsOnUsers, User } from '@prisma/client';
 import PrismaService from '../database/prisma.service';
 import { UserService } from './user.service';
+import RequestWithUser from 'src/auth/types/RequestWithUser';
 
 @Controller('user')
 export class UserController {
@@ -17,6 +19,11 @@ export class UserController {
     private readonly prisma: PrismaService,
     private readonly userService: UserService,
   ) {}
+
+  @Get('/me')
+  async findMe(@Req() req: RequestWithUser,): Promise<User> {
+    return req.user;
+  }
 
   @Get()
   async findAll(): Promise<User[]> {

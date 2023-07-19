@@ -6,7 +6,9 @@
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "clean:deep": "rm -rf ./dist && rm -rf ./node_modules",
+    "clean": "rimraf ./dist"
   },
   "license": "MIT",
   "devDependencies": {
@@ -17,7 +19,9 @@
   "dependencies": {
     "@solidjs/router": "^0.8.2",
     "axios": "^1.4.0",
+    "rimraf": "^3.0.2",
     "sass": "^1.63.4",
+    "shared-types-collectiv": "workspace:^",
     "solid-js": "^1.6.10"
   }
 }

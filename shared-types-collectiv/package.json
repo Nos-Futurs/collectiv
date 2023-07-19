@@ -1,0 +1,33 @@
+{
+  "name": "shared-types-collectiv",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "files": [
+    "dist",
+    "index.d.ts",
+    "./package.json"
+  ],
+  "main": "./dist/shared-types-collectiv.umd.cjs",
+  "module": "./dist/shared-types-collectiv.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "types": "./index.d.ts",
+    "import": "./dist/shared-types-collectiv.js",
+    "require": "./dist/shared-types-collectiv.umd.cjs"
+  },
+  "scripts": {
+    "build": "pnpm clean && vite build",
+    "clean": "rimraf ./dist "
+  },
+  "dependencies": {
+    "rimraf": "^3.0.2",
+    "shared-types-collectiv": "workspace:^"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.2",
+    "vite": "^4.4.0",
+    "vite-plugin-dts": "^3.3.1",
+    "vite-plugin-solid": "^2.7.0"
+  }
+}
