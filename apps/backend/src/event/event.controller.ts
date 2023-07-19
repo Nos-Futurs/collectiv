@@ -6,10 +6,14 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { Event } from '@prisma/client';
 import PrismaService from '../database/prisma.service';
+import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
 
+
+@UseGuards(JwtAuthGuard)
 @Controller('event')
 export class EventController {
   constructor(private readonly prisma: PrismaService) {}

@@ -4,11 +4,18 @@ import PageLayout from "../../layout/Layout";
 import SwitchButton from "../../components/buttons/SwitchButton/SwitchButton";
 import Search from "./components/Search/Search";
 import GroupCard from "./components/GroupCard/GroupCard";
-//import { getGroups } from "../../api/workingGroupsApi";
+import { useUserContext } from "../../context/authContext";
+import { useNavigate } from "@solidjs/router";
 
 const LoginPage: Component = () => {
   const [myGroups, setMyGroups] = createSignal(false);
-  //const [groups] = createResource(getGroups);
+  const navigate = useNavigate()
+  const [currentUser] = useUserContext()
+  console.log("workingGroupPage", currentUser());
+
+  if(!currentUser()){
+    navigate('/login')
+  }
 
   const mockGroups = [
     {

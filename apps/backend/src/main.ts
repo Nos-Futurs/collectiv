@@ -1,4 +1,5 @@
 import fastifyCookie from '@fastify/cookie';
+import helmet from '@fastify/helmet';
 import { NestFactory } from '@nestjs/core';
 
 import {
@@ -14,6 +15,8 @@ async function bootstrap(): Promise<void> {
   );
   app.setGlobalPrefix('api');
   await app.register(fastifyCookie);
+  await app.register(helmet); 
+
   app.enableCors({origin: ["http://localhost:3000"], credentials: true});
 
   await app.listen(3001);
