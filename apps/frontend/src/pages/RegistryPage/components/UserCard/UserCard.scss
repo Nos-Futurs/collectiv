@@ -2,39 +2,39 @@
 @use "../../../../style/layouts";
 @use "../../../../style/spacings";
 
-#card{
+
+  #card {
+    @include layouts.flex(column, center, center);
+    align-self: center;
+    margin: auto;
+    position: relative;
     height: 200px;
     width: 200px;
-    //margin-left: 20px;
-    
-    border: 5px solid #8F2D56;
-    //border: solid 1.5px colours.$dark-grey;
+    border: 5px solid #8f2d56;
     border-radius: 10px;
-    // width: 100%;
-    //min-height: 150px;
-    //margin: spacings.$m spacings.$m;
-    
-    margin: 20px auto;
-    
-}
+  }
 
-#user-photo {
-    width: 100%;
-    height: auto;
-}
+  #user-photo {
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+  }
 
-#user-name-container{
+  #user-name-container {
     margin-top: auto;
+    z-index: 2;
     text-align: center;
     width: 100%;
-}
+  }
 
-#user-name-background {
-    background-color: #FFBC42;
+  #user-name-background {
+    background-color: #ffbc42;
+
     padding: 8px;
-}
-  
-#user-name-text {
+  }
+
+  #user-name-text {
     color: black;
     font-weight: bold;
-}
+  }
+
