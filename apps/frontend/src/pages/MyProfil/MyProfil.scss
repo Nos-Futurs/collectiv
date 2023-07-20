@@ -1,0 +1,10 @@
+@use "../../style/colours";
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: colours.$green-blue;
+    height: 100vh;
+}

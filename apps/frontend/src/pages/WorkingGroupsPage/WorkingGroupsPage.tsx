@@ -8,12 +8,14 @@ import { getGroups } from "../../api/workingGroupsApi";
 
 const LoginPage: Component = () => {
   const [myGroups, setMyGroups] = createSignal(false);
-  const [groups] = createResource(getGroups)
+  const [groups] = createResource(getGroups);
 
   return (
     <PageLayout id="working-groups" protected={true}>
-      <Search setMyGroups={setMyGroups} myGroups={myGroups} />
-      <div id="divider" />
+      <div id="working-groups-search">
+        <Search setMyGroups={setMyGroups} myGroups={myGroups} />
+        <div id="divider" />
+      </div>
       <div id="groups">
         <For each={groups()} fallback={<div>Loading...</div>}>
           {(item) => <GroupCard name={item.name} />}
