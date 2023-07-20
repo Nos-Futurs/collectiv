@@ -50,7 +50,7 @@ const RegistryPage: Component = () => {
   // }
 
   return (
-    <PageLayout id="registry-page" protected={true}>
+    <PageLayout id="registry" protected={true}>
       <div id="search-bar">
         <SearchBar onClick={() => {}} />
       </div>
