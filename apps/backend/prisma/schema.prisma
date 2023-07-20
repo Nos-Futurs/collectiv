@@ -38,6 +38,7 @@ model Company {
 model Tag {
   id            Int                   @id @default(autoincrement())
   name          String                @unique
+  color         String?
   createdAt     DateTime              @default(now())
   users         TagsOnUsers[]
   events        TagsOnEvents[]

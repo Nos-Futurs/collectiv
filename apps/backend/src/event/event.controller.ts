@@ -20,13 +20,14 @@ export class EventController {
 
   @Get()
   async findAll(): Promise<Event[]> {
-    return this.prisma.event.findMany();
+    return this.prisma.event.findMany({include: { tags: true }});
   }
 
   @Get(':id')
   async findById(@Param('id') id: string): Promise<Event> {
     return this.prisma.event.findUnique({
       where: { id: Number(id) },
+      include: { tags: true }
     });
   }
 

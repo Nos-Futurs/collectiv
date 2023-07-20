@@ -22,6 +22,12 @@ const Header: Component<HeaderProps> = (props: HeaderProps) => {
       >
         Groupes de travail
       </A>
+      <A
+        href="/events"
+        class={props.page == "events" ? "selected" : "unselected"}
+      >
+        Evénement
+      </A>
       <button onClick={()=> {}} id="profil-button">
         <img alt="profil" id="profil" src={profil} />
       </button>
