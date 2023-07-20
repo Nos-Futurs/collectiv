@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { User } from '@prisma/client';
-import { FastifyRequest } from 'fastify';
+import { Request } from 'express';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { UserService } from 'src/user/user.service';
 import authConfigService from '../config/auth.config';
@@ -24,7 +24,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  private static extractJWT(req: FastifyRequest): string | null {
+  private static extractJWT(req: Request): string | null {
     if (
       req.cookies &&
       'accessToken' in req.cookies &&

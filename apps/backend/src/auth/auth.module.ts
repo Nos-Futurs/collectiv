@@ -8,11 +8,13 @@ import { AuthService } from './auth.service';
 import authConfig from './config/auth.config';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { LocalStrategy } from './strategy/local.strategy';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
     ConfigModule.forFeature(authConfig),
     DatabaseModule,
+    PassportModule,
     UserModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],

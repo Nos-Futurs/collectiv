@@ -5,18 +5,28 @@ import {
   Get,
   Param,
   Post,
-  Put
+  Put,
+  Req,
+  UseGuards
 } from '@nestjs/common';
 import { Tag, TagsOnUsers, User } from '@prisma/client';
 import PrismaService from '../database/prisma.service';
 import { UserService } from './user.service';
+import RequestWithUser from 'src/auth/types/RequestWithUser';
+import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('user')
 export class UserController {
   constructor(
     private readonly prisma: PrismaService,
     private readonly userService: UserService,
   ) {}
+
+  @Get('/me')
+  async findMe(@Req() req: RequestWithUser,): Promise<User> {
+    return req.user;
+  }
 
   @Get()
   async findAll(): Promise<User[]> {

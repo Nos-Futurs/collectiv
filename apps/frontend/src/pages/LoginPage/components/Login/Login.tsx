@@ -5,6 +5,7 @@ import Input from "../../../../components/Input/Input";
 import { login } from "../../../../api/authApi";
 import { useNavigate } from "@solidjs/router";
 
+
 interface LoginProps {
   setForgetPassword: Setter<boolean>;
 }
@@ -15,7 +16,9 @@ const Login: Component<LoginProps> = (props: LoginProps) => {
   const navigate = useNavigate();
 
   const handleLoginSubmit = () => {
-    login(username(), password()).then(() => navigate("/registry"));
+    login(username(), password()).then(() => {
+      navigate("/registry");
+    });
     // Gérer la soumission du formulaire de connexion ici
   };
 

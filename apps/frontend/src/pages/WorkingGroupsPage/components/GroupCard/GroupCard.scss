@@ -2,13 +2,20 @@
 @use "../../../../style/layouts";
 @use "../../../../style/spacings";
 
-
 #group-card {
-  @include layouts.flex(row, center, center);
+  @include layouts.flex(column, center, stretch);
   background-color: white;
   border: solid 1.5px colours.$dark-grey;
   border-radius: 10px;
-  width: 100%;
-  min-height: 150px;
   margin: 0 0 spacings.$l 0;
+
+  #group-header {
+    @include layouts.flex(row, space-between, center);
+    margin: spacings.$l;
+  }
+  #group-details{
+    border-top: solid 1px colours.$dark-grey;
+    margin: spacings.$m spacings.$xl;
+  }
+  
 }

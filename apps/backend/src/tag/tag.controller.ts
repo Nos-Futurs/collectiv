@@ -6,10 +6,14 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { Tag } from '@prisma/client';
 import PrismaService from '../database/prisma.service';
+import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
 
+
+@UseGuards(JwtAuthGuard)
 @Controller('tag')
 export class TagController {
   constructor(private readonly prisma: PrismaService) {}

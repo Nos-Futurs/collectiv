@@ -1,4 +1,5 @@
 import axios from "axios";
+import { User } from "../types/User";
 
 const baseApiUrl = import.meta.env.VITE_BASE_API_URL;
 
@@ -29,7 +30,7 @@ export async function signup(
 export async function login(
   username: string,
   password: string,
-): Promise<void> {
+): Promise<{user: User, accessToken: string}> {
   return axios({
     method: "post",
     url: `${baseApiUrl}/auth/login`,
@@ -38,5 +39,5 @@ export async function login(
       email: username,
       password,
     },
-  }).then(result => {console.log(result)});
+  })
 }

@@ -14,6 +14,7 @@ const SignUp: Component = () => {
   const [description, setDescription] = createSignal("");
   const navigate = useNavigate();
 
+
   const handleSignupSubmit = () => {
     signup(
       email(),
