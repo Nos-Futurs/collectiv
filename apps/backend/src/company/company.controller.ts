@@ -20,13 +20,14 @@ export class CompanyController {
 
   @Get()
   async findAll(): Promise<Company[]> {
-    return this.prisma.company.findMany();
+    return this.prisma.company.findMany({include: { tags: true }});
   }
 
   @Get(':id')
   async findById(@Param('id') id: string): Promise<Company> {
     return this.prisma.company.findUnique({
       where: { id: Number(id) },
+      include: { tags: true }
     });
   }
 

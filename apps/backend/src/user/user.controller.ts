@@ -7,7 +7,7 @@ import {
   Post,
   Put,
   Req,
-  UseGuards
+  UseGuards,
 } from '@nestjs/common';
 import { Tag, TagsOnUsers, User } from '@prisma/client';
 import PrismaService from '../database/prisma.service';
@@ -24,19 +24,20 @@ export class UserController {
   ) {}
 
   @Get('/me')
-  async findMe(@Req() req: RequestWithUser,): Promise<User> {
+  async findMe(@Req() req: RequestWithUser): Promise<User> {
     return req.user;
   }
 
   @Get()
   async findAll(): Promise<User[]> {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany({ include: { tags: true } });
   }
 
   @Get(':id')
   async findById(@Param('id') id: string): Promise<User> {
     return this.prisma.user.findUnique({
       where: { id: Number(id) },
+      include: { tags: true }
     });
   }
 

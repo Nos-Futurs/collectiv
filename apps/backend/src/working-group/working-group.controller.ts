@@ -20,13 +20,14 @@ export class WorkingGroupController {
 
   @Get()
   async findAll(): Promise<WorkingGroup[]> {
-    return this.prisma.workingGroup.findMany();
+    return this.prisma.workingGroup.findMany({include: { tags: true }});
   }
 
   @Get(':id')
   async findById(@Param('id') id: string): Promise<WorkingGroup> {
     return this.prisma.workingGroup.findUnique({
       where: { id: Number(id) },
+      include: { tags: true }
     });
   }
 
