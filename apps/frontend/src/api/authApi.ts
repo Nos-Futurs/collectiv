@@ -1,5 +1,5 @@
+import { User } from "@collectiv/shared-types";
 import axios from "axios";
-import { User } from "../types/User";
 
 const baseApiUrl = import.meta.env.VITE_BASE_API_URL;
 

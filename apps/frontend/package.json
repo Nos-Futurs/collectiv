@@ -16,6 +16,7 @@
     "vite-plugin-solid": "^2.5.0"
   },
   "dependencies": {
+    "@collectiv/shared-types": "workspace:^",
     "@solidjs/router": "^0.8.2",
     "axios": "^1.4.0",
     "sass": "^1.63.4",
