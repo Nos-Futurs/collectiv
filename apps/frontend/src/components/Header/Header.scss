@@ -4,7 +4,7 @@
 @use "../../style/font-sizes";
 
 #header {
-  @include layouts.flex(row, flex-start, center);
+  @include layouts.flex(row, flex-end, center);
   display: flex;
   position: sticky;
   right: 0;
@@ -13,18 +13,21 @@
   padding: 0 spacings.$xxl;
   column-gap: spacings.$xl;
   min-height: 100px;
-  background-color: colours.$green-blue;
+  background-color: colours.$light-blue;
 
   .selected {
-    background-color: colours.$light-blue;
-  }
-  .unselected {
-    background-color: colours.$grey;
+    color: colours.$purple;
+    border-bottom: solid 2px colours.$purple;
   }
 
   a {
-    font-size: font-sizes.$s;
+    font-size: font-sizes.$m;
     color: colours.$black;
+  }
+
+  #logo{
+    margin-right: auto;
+    height: 100%;
   }
 
   #profil-button {

@@ -1,3 +1,5 @@
+@use "../spacings";
+
 button {
   padding: 8px 16px;
   border: none;
@@ -8,9 +10,7 @@ button {
 }
 
 a {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 30px;
+  padding: spacings.$m;
   cursor: pointer;
   font-weight: bold;
   text-decoration: none;

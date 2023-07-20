@@ -41,13 +41,13 @@ interface HomeProps {
 const PageLayout: Component<HomeProps> = (props: HomeProps) => {
   if (props.protected) {
     return (
-      <ProtectedRoute>
-        <main id={props.id} class="page">
-          <Header page={props.id} />
+      <main id={props.id} class="page">
+        <Header page={props.id} />
+        <ProtectedRoute>
           <div class="content">{props.children}</div>
-          <Footer />
-        </main>
-      </ProtectedRoute>
+        </ProtectedRoute>
+        <Footer />
+      </main>
     );
   }
   return (
