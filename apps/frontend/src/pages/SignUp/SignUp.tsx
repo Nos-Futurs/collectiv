@@ -4,7 +4,6 @@ import "./SignUp.scss";
 import { signup } from "../../api/authApi";
 import { useNavigate } from "@solidjs/router";
 import Input from "../../components/Input/Input";
-import { useUserContext } from "../../context/authContext";
 
 const SignUp: Component = () => {
   const [lastName, setLastName] = createSignal("");
@@ -15,8 +14,6 @@ const SignUp: Component = () => {
   const [description, setDescription] = createSignal("");
   const navigate = useNavigate();
 
-  const currentUser = useUserContext()
-  console.log(currentUser)
 
   const handleSignupSubmit = () => {
     signup(

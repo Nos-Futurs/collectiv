@@ -24,8 +24,8 @@ export class UserController {
   ) {}
 
   @Get('/me')
-  async findMe(@Req() req: RequestWithUser,): Promise<{user: User, accessToken: string | undefined}> {
-    return {user: req.user, accessToken: req.cookies.accessToken};
+  async findMe(@Req() req: RequestWithUser,): Promise<User> {
+    return req.user;
   }
 
   @Get()
