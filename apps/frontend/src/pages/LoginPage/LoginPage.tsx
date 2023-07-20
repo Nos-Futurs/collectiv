@@ -21,9 +21,6 @@ const LoginPage: Component = () => {
   createEffect(async () => {
     setCurrentUser(await currentUserGetMe());
     console.log("LoginPage", currentUser());
-    if (currentUser()) {
-      navigate("/registry");
-    }
   });
 
   return (

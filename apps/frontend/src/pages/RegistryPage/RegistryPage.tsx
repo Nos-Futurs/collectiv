@@ -20,9 +20,6 @@ const LoginPage: Component = () => {
   const [currentUser] = useUserContext()
   console.log("RegistryPage", currentUser());
 
-  if(!currentUser()){
-    navigate('/login')
-  }
   return (
     <PageLayout id="registry">
       <For each={users} fallback={<div>Loading...</div>}>
