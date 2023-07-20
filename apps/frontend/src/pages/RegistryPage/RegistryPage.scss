@@ -1,0 +1,52 @@
+@use "../../style/colours";
+
+
+#search-bar {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: black;
+    
+}
+#search-input {
+    width: 400px;
+    height: 40px;
+    font-size: 18px;
+    border-radius: 50px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    
+    color: black;
+}
+
+  
+#UserCards {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 10px;
+
+}
+
+#tags-container {
+    margin-bottom: 30px;
+    border-top: 10px colours.$green-blue solid;
+    border-bottom: 10px colours.$green-blue solid;
+}
+
+#tag {
+    border: 2px solid #218381;
+    margin: 20px;
+    
+}
+  
+#tag-selected {
+    background-color: colours.$green-blue;
+    color: white;
+    margin: 20px;
+    border: 2px solid #218381;
+    transform: translate(500px);
+    transition: 0.7s;
+}
