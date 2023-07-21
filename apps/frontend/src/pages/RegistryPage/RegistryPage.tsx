@@ -1,32 +1,17 @@
-import { For, type Component, createSignal } from "solid-js";
+import { For, type Component, createSignal, createResource } from "solid-js";
 import UserCard from "./components/UserCard/UserCard";
 import PageLayout from "../../layout/Layout";
+import profil from "../../assets/profil.svg"
 
-import SearchBar from "../../components/SearchBar/SearchBar"
-import "./RegistryPage.scss"
+import SearchBar from "../../components/SearchBar/SearchBar";
+import "./RegistryPage.scss";
+import { getUsers } from "../../api/userApi";
 // Aller chercher les utilisateurs dans le back
 
-
-
 const RegistryPage: Component = () => {
-  const users=[{
-    firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
-    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
-    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
-    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
-    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
-    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
-    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
-    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
-    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
-    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
-    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
-    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"]},
-    {firstName: "John", lastName: "Kane", photo:"", tags: ["Travail", "Lieu"],
-  }]
+  const [users] = createResource(getUsers);
   const [searchQuery, setSearchQuery] = createSignal("");
   const [selectedTags, setSelectedTags] = createSignal<string[]>([]);
-
 
   function handleSearch(event: Event) {
     const value = (event.target as HTMLInputElement).value;
@@ -47,35 +32,33 @@ const RegistryPage: Component = () => {
     return selectedTags().includes(tag);
   }
 
-  function filteredUsers() {
-    if (!searchQuery() && selectedTags().length === 0) {
-      return users;
-    }
-    const query = searchQuery().toLowerCase();
-    return users.filter((user) => {
-      const hasMatchingTag = selectedTags().some((tag) => user.tags.includes(tag));
-      return (
-        user.firstName.toLowerCase().includes(query) ||
-        user.lastName.toLowerCase().includes(query) ||
-        hasMatchingTag
-      );
-    });
-  }
+  // function filteredUsers() {
+  //   if (!searchQuery() && selectedTags().length === 0) {
+  //     return users;
+  //   }
+  //   const query = searchQuery().toLowerCase();
+  //   return users().filter((user) => {
+  //     const hasMatchingTag = selectedTags().some((tag) =>
+  //       user.tags.includes(tag)
+  //     );
+  //     return (
+  //       user.firstName.toLowerCase().includes(query) ||
+  //       user.lastName.toLowerCase().includes(query) ||
+  //       hasMatchingTag
+  //     );
+  //   });
+  // }
 
-
-  return (  
-    <PageLayout id="registry-page" protected={true}>
+  return (
+    <PageLayout id="registry" protected={true}>
       <div id="search-bar">
-        <SearchBar 
-        onClick={() => {}} />
+        <SearchBar onClick={() => {}} />
       </div>
-      {/* <input
-          value={searchQuery()} 
-          onInput={handleSearch}
-          /> */}
-      
       <div id="tags-container">
-        <For each={["Travail", "Lieu", "Sport"]} fallback={<div>Loading tags...</div>}>
+        <For
+          each={["Travail", "Lieu", "Sport"]}
+          fallback={<div>Loading tags...</div>}
+        >
           {(tag) => (
             <button
               id={isTagSelected(tag) ? "tag-selected" : "tag"}
@@ -87,14 +70,16 @@ const RegistryPage: Component = () => {
         </For>
       </div>
 
-
-      <div id="UserCards">
-        <For each={filteredUsers()} fallback={<div>Aucun utilisateur trouvé</div>}>
+      <div id="user-cards">
+        <For
+          each={users()}
+          fallback={<div>Aucun utilisateur trouvé</div>}
+        >
           {(user) => (
             <UserCard
               firstName={user.firstName}
               lastName={user.lastName}
-              photo={user.photo}
+              photo={profil}
             />
           )}
         </For>

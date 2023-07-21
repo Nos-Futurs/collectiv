@@ -18,3 +18,16 @@ export async function getMe(): Promise<{ user: User; accessToken: string }> {
       return undefined;
     });
 }
+
+
+export async function getUsers(): Promise<Array<User>> {
+  return axios({
+    method: "get",
+    url: `${baseApiUrl}/user`,
+    withCredentials: true,
+  })
+    .then((resp) => {
+      return resp.data;
+    })
+  
+}
