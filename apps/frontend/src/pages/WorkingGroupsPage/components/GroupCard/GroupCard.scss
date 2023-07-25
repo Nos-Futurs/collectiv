@@ -1,7 +1,7 @@
-@use "../../../../style/colours";
-@use "../../../../style/layouts";
-@use "../../../../style/spacings";
-@use "../../../../style/components/button.scss";
+@use "@style/colours";
+@use "@style/layouts";
+@use "@style/spacings";
+@use "@style/components/button.scss";
 
 #group-card {
   @include layouts.flex(column, center, stretch);

@@ -1,7 +1,7 @@
-@use "../../../style/colours";
-@use "../../../style/layouts";
-@use "../../../style/spacings";
-@use "../../../style/font-sizes";
+@use "@style/colours";
+@use "@style/layouts";
+@use "@style/spacings";
+@use "@style/font-sizes";
 
 #switch-button {
   @include layouts.flex(row, center, center);
