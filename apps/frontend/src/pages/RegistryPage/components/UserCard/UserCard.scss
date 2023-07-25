@@ -5,13 +5,18 @@
 
   #card {
     @include layouts.flex(column, center, center);
+    padding: 0;
     align-self: center;
     margin: auto;
     position: relative;
     height: 200px;
     width: 200px;
-    border: 5px solid #8f2d56;
+    border: 5px solid colours.$dark-grey;
     border-radius: 10px;
+  }
+
+  #card.selected{
+    border-color: colours.$purple ;
   }
 
   #user-photo {

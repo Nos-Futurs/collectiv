@@ -1,5 +1,5 @@
 import { Setter, type Component, Accessor } from "solid-js";
-import "./SwitchButton.scss"
+import "./SwitchButton.scss";
 
 interface SwitchButtonProps {
   setValue: Setter<boolean>;
@@ -13,7 +13,11 @@ const SwitchButton: Component<SwitchButtonProps> = (
   return (
     <div id="switch-button">
       <label class="switch">
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          checked={props.value()}
+          onClick={(): void => {props.setValue(!props.value())}}
+        />
         <span class="slider round"></span>
       </label>
       <p>{props.label}</p>
