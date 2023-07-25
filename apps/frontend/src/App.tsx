@@ -8,10 +8,12 @@ import Events from "./pages/Events/Events";
 import MyProfil from "./pages/MyProfil/MyProfil";
 import UserProfil from "./pages/UserProfil/UserProfil";
 import Group from "./pages/Group/Group";
+import { UserProvider } from "./context/userContext";
 
 const App: Component = () => {
   return (
     <Router>
+      <UserProvider>
       <Routes>
         <Route path="/login" component={LoginPage} />
         <Route path="/signup" component={SignUp} />
@@ -22,6 +24,7 @@ const App: Component = () => {
         <Route path="/groups/:id" component={Group}/>
         <Route path="/events" component={Events} />
       </Routes>
+      </UserProvider>
     </Router>
   );
 };

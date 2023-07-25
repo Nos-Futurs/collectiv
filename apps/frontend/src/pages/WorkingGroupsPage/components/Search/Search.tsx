@@ -1,8 +1,13 @@
-import { Setter, type Component, Accessor } from "solid-js";
+import { Setter, type Component, Accessor, createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
+
+
 import "./Search.scss";
 import { A } from "@solidjs/router";
 import SwitchButton from "../../../../components/buttons/SwitchButton/SwitchButton";
 import SearchBar from "../../../../components/SearchBar/SearchBar";
+import TagSelector from "../../../../components/TagSelector/TagSelector";
+import { Tag } from "@collectiv/shared-types";
 
 interface SearchProps {
   setMyGroups: Setter<boolean>;
@@ -10,14 +15,19 @@ interface SearchProps {
 }
 
 const Search: Component<SearchProps> = (props: SearchProps) => {
+  const [selectedTags, setSelectedTags] = createStore<Array<Tag>>([]);
   return (
     <div id="search">
       <SwitchButton
         setValue={props.setMyGroups}
         value={props.myGroups}
-        label={"Mes groupes"}
+        label={"Mes groupes uniquements"}
       />
       <SearchBar onClick={() => {}} />
+      <TagSelector
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
+      />
     </div>
   );
 };

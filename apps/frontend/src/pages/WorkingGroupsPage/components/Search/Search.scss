@@ -1,9 +1,9 @@
-@use "../../../../style/colours";
-@use "../../../../style/layouts";
-@use "../../../../style/spacings";
-@use "../../../../style/font-sizes";
+@use "@style/colours";
+@use "@style/layouts";
+@use "@style/spacings";
+@use "@style/font-sizes";
 
 #search {
-  @include layouts.flex(row, flex-start, center);
-  padding: spacings.$xl spacings.$xl spacings.$m spacings.$xl;
+  @include layouts.flex(column, flex-start, flex-start);
+  padding: spacings.$l spacings.$xl spacings.$s spacings.$xl;
 }

@@ -1,10 +1,32 @@
-@use "../../style/colours";
+@use "@style/colours";
+@use "@style/layouts";
+@use "@style/spacings";
 
+#group {
+  @include layouts.grid(2fr 1fr, repeat(4, auto));
+  height: calc(100vh - 200px);
+  width: 100%;
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: colours.$green-blue;
-    height: 100vh;
+  #description {
+    @include layouts.flex(row, center, center);
+    background-color: colours.$grey;
+    grid-column: span 2;
+  }
+  #chat {
+    @include layouts.flex(row, center, center);
+    background-color: red;
+    grid-row: span 3;
+  }
+  #participants {
+    @include layouts.flex(row, center, center);
+    background-color: blue;
+  }
+  #documents {
+    @include layouts.flex(row, center, center);
+    background-color: green;
+  }
+  #events {
+    @include layouts.flex(row, center, center);
+    background-color: yellow;
+  }
 }

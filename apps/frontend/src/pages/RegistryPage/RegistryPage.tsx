@@ -1,35 +1,24 @@
-import { For, type Component, createSignal, createResource } from "solid-js";
+import { For, type Component, createSignal, createResource, createEffect } from "solid-js";
 import UserCard from "./components/UserCard/UserCard";
 import PageLayout from "../../layout/Layout";
-import profil from "../../assets/profil.svg"
+import profil from "../../assets/profil.svg";
 
 import SearchBar from "../../components/SearchBar/SearchBar";
 import "./RegistryPage.scss";
 import { getUsers } from "../../api/userApi";
+import SwitchButton from "../../components/buttons/SwitchButton/SwitchButton";
+import SearchRegistry from "./components/SearchRegistry/SearchRegistry";
 // Aller chercher les utilisateurs dans le back
 
 const RegistryPage: Component = () => {
   const [users] = createResource(getUsers);
   const [searchQuery, setSearchQuery] = createSignal("");
+  const [createGroup, setCreateGroup] = createSignal(false);
   const [selectedTags, setSelectedTags] = createSignal<string[]>([]);
 
   function handleSearch(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     setSearchQuery(value);
-  }
-
-  function toggleTag(tag: string) {
-    setSelectedTags((prevTags) => {
-      if (prevTags.includes(tag)) {
-        return prevTags.filter((t) => t !== tag);
-      } else {
-        return [...prevTags, tag];
-      }
-    });
-  }
-
-  function isTagSelected(tag: string) {
-    return selectedTags().includes(tag);
   }
 
   // function filteredUsers() {
@@ -49,41 +38,26 @@ const RegistryPage: Component = () => {
   //   });
   // }
 
+  createEffect(()=>{
+    console.log(createGroup())
+  })
   return (
     <PageLayout id="registry" protected={true}>
-      <div id="search-bar">
-        <SearchBar onClick={() => {}} />
-      </div>
-      <div id="tags-container">
-        <For
-          each={["Travail", "Lieu", "Sport"]}
-          fallback={<div>Loading tags...</div>}
-        >
-          {(tag) => (
-            <button
-              id={isTagSelected(tag) ? "tag-selected" : "tag"}
-              onClick={() => toggleTag(tag)}
-            >
-              {tag}
-            </button>
-          )}
-        </For>
-      </div>
-
+      <SearchRegistry createGroup={createGroup} setCreateGroup={setCreateGroup} selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
       <div id="user-cards">
-        <For
-          each={users()}
-          fallback={<div>Aucun utilisateur trouvé</div>}
-        >
+        <For each={users()} fallback={<div>Aucun utilisateur trouvé</div>}>
           {(user) => (
             <UserCard
-              firstName={user.firstName}
-              lastName={user.lastName}
+              selectable={createGroup()}
+              user={user}
               photo={profil}
             />
           )}
         </For>
       </div>
+      {createGroup() && (
+        <button id="create-group">Créer un groupe</button>
+      )}
     </PageLayout>
   );
 };

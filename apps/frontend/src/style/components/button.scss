@@ -1,12 +1,16 @@
 @use "../spacings";
 
-button {
+%rounded-button {
   padding: 8px 16px;
   border: none;
   border-radius: 30px;
   cursor: pointer;
   font-weight: bold;
   font-size: 15px;
+}
+
+button {
+  @extend %rounded-button;
 }
 
 a {

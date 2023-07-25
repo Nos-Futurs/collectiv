@@ -1,53 +1,19 @@
-@use "../../style/colours";
-@use "../../style/layouts";
-@use "../../style/spacings";
+@use "@style/colours";
+@use "@style/layouts";
+@use "@style/spacings";
 @use "sass:math";
 
-
-#search-bar {
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  color: black;
-}
-#search-input {
-  width: 400px;
-  height: 40px;
-  font-size: 18px;
-  border-radius: 50px;
-  padding: 10px;
-  border: none;
-  outline: none;
-  color: black;
-}
-
 #user-cards {
-  @include layouts.grid(
-    repeat(5, auto),
-    auto
-  );
+  @include layouts.grid(repeat(5, auto), auto);
+  overflow-y: scroll;
   margin: spacings.$m;
   gap: spacings.$m;
 }
-
-#tags-container {
-  margin-bottom: 30px;
-  border-top: 10px colours.$green-blue solid;
-  border-bottom: 10px colours.$green-blue solid;
-}
-
-#tag {
-  border: 2px solid #218381;
-  margin: 20px;
-}
-
-#tag-selected {
-  background-color: colours.$green-blue;
-  color: white;
-  margin: 20px;
-  border: 2px solid #218381;
-  transform: translate(500px);
-  transition: 0.7s;
+#create-group{
+  background-color: colours.$purple;
+  padding: 10px 45px;
+  font-size: 20px;
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
 }

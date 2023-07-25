@@ -3,11 +3,13 @@ import "./WorkingGroupsPage.scss";
 import PageLayout from "../../layout/Layout";
 import Search from "./components/Search/Search";
 import GroupCard from "./components/GroupCard/GroupCard";
-import { useNavigate } from "@solidjs/router";
 import { getGroups } from "../../api/workingGroupsApi";
+import { useUserContext } from "../../context/userContext";
 
 const LoginPage: Component = () => {
   const [myGroups, setMyGroups] = createSignal(false);
+  const [currentUser] = useUserContext();
+  console.log(currentUser());
   const [groups] = createResource(getGroups);
 
   return (
@@ -18,7 +20,7 @@ const LoginPage: Component = () => {
       </div>
       <div id="groups">
         <For each={groups()} fallback={<div>Loading...</div>}>
-          {(item) => <GroupCard name={item.name} />}
+          {(item) => <GroupCard group={item} userId={currentUser()?.id}/>}
         </For>
       </div>
     </PageLayout>

@@ -1,6 +1,7 @@
-@use "../../../../style/colours";
-@use "../../../../style/layouts";
-@use "../../../../style/spacings";
+@use "@style/colours";
+@use "@style/layouts";
+@use "@style/spacings";
+@use "@style/components/button.scss";
 
 #group-card {
   @include layouts.flex(column, center, stretch);
@@ -12,10 +13,15 @@
   #group-header {
     @include layouts.flex(row, space-between, center);
     margin: spacings.$l;
+
+    a {
+      @extend %rounded-button;
+      color: black;
+      background-color: colours.$yellow;
+    }
   }
-  #group-details{
+  #group-details {
     border-top: solid 1px colours.$dark-grey;
     margin: spacings.$m spacings.$xl;
   }
-  
 }
