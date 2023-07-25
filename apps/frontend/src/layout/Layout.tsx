@@ -19,11 +19,15 @@ const ProtectedRoute: Component<ProtectedProps> = (props: ProtectedProps) => {
   const [currentUser] = createResource(getMe);
   const navigate = useNavigate();
 
+  //TODO: This is not working when the children component calls createRessource - it seems to override de getMe Ressource
   createEffect(() => {
-    if (!currentUser.loading && !currentUser()) {
-      navigate("/login");
+    if (!currentUser.loading) {
+      const user = currentUser();
+      if (!user) {
+        navigate("/login");
+      }
     }
-  });
+  }, currentUser.loading);
 
   return (
     <Show when={!currentUser.loading} fallback={<div>loading...</div>}>
@@ -46,7 +50,6 @@ const PageLayout: Component<HomeProps> = (props: HomeProps) => {
         <ProtectedRoute>
           <div class="content">{props.children}</div>
         </ProtectedRoute>
-        <Footer />
       </main>
     );
   }

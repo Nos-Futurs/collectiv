@@ -1,7 +1,7 @@
 import { For, type Component, createSignal, createResource } from "solid-js";
 import UserCard from "./components/UserCard/UserCard";
 import PageLayout from "../../layout/Layout";
-import profil from "../../assets/profil.svg"
+import profil from "../../assets/profil.svg";
 
 import SearchBar from "../../components/SearchBar/SearchBar";
 import "./RegistryPage.scss";
@@ -51,30 +51,28 @@ const RegistryPage: Component = () => {
 
   return (
     <PageLayout id="registry" protected={true}>
-      <div id="search-bar">
+      <div id="search-section">
         <SearchBar onClick={() => {}} />
-      </div>
-      <div id="tags-container">
-        <For
-          each={["Travail", "Lieu", "Sport"]}
-          fallback={<div>Loading tags...</div>}
-        >
-          {(tag) => (
-            <button
-              id={isTagSelected(tag) ? "tag-selected" : "tag"}
-              onClick={() => toggleTag(tag)}
-            >
-              {tag}
-            </button>
-          )}
-        </For>
+        <div id="tags-container">
+          <For
+            each={["Travail", "Lieu", "Sport"]}
+            fallback={<div>Loading tags...</div>}
+          >
+            {(tag) => (
+              <button
+                id={isTagSelected(tag) ? "tag-selected" : "tag"}
+                onClick={() => toggleTag(tag)}
+              >
+                {tag}
+              </button>
+            )}
+          </For>
+        </div>
+        <div id="divider" />
       </div>
 
       <div id="user-cards">
-        <For
-          each={users()}
-          fallback={<div>Aucun utilisateur trouvé</div>}
-        >
+        <For each={users()} fallback={<div>Aucun utilisateur trouvé</div>}>
           {(user) => (
             <UserCard
               firstName={user.firstName}

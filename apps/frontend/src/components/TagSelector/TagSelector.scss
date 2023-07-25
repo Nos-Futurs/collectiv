@@ -1,0 +1,18 @@
+@use "@style/colours";
+@use "@style/layouts";
+@use "@style/spacings";
+@use "@style/font-sizes";
+
+#tag-selector {
+    padding-top: spacings.$s;
+    @include layouts.flex(row, flex-start, center);
+    column-gap: spacings.$s;
+    width: 300px;
+}
+
+#tag{
+    background-color: colours.$dark-grey;
+    margin: 0;
+    border: none;
+    border-radius: 25px;
+}
