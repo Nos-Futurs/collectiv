@@ -2,17 +2,34 @@ import { createSignal, type Component } from "solid-js";
 import minus from "../../../../assets/minus.svg";
 import plus from "../../../../assets/plus.svg";
 import "./GroupCard.scss";
+import { A } from "@solidjs/router";
+import { WorkingGroup } from "@collectiv/shared-types";
 
 interface GroupCardProps {
-  name: string;
+  group: WorkingGroup;
+  userId?: number;
 }
 
 const GroupCard: Component<GroupCardProps> = (props: GroupCardProps) => {
   const [showDetails, setShowDetails] = createSignal(false);
+  const usersId = props.group.users.map((userRelation) => userRelation.userId);
+  const isParticipant = props.userId
+    ? usersId.includes(props.userId)
+    : undefined;
+
   return (
     <div id="group-card">
       <div id="group-header">
-        <h1>{props.name}</h1>
+        <div id="main-infos">
+          <h1>{props.group.name}</h1>
+          {isParticipant ? (
+            <A href={`/groups/${props.group.id}`} id="open-group">
+              Ouvrir
+            </A>
+          ) : (
+            <button>Demander à rejoindre</button>
+          )}
+        </div>
         <img
           alt={showDetails() ? "minus-dropdown" : "plus-dropdown"}
           id={showDetails() ? "minus-dropdown" : "plus-dropdown"}

@@ -10,27 +10,30 @@ import Header from "../components/Header/Header";
 import "./Layout.scss";
 import { getMe } from "../api/userApi";
 import { useNavigate } from "@solidjs/router";
+import { useUserContext } from "../context/userContext";
 
 interface ProtectedProps {
   children: JSXElement;
 }
 
 const ProtectedRoute: Component<ProtectedProps> = (props: ProtectedProps) => {
-  const [currentUser] = createResource(getMe);
+  const [currentUser, setCurrentUser] = useUserContext();
+  const [getCurrentUser] = createResource(getMe);
   const navigate = useNavigate();
 
   //TODO: This is not working when the children component calls createRessource - it seems to override de getMe Ressource
   createEffect(() => {
-    if (!currentUser.loading) {
-      const user = currentUser();
+    if (!getCurrentUser.loading) {
+      const user = getCurrentUser();
+      setCurrentUser(user);
       if (!user) {
         navigate("/login");
       }
     }
-  }, currentUser.loading);
+  }, getCurrentUser.loading);
 
   return (
-    <Show when={!currentUser.loading} fallback={<div>loading...</div>}>
+    <Show when={!getCurrentUser.loading} fallback={<div>loading...</div>}>
       {props.children}
     </Show>
   );

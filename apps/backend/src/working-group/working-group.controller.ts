@@ -12,7 +12,6 @@ import { WorkingGroup } from '@prisma/client';
 import PrismaService from '../database/prisma.service';
 import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
 
-
 @UseGuards(JwtAuthGuard)
 @Controller('working-group')
 export class WorkingGroupController {
@@ -20,19 +19,23 @@ export class WorkingGroupController {
 
   @Get()
   async findAll(): Promise<WorkingGroup[]> {
-    return this.prisma.workingGroup.findMany({include: { tags: true }});
+    return this.prisma.workingGroup.findMany({
+      include: { tags: true, users: true },
+    });
   }
 
   @Get(':id')
   async findById(@Param('id') id: string): Promise<WorkingGroup> {
     return this.prisma.workingGroup.findUnique({
       where: { id: Number(id) },
-      include: { tags: true }
+      include: { tags: true },
     });
   }
 
   @Post()
-  async create(@Body() workingGroupData: Omit<WorkingGroup, 'id'>): Promise<WorkingGroup> {
+  async create(
+    @Body() workingGroupData: Omit<WorkingGroup, 'id'>,
+  ): Promise<WorkingGroup> {
     return this.prisma.workingGroup.create({
       data: workingGroupData,
     });
