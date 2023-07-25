@@ -10,6 +10,7 @@ import {
 import "./TagSelector.scss";
 import { getTags } from "../../api/tagApi";
 import { Tag } from "@collectiv/shared-types";
+import { SetStoreFunction } from "solid-js/store";
 
 interface TagProp {
   tag: Tag;
@@ -30,37 +31,46 @@ const TagComponent: Component<TagProp> = (props: TagProp) => {
 };
 
 interface TagSelectorProp {
-  selectedTags: Accessor<Array<Tag>>;
-  setSelectedTags: Setter<Array<Tag>>;
+  selectedTags: Tag[];
+  setSelectedTags: SetStoreFunction<Tag[]>;
 }
 
-const addOrRemoveTag = (initialArray: Array<Tag>, tag: Tag): Array<Tag> => {
-  if (initialArray.includes(tag)) {
-    const index = initialArray.indexOf(tag);
-    initialArray.splice(index, 1);
-  } else {
-    initialArray.push(tag);
+const checkInclude = (
+  initialArray: Array<Tag>,
+  tag: Tag
+): number | undefined => {
+  for (let index = 0; index < initialArray.length; index++) {
+    let itemToCompare = JSON.parse(JSON.stringify(initialArray[index]));
+    if (itemToCompare.id === tag.id) {
+      return index;
+    }
   }
-  return initialArray;
+  return undefined;
 };
-
 
 //https://github.com/solidjs/solid/issues/1164
 const TagSelector: Component<TagSelectorProp> = (props: TagSelectorProp) => {
   const [tags] = createResource(getTags);
-  createEffect(() => {
-    console.log(props.selectedTags());
-  }, props.selectedTags());
 
+  createEffect(() => {
+    console.log([...props.selectedTags]);
+  });
   return (
     <div id="tag-selector">
       <For each={tags()} fallback={<>loading</>}>
         {(item) => (
           <TagComponent
             tag={item}
-            selected={props.selectedTags().includes(item)}
+            selected={props.selectedTags.includes(item)}
             onClick={() => {
-              props.setSelectedTags(addOrRemoveTag(props.selectedTags(), item));
+              const initialArray = [...props.selectedTags];
+              const index = checkInclude(initialArray, item);
+              if (index !== undefined) {
+                initialArray.splice(index, 1);
+              } else {
+                initialArray.push(item);
+              }
+              props.setSelectedTags(initialArray);
               return {};
             }}
           />

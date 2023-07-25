@@ -1,4 +1,7 @@
 import { Setter, type Component, Accessor, createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
+
+
 import "./Search.scss";
 import { A } from "@solidjs/router";
 import SwitchButton from "../../../../components/buttons/SwitchButton/SwitchButton";
@@ -12,7 +15,7 @@ interface SearchProps {
 }
 
 const Search: Component<SearchProps> = (props: SearchProps) => {
-  const [selectedTags, setSelectedTags] = createSignal<Array<Tag>>([]);
+  const [selectedTags, setSelectedTags] = createStore<Array<Tag>>([]);
   return (
     <div id="search">
       <SwitchButton
