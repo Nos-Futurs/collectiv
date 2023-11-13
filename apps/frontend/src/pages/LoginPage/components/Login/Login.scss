@@ -14,7 +14,7 @@
   max-width: 400px;
 
   #login-title {
-    margin-bottom: spacings.$m;
+    margin: 0 0 spacings.$m 0;
     text-align: center;
     font-size: font-sizes.$l;
   }
@@ -26,13 +26,13 @@
     font-size: font-sizes.$m;
     font-style: italic;
   }
-  #button-container {
+  #button-container-login {
     @include layouts.flex(column);
     row-gap: spacings.$s;
     .create-account-button {
       @extend %rounded-button;
       text-align: center;
-      background-color: #8f2d56;
+      background-color: colours.$purple;
       padding: spacings.$s 0;
       margin: 0;
       width: 100%;
@@ -41,18 +41,13 @@
     .login-button {
       width: 100%;
       padding: spacings.$s 0;
-      background-color: #4eb1be;
-      color: white;
+      background-color: colours.$yellow;
+      color: black;
+      width: 60%;
     }
 
     .login-button:hover {
       background-color: colours.$green-blue;
-    }
-
-    .signup-button {
-      background-color: #ffbc42;
-      color: black;
-      width: 60%;
     }
   }
 }

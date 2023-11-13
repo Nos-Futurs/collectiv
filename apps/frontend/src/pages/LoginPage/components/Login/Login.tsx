@@ -41,7 +41,7 @@ const Login: Component<LoginProps> = (props: LoginProps) => {
       <div class="forgot-password-link" onClick={props.setForgetPassword}>
         Mot de passe oublié ?
       </div>
-      <div id="button-container">
+      <div id="button-container-login">
         <button type="submit" class="login-button" onClick={handleLoginSubmit}>
           S'identifier
         </button>

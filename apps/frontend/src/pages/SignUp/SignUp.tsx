@@ -29,51 +29,53 @@ const SignUp: Component = () => {
   };
 
   return (
-    <div id="signup-form">
-      <h2 class="login-title">Créez votre compte</h2>
-      <Input
-        label="Nom"
-        id="lastName"
-        value={lastName}
-        setValue={setLastName}
-      />
-      <Input
-        label="Prénom"
-        id="firstName"
-        value={firstName}
-        setValue={setFirstName}
-      />
-      <Input
-        label="Email"
-        id="email"
-        value={email}
-        setValue={setEmail}
-        type="email"
-      />
-      <Input
-        label="Mot de passe"
-        id="password"
-        value={password}
-        setValue={setPassword}
-        type="password"
-      />
-      <Input label="Région" id="area" value={region} setValue={setRegion} />
-      <Input
-        label="Description"
-        id="description"
-        value={description}
-        setValue={setDescription}
-        largeInput={true}
-      />
-      <div class="button-container">
-        <button type="submit" id="signup-button" onClick={handleSignupSubmit}>
-          S'inscrire
-        </button>
-        <a id="cancel-button" href="/login">
-          Annuler
-        </a>
+    <section id="section-signup">
+      <div id="signup-form">
+        <h2 id="login-title">Créez votre compte</h2>
+        <Input
+          label="Nom"
+          id="lastName"
+          value={lastName}
+          setValue={setLastName}
+        />
+        <Input
+          label="Prénom"
+          id="firstName"
+          value={firstName}
+          setValue={setFirstName}
+        />
+        <Input
+          label="Email"
+          id="email"
+          value={email}
+          setValue={setEmail}
+          type="email"
+        />
+        <Input
+          label="Mot de passe"
+          id="password"
+          value={password}
+          setValue={setPassword}
+          type="password"
+        />
+        <Input label="Région" id="area" value={region} setValue={setRegion} />
+        <Input
+          label="Description"
+          id="description"
+          value={description}
+          setValue={setDescription}
+          largeInput={true}
+        />
+        <div id="button-container">
+          <button type="submit" id="signup-button" onClick={handleSignupSubmit}>
+            S'inscrire
+          </button>
+          <a id="cancel-button" href="/login">
+            Annuler
+          </a>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

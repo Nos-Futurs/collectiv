@@ -17,8 +17,8 @@ const ForgetPassword: Component<ForgetPasswordProps> = (
   return (
     <form class="forgot-password-form" onSubmit={handleForgotPasswordSubmit}>
       <h2 class="forgot-password-title">Mot de passe oublié</h2>
-      Entrez votre adresse e-mail ou votre numéro de téléphone, et nous vous
-      enverrons un lien pour récupérer votre compte.
+      <p>Entrez votre adresse e-mail ou votre numéro de téléphone, et nous vous
+      enverrons un lien pour récupérer votre compte.</p>
       <div class="form-group">
         <label for="email" class="email_address">
           Adresse e-mail ou n° de téléphone
