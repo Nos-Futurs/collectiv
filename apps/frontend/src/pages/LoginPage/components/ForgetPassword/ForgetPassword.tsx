@@ -15,13 +15,13 @@ const ForgetPassword: Component<ForgetPasswordProps> = (
   };
 
   return (
-    <form class="forgot-password-form" onSubmit={handleForgotPasswordSubmit}>
-      <h2 class="forgot-password-title">Mot de passe oublié</h2>
+    <form id="forgot-password-form" onSubmit={handleForgotPasswordSubmit}>
+      <h2 id="forgot-password-title">Mot de passe oublié</h2>
       <p>Entrez votre adresse e-mail ou votre numéro de téléphone, et nous vous
       enverrons un lien pour récupérer votre compte.</p>
-      <div class="form-group">
-        <label for="email" class="email_address">
-          Adresse e-mail ou n° de téléphone
+      <div id="email-address">
+        <label for="email" id="label-email">
+          Adresse e-mail
         </label>
         <input
           id="email"
@@ -30,13 +30,13 @@ const ForgetPassword: Component<ForgetPasswordProps> = (
           onInput={(e: Event) => setEmail((e.target as HTMLInputElement).value)}
         />
       </div>
-      <div class="form-group">
-        <button type="submit" class="reset-password-button">
+      <div id="form-group">
+        <button type="submit" id="reset-password-button">
           Envoyer un lien de connexion
         </button>
         <button
           type="button"
-          class="cancel-button"
+          id="cancel-button"
           onClick={() => props.setForgetPassword(false)}
         >
           Annuler
