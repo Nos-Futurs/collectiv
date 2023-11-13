@@ -1,85 +1,58 @@
 @use "@style/colours";
+@use "@style/spacings";
+@use "@style/layouts";
+@use "@style/font-sizes";
+@use "@style/components/button";
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-  
 #login-form {
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 8px;
-    width: 300px;
-}
-  
-.login-form.hidden {
-    display: none;
-}
-  
-.login-title {
-    margin-bottom: 16px;
+  background-color: #f0f0f0;
+  @include layouts.grid(1fr, repeat(5, auto));
+  padding: spacings.$xl spacings.$l;
+  border-radius: 8px;
+  row-gap: spacings.$m;
+  width: 30%;
+  max-width: 400px;
+
+  #login-title {
+    margin-bottom: spacings.$m;
     text-align: center;
-}
-  
-.login-button {
-    width: 100%;
-    background-color: #4eb1be;
-    color: white;
-}
+    font-size: font-sizes.$l;
+  }
 
-.login-button:hover {
-    background-color: colours.$green-blue;
-}
-  
-.create-account-button {
-    background-color: #8F2D56;
-    color: white;
-    margin-top: 20px;
-}
-  
-.signup-button {
-    background-color: #FFBC42;
-    color: black;
-    width: 60%;
-}
-  
-.cancel-button {
-    background-color: #f44336;
-    color: white;
-    margin-left: 37px;
-}
-
-.button-container {
-    display: flex;
-    justify-content: center;
-}
-
-.forgot-password-link {
-    margin-top: 10px;
-    color: #D81159;
+  .forgot-password-link {
+    margin: spacings.$m 0;
+    color: #d81159;
     cursor: pointer;
-    font-size: 90%;
+    font-size: font-sizes.$m;
     font-style: italic;
-}
+  }
+  #button-container {
+    @include layouts.flex(column);
+    row-gap: spacings.$s;
+    .create-account-button {
+      @extend %rounded-button;
+      text-align: center;
+      background-color: #8f2d56;
+      padding: spacings.$s 0;
+      margin: 0;
+      width: 100%;
+      color: white;
+    }
+    .login-button {
+      width: 100%;
+      padding: spacings.$s 0;
+      background-color: #4eb1be;
+      color: white;
+    }
 
+    .login-button:hover {
+      background-color: colours.$green-blue;
+    }
 
-.forgot-password-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-    width: 30%;
-    height: 40%;
+    .signup-button {
+      background-color: #ffbc42;
+      color: black;
+      width: 60%;
+    }
+  }
 }
-  
-.forgot-password-title {
-    margin-bottom: 20px;
-    margin-top: 50px;
-}
-  
-.reset-password-button {
-    margin-top: 20px;
-}
-  
