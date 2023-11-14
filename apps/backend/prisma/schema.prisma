@@ -26,6 +26,17 @@ model User {
   WorkingGroups     WorkingGroupsOnUsers[]
 }
 
+model PendingUser {
+  id          Int      @id @default(autoincrement())
+  email       String   @unique
+  createdAt   DateTime @default(now())
+  firstName   String
+  lastName    String
+  structure   String
+  description String
+  region      String
+}
+
 model Company {
   id        Int               @id @default(autoincrement())
   name      String            @unique

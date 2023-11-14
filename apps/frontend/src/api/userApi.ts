@@ -24,3 +24,20 @@ export async function getUsers(): Promise<Array<User>> {
     return resp.data;
   });
 }
+
+
+export async function createPendingUser(data: {
+  email: string;
+  firstName: string;
+  lastName: string;
+  region: string;
+  description: string;
+  structure: string;
+}): Promise<void> {
+  return axios({
+    method: "post",
+    url: `${baseApiUrl}/pending-users`,
+    withCredentials: true,
+    data,
+  }).then((resp) => resp.data);
+}

@@ -4,18 +4,21 @@ import "./Login.scss";
 import Input from "../../../../components/Input/Input";
 import { login } from "../../../../api/authApi";
 import { useNavigate } from "@solidjs/router";
+import { createStore } from "solid-js/store";
 
 interface LoginProps {
   setForgetPassword: Setter<boolean>;
 }
 
 const Login: Component<LoginProps> = (props: LoginProps) => {
-  const [username, setUsername] = createSignal("");
-  const [password, setPassword] = createSignal("");
+  const [creadential, setCredential] = createStore({
+    username: "",
+    password: "",
+  });
   const navigate = useNavigate();
 
   const handleLoginSubmit = () => {
-    login(username(), password()).then(() => {
+    login(creadential).then(() => {
       navigate("/registry");
     });
     // Gérer la soumission du formulaire de connexion ici
@@ -28,15 +31,19 @@ const Login: Component<LoginProps> = (props: LoginProps) => {
         id="username"
         type="email"
         label="Email"
-        value={username}
-        setValue={setUsername}
+        value={creadential.username}
+        setValue={(value: string) => {
+          setCredential("username", value);
+        }}
       />
       <Input
         id="password"
         type="password"
         label="Mot de passe"
-        value={password}
-        setValue={setPassword}
+        value={creadential.password}
+        setValue={(value: string) => {
+          setCredential("password", value);
+        }}
       />
       <div class="forgot-password-link" onClick={props.setForgetPassword}>
         Mot de passe oublié ?
