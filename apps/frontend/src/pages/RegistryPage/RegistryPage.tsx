@@ -21,26 +21,10 @@ const RegistryPage: Component = () => {
     setSearchQuery(value);
   }
 
-  // function filteredUsers() {
-  //   if (!searchQuery() && selectedTags().length === 0) {
-  //     return users;
-  //   }
-  //   const query = searchQuery().toLowerCase();
-  //   return users().filter((user) => {
-  //     const hasMatchingTag = selectedTags().some((tag) =>
-  //       user.tags.includes(tag)
-  //     );
-  //     return (
-  //       user.firstName.toLowerCase().includes(query) ||
-  //       user.lastName.toLowerCase().includes(query) ||
-  //       hasMatchingTag
-  //     );
-  //   });
-  // }
-
   createEffect(()=>{
     console.log(createGroup())
   })
+  
   return (
     <PageLayout id="registry" protected={true}>
       <SearchRegistry createGroup={createGroup} setCreateGroup={setCreateGroup} selectedTags={selectedTags} setSelectedTags={setSelectedTags} />

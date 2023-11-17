@@ -1,6 +1,6 @@
 import { type Component } from "solid-js";
 import profil from "../../assets/profil.svg";
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/logo.png";
 import "./Header.scss";
 import { A } from "@solidjs/router";
 

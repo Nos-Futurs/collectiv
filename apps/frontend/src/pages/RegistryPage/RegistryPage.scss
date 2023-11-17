@@ -3,17 +3,20 @@
 @use "@style/spacings";
 @use "sass:math";
 
-#user-cards {
-  @include layouts.grid(repeat(5, auto), auto);
-  overflow-y: scroll;
-  margin: spacings.$m;
-  gap: spacings.$m;
-}
-#create-group{
-  background-color: colours.$purple;
-  padding: 10px 45px;
-  font-size: 20px;
-  position: fixed;
-  bottom: 50px;
-  right: 100px;
+#registry {
+  #user-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    overflow-y: scroll;
+    margin: spacings.$l;
+    gap: spacings.$xl;
+  }
+  #create-group {
+    background-color: colours.$purple;
+    padding: 10px 45px;
+    font-size: 20px;
+    position: fixed;
+    bottom: 50px;
+    right: 100px;
+  }
 }
