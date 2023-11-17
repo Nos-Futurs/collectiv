@@ -1,10 +1,12 @@
-import { Setter, type Component, createSignal } from "solid-js";
+import { Setter, type Component, createSignal, createResource } from "solid-js";
 
 import "./Login.scss";
 import Input from "../../../../components/Input/Input";
 import { login } from "../../../../api/authApi";
 import { useNavigate } from "@solidjs/router";
 import { createStore } from "solid-js/store";
+import { useUserContext } from "../../../../context/userContext";
+import { getMe } from "../../../../api/userApi";
 
 interface LoginProps {
   setForgetPassword: Setter<boolean>;
@@ -15,10 +17,14 @@ const Login: Component<LoginProps> = (props: LoginProps) => {
     username: "",
     password: "",
   });
+  const [currentUser, setCurrentUser] = useUserContext();
+  const [getCurrentUser] = createResource(getMe);
   const navigate = useNavigate();
 
   const handleLoginSubmit = () => {
-    login(creadential).then(() => {
+    login(creadential).then(async () => {
+      const user = await getCurrentUser();
+      setCurrentUser(user);
       navigate("/registry");
     });
     // Gérer la soumission du formulaire de connexion ici

@@ -1,0 +1,30 @@
+@use "@style/colours";
+@use "@style/spacings";
+@use "@style/layouts";
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: colours.$green-blue;
+    height: 100vh;
+}
+
+#pending-users{
+    #pending-card{
+        @include layouts.grid(3fr 1fr, auto);
+        background-color: colours.$dark-grey;
+        width: 60%;
+        min-height: 200px;
+        border-radius: 10px;
+        padding: spacings.$m;
+        p{
+            grid-column: 1;
+        }
+        button{
+            grid-column: 2;
+            grid-row: 1;
+        }
+    }
+}

@@ -9,6 +9,7 @@ import MyProfil from "./pages/MyProfil/MyProfil";
 import UserProfil from "./pages/UserProfil/UserProfil";
 import Group from "./pages/Group/Group";
 import { UserProvider } from "./context/userContext";
+import Admin from "./pages/Admin/Admin";
 
 const App: Component = () => {
   return (
@@ -23,6 +24,7 @@ const App: Component = () => {
         <Route path="/users/:id" component={UserProfil}/>
         <Route path="/groups/:id" component={Group}/>
         <Route path="/events" component={Events} />
+        <Route path="/admin" component={Admin} />
       </Routes>
       </UserProvider>
     </Router>

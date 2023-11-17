@@ -8,4 +8,10 @@ export interface User {
   description: string;
   region: string;
   companyId: number;
+  role: Role
+}
+
+export enum Role {
+  USER = "USER",
+  ADMIN = "ADMIN",
 }
