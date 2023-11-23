@@ -6,6 +6,7 @@ import { TagModule } from './tag/tag.module';
 import { UserModule } from './user/user.module';
 import { WorkingGroupModule } from './working-group/working-group.module';
 import { PendingUserModule } from './pending-user/pending-user.module';
+import DatabaseModule from './database/database.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { PendingUserModule } from './pending-user/pending-user.module';
     TagModule,
     UserModule,
     WorkingGroupModule,
+    DatabaseModule
   ],
   controllers: [],
 })

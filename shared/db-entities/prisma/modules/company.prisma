@@ -1,0 +1,12 @@
+import { User }from "./user"
+import { TagsOnCompanies }from "./tag"
+
+model Company {
+    id        Int               @id @default(autoincrement())
+    name      String            @unique
+    createdAt DateTime          @default(now())
+    region    String
+    users     User[]
+    tags      TagsOnCompanies[]
+}
+

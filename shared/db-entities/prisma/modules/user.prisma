@@ -1,0 +1,27 @@
+import { User } from "./user"
+import { Company } from "./company"
+import { WorkingGroup, WorkingGroupsOnUsers } from "./working-groups"
+import { TagsOnUsers } from "./tag"
+
+enum Role {
+    USER
+    ADMIN
+}
+
+model User {
+    id                Int                    @id @default(autoincrement())
+    email             String                 @unique
+    createdAt         DateTime               @default(now())
+    firstName         String
+    lastName          String
+    password          String
+    description       String
+    role              Role                   @default(USER)
+    region            String
+    validated         Boolean
+    company           Company                @relation(fields: [companyId], references: [id]) // One to many relation with company
+    companyId         Int
+    tags              TagsOnUsers[] // many to many relation with tags
+    workingGroupOwned WorkingGroup[]
+    WorkingGroups     WorkingGroupsOnUsers[]
+}

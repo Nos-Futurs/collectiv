@@ -1,0 +1,14 @@
+import { WorkingGroup }from "./working-groups"
+import { TagsOnEvents }from "./tag"
+
+model Event {
+    id             Int            @id @default(autoincrement())
+    createdAt      DateTime       @default(now())
+    updatedAt      DateTime       @updatedAt
+    startDate      DateTime
+    endDate        DateTime
+    workingGroup   WorkingGroup   @relation(fields: [workingGroupId], references: [id]) // One to many relation with workingGroup
+    workingGroupId Int
+    name           String
+    tags           TagsOnEvents[]
+}
