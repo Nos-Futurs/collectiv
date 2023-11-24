@@ -1,20 +1,21 @@
 import { User }from "./user"
 import { Event }from "./event"
-import { TagsOnWorkingGroups }from "./tag"
+import { Tag }from "./tag"
 
 model WorkingGroup {
     id        Int                    @id @default(autoincrement())
     name      String                 @unique
     createdAt DateTime               @default(now())
     updatedAt DateTime               @updatedAt
+    /// @description The tags link to this event
+    /// @DtoRelationCanConnectOnCreate
+    /// @DtoRelationCanConnectOnUpdate
     owner     User                   @relation(fields: [ownerId], references: [id])
     ownerId   Int
     users     WorkingGroupsOnUsers[]
-    tags      TagsOnWorkingGroups[]
+    tags      Tag[]
     Event     Event[]
 }
-
-
 
 model WorkingGroupsOnUsers {
     workingGroup   WorkingGroup @relation(fields: [workingGroupId], references: [id])
@@ -25,4 +26,3 @@ model WorkingGroupsOnUsers {
 
     @@id([workingGroupId, userId])
 }
-

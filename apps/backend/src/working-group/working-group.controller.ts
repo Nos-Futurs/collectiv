@@ -8,9 +8,12 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
-import { WorkingGroup } from '@prisma/client';
-import PrismaService from '../database/prisma.service';
-import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
+import PrismaService from '../database/prisma.service.js';
+import JwtAuthGuard from '../auth/guard/jwt-auth.guard.js';
+import {
+  CreateWorkingGroupDto,
+  WorkingGroup,
+} from '@collectiv/db-entities/backend';
 
 @UseGuards(JwtAuthGuard)
 @Controller('working-group')
@@ -33,22 +36,34 @@ export class WorkingGroupController {
   }
 
   @Post()
-  async create(
-    @Body() workingGroupData: Omit<WorkingGroup, 'id'>,
-  ): Promise<WorkingGroup> {
+  async create(@Body() dto: CreateWorkingGroupDto): Promise<WorkingGroup> {
+    const connectOwner = dto.owner
+      ? {
+          connect: {
+            id: dto.owner.connect.id,
+          },
+        }
+      : undefined;
     return this.prisma.workingGroup.create({
-      data: workingGroupData,
+      data: {...dto, owner: connectOwner}
     });
   }
 
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() workingGroupData: Partial<WorkingGroup>,
+    @Body() dto: Partial<CreateWorkingGroupDto>,
   ): Promise<WorkingGroup> {
+    const connectOwner = dto.owner
+      ? {
+          connect: {
+            id: dto.owner.connect.id,
+          },
+        }
+      : undefined;
     return this.prisma.workingGroup.update({
       where: { id: Number(id) },
-      data: workingGroupData,
+      data: {...dto, owner: connectOwner}
     });
   }
 

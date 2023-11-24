@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TagController } from './tag.controller';
+import { TagController } from './tag.controller.js';
 
 describe('TagController', () => {
   let controller: TagController;

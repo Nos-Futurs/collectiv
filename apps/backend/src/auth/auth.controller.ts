@@ -1,9 +1,9 @@
 import { Body, Controller, HttpException, HttpStatus, Post, Req, Res, UseGuards } from '@nestjs/common';
-import { User } from '@prisma/client';
 import { FastifyReply } from 'fastify';
-import { AuthService } from './auth.service';
-import LocalAuthGuard from './guard/local.auth.guard';
-import RequestWithUser from './types/RequestWithUser';
+import { AuthService } from './auth.service.js';
+import LocalAuthGuard from './guard/local.auth.guard.js';
+import RequestWithUser from './types/RequestWithUser.js';
+import { CreateUserDto, User } from '@collectiv/db-entities/backend';
 
 
 
@@ -34,7 +34,7 @@ export class AuthController {
   }
 
   @Post('signup')
-  async signUp(@Body() userData: Omit<User, 'id'>): Promise<User> {
+  async signUp(@Body() userData: CreateUserDto): Promise<User> {
     return this.authService.signUp(userData);
   }
 }

@@ -8,10 +8,9 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
-import { Event } from '@prisma/client';
-import PrismaService from '../database/prisma.service';
-import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
-
+import PrismaService from '../database/prisma.service.js';
+import JwtAuthGuard from '../auth/guard/jwt-auth.guard.js';
+import { CreateEventDto, Event } from '@collectiv/db-entities/backend';
 
 @UseGuards(JwtAuthGuard)
 @Controller('event')
@@ -20,32 +19,61 @@ export class EventController {
 
   @Get()
   async findAll(): Promise<Event[]> {
-    return this.prisma.event.findMany({include: { tags: true }});
+    return this.prisma.event.findMany({ include: { tags: true } });
   }
 
   @Get(':id')
   async findById(@Param('id') id: string): Promise<Event> {
     return this.prisma.event.findUnique({
       where: { id: Number(id) },
-      include: { tags: true }
+      include: { tags: true },
     });
   }
 
   @Post()
-  async create(@Body() eventData: Omit<Event, 'id'>): Promise<Event> {
+  async create(@Body() dto: CreateEventDto): Promise<Event> {
+    const connectGroup = dto.workingGroup
+      ? {
+          connect: {
+            id: dto.workingGroup.connect.id,
+          },
+        }
+      : undefined;
+    const connectTags = dto.tags
+      ? {
+          connect: dto.tags?.connect.map((connection) => ({
+            id: connection.id,
+          })),
+        }
+      : undefined;
+
     return this.prisma.event.create({
-      data: eventData,
+      data: { ...dto, workingGroup: connectGroup, tags: connectTags },
     });
   }
 
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() eventData: Partial<Event>,
+    @Body() dto: Partial<CreateEventDto>,
   ): Promise<Event> {
+    const connectGroup = dto.workingGroup
+      ? {
+          connect: {
+            id: dto.workingGroup.connect.id,
+          },
+        }
+      : undefined;
+    const connectTags = dto.tags
+      ? {
+          connect: dto.tags?.connect.map((connection) => ({
+            id: connection.id,
+          })),
+        }
+      : undefined;
     return this.prisma.event.update({
       where: { id: Number(id) },
-      data: eventData,
+      data: { ...dto, workingGroup: connectGroup, tags: connectTags },
     });
   }
 

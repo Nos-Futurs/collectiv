@@ -1,7 +1,7 @@
 import { User } from "./user"
 import { Company } from "./company"
 import { WorkingGroup, WorkingGroupsOnUsers } from "./working-groups"
-import { TagsOnUsers } from "./tag"
+import { Tag } from "./tag"
 
 enum Role {
     USER
@@ -25,7 +25,7 @@ model User {
     /// @DtoRelationCanConnectOnUpdate
     company           Company                @relation(fields: [companyId], references: [id]) // One to many relation with company
     companyId         Int
-    tags              TagsOnUsers[] // many to many relation with tags
+    tags              Tag[] // many to many relation with tags
     workingGroupOwned WorkingGroup[]
     WorkingGroups     WorkingGroupsOnUsers[]
 }

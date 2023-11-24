@@ -9,14 +9,13 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import JwtAuthGuard from '~/auth/guard/jwt-auth.guard.js';
-import PrismaService from '~/database/prisma.service.js';
+import JwtAuthGuard from '../auth/guard/jwt-auth.guard.js';
+import PrismaService from '../database/prisma.service.js';
 import { UserService } from './user.service.js';
-import RequestWithUser from '~/auth/types/RequestWithUser.js';
+import RequestWithUser from '../auth/types/RequestWithUser.js';
 import {
   CreateUserDto,
   TagDto,
-  TagsOnUsers,
   User,
 } from '@collectiv/db-entities/backend';
 
@@ -77,19 +76,6 @@ export class UserController {
       where: { id: Number(id) },
       data: { ...dto, company: connectCompany },
     });
-  }
-
-  @Put(':id/add-tag')
-  async addTag(@Param('id') id: string, @Body() tagData: Partial<TagDto>) {
-    return this.userService.addTag(Number(id), tagData.id);
-  }
-
-  @Put(':id/remove-tag')
-  async removeTag(
-    @Param('id') id: string,
-    @Body() data: { tagId: number },
-  ): Promise<TagsOnUsers> {
-    return this.userService.removeTag(Number(id), data.tagId);
   }
 
   @Delete(':id')
