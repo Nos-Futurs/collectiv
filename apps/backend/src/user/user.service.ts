@@ -1,18 +1,18 @@
+import { TagsOnUsersDto, UserDto } from '@collectiv/db-entities/backend';
 import { Injectable } from '@nestjs/common';
-import { TagsOnUsers, User } from '@prisma/client';
-import PrismaService from '../database/prisma.service';
+import PrismaService from '~/database/prisma.service.js';
 
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async findOne(email: string): Promise<User | undefined> {
+  async findOne(email: string): Promise<UserDto | undefined> {
     return this.prisma.user.findUnique({
       where: { email },
     });
   }
 
-  addTag(userId: number, tagId: number): Promise<User> {
+  addTag(userId: number, tagId: number): Promise<UserDto> {
     return this.prisma.user.update({
       where: { id: Number(userId) },
       data: {
@@ -31,7 +31,7 @@ export class UserService {
     });
   }
 
-  removeTag(userId: number, tagId: number): Promise<TagsOnUsers> {
+  removeTag(userId: number, tagId: number): Promise<TagsOnUsersDto> {
     return this.prisma.tagsOnUsers.delete({
       where: { tagId_userId: { userId, tagId } },
     });

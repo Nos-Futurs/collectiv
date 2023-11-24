@@ -3,24 +3,26 @@ import { Event }from "./event"
 import { TagsOnWorkingGroups }from "./tag"
 
 model WorkingGroup {
-  id        Int                    @id @default(autoincrement())
-  name      String                 @unique
-  createdAt DateTime               @default(now())
-  updatedAt DateTime               @updatedAt
-  owner     User                   @relation(fields: [ownerId], references: [id])
-  ownerId   Int
-  users     WorkingGroupsOnUsers[]
-  tags      TagsOnWorkingGroups[]
-  Event     Event[]
+    id        Int                    @id @default(autoincrement())
+    name      String                 @unique
+    createdAt DateTime               @default(now())
+    updatedAt DateTime               @updatedAt
+    owner     User                   @relation(fields: [ownerId], references: [id])
+    ownerId   Int
+    users     WorkingGroupsOnUsers[]
+    tags      TagsOnWorkingGroups[]
+    Event     Event[]
 }
+
 
 
 model WorkingGroupsOnUsers {
-  workingGroup   WorkingGroup @relation(fields: [workingGroupId], references: [id])
-  workingGroupId Int // relation scalar field (used in the `@relation` attribute above)
-  user           User         @relation(fields: [userId], references: [id])
-  userId         Int // relation scalar field (used in the `@relation` attribute above)
-  assignedAt     DateTime     @default(now())
+    workingGroup   WorkingGroup @relation(fields: [workingGroupId], references: [id])
+    workingGroupId Int // relation scalar field (used in the `@relation` attribute above)
+    user           User         @relation(fields: [userId], references: [id])
+    userId         Int // relation scalar field (used in the `@relation` attribute above)
+    assignedAt     DateTime     @default(now())
 
-  @@id([workingGroupId, userId])
+    @@id([workingGroupId, userId])
 }
+

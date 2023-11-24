@@ -9,11 +9,16 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { Tag, TagsOnUsers, User } from '@prisma/client';
-import PrismaService from '../database/prisma.service';
-import { UserService } from './user.service';
-import RequestWithUser from 'src/auth/types/RequestWithUser';
-import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
+import JwtAuthGuard from '~/auth/guard/jwt-auth.guard.js';
+import PrismaService from '~/database/prisma.service.js';
+import { UserService } from './user.service.js';
+import RequestWithUser from '~/auth/types/RequestWithUser.js';
+import {
+  CreateUserDto,
+  TagDto,
+  TagsOnUsers,
+  User,
+} from '@collectiv/db-entities/backend';
 
 @UseGuards(JwtAuthGuard)
 @Controller('user')
@@ -37,30 +42,45 @@ export class UserController {
   async findById(@Param('id') id: string): Promise<User> {
     return this.prisma.user.findUnique({
       where: { id: Number(id) },
-      include: { tags: true }
+      include: { tags: true },
     });
   }
 
   @Post()
-  async create(@Body() userData: Omit<User, 'id'>): Promise<User> {
+  async create(@Body() dto: CreateUserDto): Promise<User> {
+    const connectCompany = dto.company
+      ? {
+          connect: {
+            id: dto.company.connect.id,
+          },
+        }
+      : undefined;
+
     return this.prisma.user.create({
-      data: userData,
+      data: { ...dto, company: connectCompany },
     });
   }
 
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() userData: Partial<User>,
-  ): Promise<User> {
+    @Body() dto: Partial<CreateUserDto>,
+  ): Promise<CreateUserDto> {
+    const connectCompany = dto.company
+      ? {
+          connect: {
+            id: dto.company.connect.id,
+          },
+        }
+      : undefined;
     return this.prisma.user.update({
       where: { id: Number(id) },
-      data: userData,
+      data: { ...dto, company: connectCompany },
     });
   }
 
   @Put(':id/add-tag')
-  async addTag(@Param('id') id: string, @Body() tagData: Partial<Tag>) {
+  async addTag(@Param('id') id: string, @Body() tagData: Partial<TagDto>) {
     return this.userService.addTag(Number(id), tagData.id);
   }
 

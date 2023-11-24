@@ -19,6 +19,10 @@ model User {
     role              Role                   @default(USER)
     region            String
     validated         Boolean
+    /// @description The company whom the partner belongs to
+    /// @DtoCreateOptional
+    /// @DtoRelationCanConnectOnCreate
+    /// @DtoRelationCanConnectOnUpdate
     company           Company                @relation(fields: [companyId], references: [id]) // One to many relation with company
     companyId         Int
     tags              TagsOnUsers[] // many to many relation with tags
