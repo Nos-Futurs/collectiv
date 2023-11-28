@@ -1,4 +1,4 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
@@ -33,6 +33,9 @@ export class AuthService {
   }
 
   async login(user: User): Promise<{ accessToken: string; user: User }> {
+    if (!user.validated || !user.verified){
+      throw new HttpException({ reason: 'The user is not validated yet' }, HttpStatus.UNAUTHORIZED);
+    }
     const payload = { username: user.email, sub: user.id };
     return {
       accessToken: this.jwtService.sign(payload, {
@@ -42,7 +45,7 @@ export class AuthService {
     };
   }
 
-  async signUp(dto: CreateUserDto): Promise<User> {
+  async signUp(dto: Omit<CreateUserDto, "validated" | "verified">): Promise<User> {
     const hashedPassword = await this.hashPassword(dto.password);
     const { password, ...dataRest } = dto;
     const connectCompany = dto.company
@@ -56,7 +59,9 @@ export class AuthService {
       data: {
         password: hashedPassword,
         ...dataRest,
-        company: connectCompany
+        company: connectCompany,
+        validated: false,
+        verified: false
       },
     });
   }

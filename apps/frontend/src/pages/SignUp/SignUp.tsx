@@ -4,7 +4,7 @@ import "./SignUp.scss";
 import { useNavigate } from "@solidjs/router";
 import Input from "../../components/Input/Input";
 import { createStore } from "solid-js/store";
-import { createPendingUser } from "../../api/userApi";
+import { signUpUser } from "../../api/userApi";
 
 const SignUp: Component = () => {
   const [form, setForm] = createStore({
@@ -14,11 +14,12 @@ const SignUp: Component = () => {
     email: "",
     region: "",
     description: "",
+    password: "",
   });
   const navigate = useNavigate();
 
   const handleSignupSubmit = () => {
-    createPendingUser(form).then(() => {
+    signUpUser(form).then(() => {
       navigate("/login");
     });
     return false;
@@ -52,6 +53,15 @@ const SignUp: Component = () => {
             setForm("email", value);
           }}
           type="email"
+        />
+        <Input
+          label="Password"
+          id="password"
+          value={form.password}
+          setValue={(value: string) => {
+            setForm("password", value);
+          }}
+          type="password"
         />
         <Input
           label="Votre Structure"

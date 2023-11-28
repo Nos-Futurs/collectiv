@@ -1,4 +1,4 @@
-import { User } from "@collectiv/shared-types";
+import { User } from "@collectiv/db-entities/frontend";
 import axios from "axios";
 
 const baseApiUrl = import.meta.env.VITE_BASE_API_URL;

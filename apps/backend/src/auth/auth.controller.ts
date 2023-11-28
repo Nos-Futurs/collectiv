@@ -34,7 +34,7 @@ export class AuthController {
   }
 
   @Post('signup')
-  async signUp(@Body() userData: CreateUserDto): Promise<User> {
+  async signUp(@Body() userData: Omit<CreateUserDto, "validated" | "verified">): Promise<User> {
     return this.authService.signUp(userData);
   }
 }

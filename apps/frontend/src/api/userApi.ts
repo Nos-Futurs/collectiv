@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User } from "@collectiv/shared-types";
+import { User } from "@collectiv/db-entities/frontend";
 
 const baseApiUrl = import.meta.env.VITE_BASE_API_URL;
 
@@ -25,19 +25,26 @@ export async function getUsers(): Promise<Array<User>> {
   });
 }
 
-
-export async function createPendingUser(data: {
+export async function signUpUser(data: {
   email: string;
   firstName: string;
   lastName: string;
   region: string;
   description: string;
+  password: string;
   structure: string;
 }): Promise<void> {
   return axios({
     method: "post",
-    url: `${baseApiUrl}/pending-users`,
+    url: `${baseApiUrl}/auth/signup`,
     withCredentials: true,
-    data,
+    data: {
+      email: data.email,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      region: data.region,
+      description: data.description,
+      password: data.password,
+    },
   }).then((resp) => resp.data);
 }
