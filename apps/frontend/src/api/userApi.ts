@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User } from "@collectiv/db-entities/frontend";
+import { CreateUserDto, User } from "@collectiv/db-entities/frontend";
 
 const baseApiUrl = import.meta.env.VITE_BASE_API_URL;
 
@@ -46,5 +46,18 @@ export async function signUpUser(data: {
       description: data.description,
       password: data.password,
     },
+  }).then((resp) => resp.data);
+}
+
+export async function updateUser(dto: {
+  filter: { id: number };
+  data: Partial<CreateUserDto>;
+}): Promise<void> {
+  const {filter, data} = dto;
+  return axios({
+    method: "put",
+    url: `${baseApiUrl}/user/${filter.id}`,
+    withCredentials: true,
+    data,
   }).then((resp) => resp.data);
 }

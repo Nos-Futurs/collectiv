@@ -15,7 +15,6 @@ import { UserService } from './user.service.js';
 import RequestWithUser from '../auth/types/RequestWithUser.js';
 import {
   CreateUserDto,
-  TagDto,
   User,
 } from '@collectiv/db-entities/backend';
 

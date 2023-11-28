@@ -12,6 +12,8 @@
 }
 
 #pending-users{
+    @include layouts.flex(column, flex-start);
+    row-gap: spacings.$m;
     #pending-card{
         @include layouts.grid(3fr 1fr, auto);
         background-color: colours.$dark-grey;
