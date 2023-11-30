@@ -1,0 +1,36 @@
+@use '@style/colours';
+
+
+#tags-container-selected {
+  margin: 0px 0px 15px 0px;
+  #tag {
+    border: 2px solid black;
+    margin: 20px;
+  }
+  
+  #tag-selected {
+    background-color: colours.$green-blue;
+    color: white;
+    margin: 20px;
+    border: 2px solid #218381;
+    transform: translate(500px);
+    transition: 0.7s;
+  }
+}
+
+#tags-container-options {
+  margin: 0px 0px 15px 0px;
+  #tag {
+    border: 2px solid #218381;
+    margin: 20px;
+  }
+  
+  #tag-selected {
+    background-color: colours.$green-blue;
+    color: white;
+    margin: 20px;
+    border: 2px solid #218381;
+    transform: translate(500px);
+    transition: 0.7s;
+  }
+}

@@ -18,7 +18,6 @@ const RegistryPage: Component = () => {
   const [users] = createResource(getUsers);
   const [searchQuery, setSearchQuery] = createSignal("");
   const [createGroup, setCreateGroup] = createSignal(false);
-  const [selectedTags, setSelectedTags] = createSignal<string[]>([]);
 
   function handleSearch(event: Event) {
     const value = (event.target as HTMLInputElement).value;
@@ -31,28 +30,28 @@ const RegistryPage: Component = () => {
 
   return (
     <PageLayout id="registry" protected={true}>
-      <SearchRegistry
-        createGroup={createGroup}
-        setCreateGroup={setCreateGroup}
-        selectedTags={selectedTags}
-        setSelectedTags={setSelectedTags}
-      />
-      <div id="user-cards">
-        <For each={users()} fallback={<div>Aucun utilisateur trouvé</div>}>
-          {(user) => {
-            if (user.validated && user.verified) {
-              return (
-                <UserCard
-                  selectable={createGroup()}
-                  user={user}
-                  photo={profil}
-                />
-              );
-            }
-          }}
-        </For>
-      </div>
-      {createGroup() && <button id="create-group">Créer un groupe</button>}
+      <section id="registry-container">
+        <SearchRegistry
+          createGroup={createGroup}
+          setCreateGroup={setCreateGroup}
+        />
+        <div id="user-cards">
+          <For each={users()} fallback={<div>Aucun utilisateur trouvé</div>}>
+            {(user) => {
+              if (user.validated && user.verified) {
+                return (
+                  <UserCard
+                    selectable={createGroup()}
+                    user={user}
+                    photo={profil}
+                  />
+                );
+              }
+            }}
+          </For>
+        </div>
+        {createGroup() && <button id="create-group">Créer un groupe</button>}
+      </section>
     </PageLayout>
   );
 };

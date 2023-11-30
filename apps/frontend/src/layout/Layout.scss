@@ -2,13 +2,17 @@
 @use "@style/spacings";
 
 .page {
-  max-height: 100%;
-  max-width: 100vw;
+  height: 100vh;
+  width: 100vw;
+  @include layouts.grid(1fr, 150px calc(100vh - 150px));
 
   .content {
-    @include layouts.flex(column, stretch, stretch);
-    max-width: 100vw;
-    min-height: calc(100vh - (200px));
-    padding: spacings.$xl;
+    @include layouts.flex(column);
+    width: 100%;
+    height: 400px;
+    padding: spacings.$l;
+    overflow-y: scroll;
+    height: 100%;
+    margin: 0;
   }
 }
