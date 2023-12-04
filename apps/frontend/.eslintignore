@@ -1,0 +1,8 @@
+/build
+/dist
+/node_modules
+.eslintrc.js
+*.scss
+*.css
+tsconfig(.*).json
+commitlint.config.js

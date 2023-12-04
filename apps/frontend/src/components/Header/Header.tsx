@@ -32,7 +32,7 @@ const Header: Component<HeaderProps> = (props: HeaderProps) => {
       >
         Evénements
       </A>
-      {(currentUser() && currentUser()?.role) && (
+      {(currentUser.user && currentUser?.user?.role) && (
         <A
           href="/admin"
           class={props.page == "admin" ? "selected" : "unselected"}

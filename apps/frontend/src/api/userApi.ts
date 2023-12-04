@@ -12,7 +12,9 @@ export async function getMe(): Promise<User | undefined> {
     .then((resp) => {
       return resp.data;
     })
-    .catch(() => undefined);
+    .catch((err) => {
+      return undefined;
+    });
 }
 
 export async function getUsers(): Promise<Array<User>> {
@@ -53,7 +55,7 @@ export async function updateUser(dto: {
   filter: { id: number };
   data: Partial<CreateUserDto>;
 }): Promise<void> {
-  const {filter, data} = dto;
+  const { filter, data } = dto;
   return axios({
     method: "put",
     url: `${baseApiUrl}/user/${filter.id}`,

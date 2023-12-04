@@ -5,9 +5,9 @@
 
 #registry-container {
   @include layouts.grid(1fr 3fr, auto);
-  column-gap: spacings.$xl;
   #user-cards {
     display: grid;
+    height: fit-content;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     overflow-y: scroll;
     margin: spacings.$l;

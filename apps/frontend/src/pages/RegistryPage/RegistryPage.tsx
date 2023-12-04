@@ -24,10 +24,6 @@ const RegistryPage: Component = () => {
     setSearchQuery(value);
   }
 
-  createEffect(() => {
-    console.log(createGroup());
-  });
-
   return (
     <PageLayout id="registry" protected={true}>
       <section id="registry-container">

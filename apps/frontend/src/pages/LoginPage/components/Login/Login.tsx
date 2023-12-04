@@ -24,7 +24,7 @@ const Login: Component<LoginProps> = (props: LoginProps) => {
   const handleLoginSubmit = () => {
     login(creadential).then(async () => {
       const user = await getCurrentUser();
-      setCurrentUser(user);
+      setCurrentUser({user});
       navigate("/registry");
     });
     // Gérer la soumission du formulaire de connexion ici

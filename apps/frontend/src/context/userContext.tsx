@@ -1,22 +1,26 @@
-import { User } from "@collectiv/shared-types";
 import {
-  Accessor,
   JSX,
-  Setter,
   createContext,
-  createEffect,
-  createResource,
-  createSignal,
   useContext,
 } from "solid-js";
-import { getMe } from "../api/userApi";
+import { User } from "@collectiv/db-entities/frontend";
+import { SetStoreFunction, createStore } from "solid-js/store";
 
 interface UserProviderProps {
   children: JSX.Element;
 }
 
-type TypeUserContext = [Accessor<User | undefined>, Setter<User | undefined>];
-const [currentUser, setCurrentUser] = createSignal<User | undefined>(undefined);
+interface UserProviderProps {
+  children: JSX.Element;
+}
+
+type TypeUserContext = [
+  Record<"user", User | undefined>,
+  SetStoreFunction<Record<"user", User | undefined>>
+];
+const [currentUser, setCurrentUser] = createStore<
+  Record<"user", User | undefined>
+>({ user: undefined });
 
 export const UserContext = createContext<TypeUserContext>([
   currentUser,
@@ -28,9 +32,12 @@ export function useUserContext(): TypeUserContext {
 }
 
 export function UserProvider(props: UserProviderProps): JSX.Element {
-  const [currentUser, setCurrentUser] = createSignal<User>();
+  const [currentUser, setCurrentUser] = createStore<
+    Record<"user", User | undefined>
+  >({ user: undefined });
+
   return (
-    <UserContext.Provider value={[currentUser, setCurrentUser] }>
+    <UserContext.Provider value={[currentUser, setCurrentUser]}>
       {props.children}
     </UserContext.Provider>
   );

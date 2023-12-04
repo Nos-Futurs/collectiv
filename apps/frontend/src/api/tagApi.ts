@@ -3,7 +3,7 @@ import axios from "axios";
 
 const baseApiUrl = import.meta.env.VITE_BASE_API_URL;
 
-export async function getTags(): Promise<Array<Tag>> {
+export async function getTags(): Promise<[Tag]> {
   return axios({
     method: "get",
     url: `${baseApiUrl}/tag`,

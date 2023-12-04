@@ -14,7 +14,9 @@
     "@collectiv/db-entities": "workspace:^",
     "typescript": "^4.9.5",
     "vite": "^4.1.1",
-    "vite-plugin-solid": "^2.5.0"
+    "vite-plugin-solid": "^2.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0"
   },
   "dependencies": {
     "@solidjs/router": "^0.8.2",

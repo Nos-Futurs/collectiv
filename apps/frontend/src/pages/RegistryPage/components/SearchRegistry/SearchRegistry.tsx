@@ -4,8 +4,7 @@ import {
   Accessor,
   Setter,
   Show,
-  For,
-  createSignal,
+  createEffect,
 } from "solid-js";
 import SwitchButton from "../../../../components/buttons/SwitchButton/SwitchButton";
 import SearchBar from "../../../../components/SearchBar/SearchBar";
@@ -28,37 +27,73 @@ const SearchRegistry: Component<SearchRegistryProps> = (
   const [selectedTags, setSelectedTags] = createStore<{ tags: Tag[] }>({
     tags: [],
   });
+  const [optionTags, setOptionTags] = createStore<{ tags: Tag[] }>({
+    tags: [],
+  });
   const [tags] = createResource(getTags);
 
   const handleAddTag = (tag: Tag): void => {
-    let index: number;
-    index = selectedTags.tags.findIndex((item) => {
+    const indexSelected = selectedTags.tags.findIndex((item) => {
+      return item.id === tag.id;
+    });
+    const indexOptions = optionTags.tags.findIndex((item) => {
       return item.id === tag.id;
     });
     setSelectedTags(
       produce((draft) => {
         // Add the item if it doesn't exist
-        if (index === -1) {
+        if (indexSelected === -1) {
           draft.tags.push(tag);
+        }
+      })
+    );
+    setOptionTags(
+      produce((draft) => {
+        // Add the item if it doesn't exist
+        if (indexOptions !== -1) {
+          draft.tags.splice(indexOptions, 1);
         }
       })
     );
   };
 
   const handleDeleteTag = (tag: Tag): void => {
-    let index: number;
-    index = selectedTags.tags.findIndex((item) => {
+    const indexSelected = selectedTags.tags.findIndex((item) => {
+      return item.id === tag.id;
+    });
+    const indexOptions = optionTags.tags.findIndex((item) => {
       return item.id === tag.id;
     });
     setSelectedTags(
       produce((draft) => {
-        if (index > -1) {
+        if (indexSelected > -1) {
           // Remove the item if it exists
-          draft.tags.splice(index, 1);
+          draft.tags.splice(indexSelected, 1);
+        }
+      })
+    );
+    setOptionTags(
+      produce((draft) => {
+        // Add the item if it doesn't exist
+        if (indexOptions === -1) {
+          draft.tags.push(tag);
         }
       })
     );
   };
+
+  createEffect(() => {
+    if (!tags.loading) {
+      tags()!.map((tag) => {
+        setOptionTags(
+          produce((draft) => {
+            // Add the item if it doesn't exist
+            draft.tags.push(tag);
+          })
+        );
+      });
+    }
+  });
 
   return (
     <div id="search-section">
@@ -76,10 +111,9 @@ const SearchRegistry: Component<SearchRegistryProps> = (
       </div>
       <div id="tag-container">
         <Show when={!tags.loading} fallback={<>Loading tags...</>}>
-          <p></p>
           <TagSearch
             values={selectedTags.tags}
-            options={tags()}
+            options={optionTags.tags}
             handleDeleteTag={handleDeleteTag}
             handleAddTag={handleAddTag}
           />

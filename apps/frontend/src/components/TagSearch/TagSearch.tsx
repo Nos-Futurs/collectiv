@@ -1,11 +1,4 @@
-import {
-  Component,
-  For,
-  JSX,
-  Show,
-  createEffect,
-  createSignal,
-} from "solid-js";
+import { Component, For, Show, createEffect } from "solid-js";
 
 import "./TagSearch.scss";
 import { Tag } from "@collectiv/db-entities/backend";
@@ -13,7 +6,7 @@ import { createStore, produce } from "solid-js/store";
 
 interface ActivitySearchProps {
   values: Tag[];
-  options: Tag[] | undefined;
+  options: Tag[];
   handleDeleteTag: (tag: Tag) => void;
   handleAddTag: (tag: Tag) => void;
 }
@@ -25,26 +18,11 @@ const TagSearch: Component<ActivitySearchProps> = (
     tags: props.options ? props.options : [],
   });
 
-  createEffect(() => {
-    for (let k = 0; k < props.values.length; k++) {
-      let index = remainingTags.tags.findIndex((item) => {
-        return item.id === props.values[k].id;
-      });
-      setRemainingTags(
-        produce((draft) => {
-          // Add the item if it doesn't exist
-          if (index === -1) {
-            draft.tags.push(props.values[k]);
-          }
-        })
-      );
-    }
-  });
-
   return (
     <div id="tags-container">
       <Show when={props.values.length > 0} fallback={<></>}>
         <div id="tags-container-selected">
+          <h1>Tags sélectionnés</h1>
           <For each={props.values} fallback={<div>Loading tags...</div>}>
             {(tag) => (
               <button
@@ -60,10 +38,11 @@ const TagSearch: Component<ActivitySearchProps> = (
         </div>
       </Show>
       <Show
-        when={remainingTags.tags !== undefined && remainingTags.tags.length > 0}
+        when={props.options.length > 0}
         fallback={<></>}
       >
         <div id="tags-container-options">
+          <h1>Tags disponibles</h1>
           <For each={props.options} fallback={<div>Loading tags...</div>}>
             {(tag) => {
               if (!props.values.includes(tag)) {
