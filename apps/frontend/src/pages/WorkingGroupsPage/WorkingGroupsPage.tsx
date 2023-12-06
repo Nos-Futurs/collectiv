@@ -13,15 +13,14 @@ const LoginPage: Component = () => {
 
   return (
     <PageLayout id="working-groups" protected={true}>
-      <div id="working-groups-search">
+      <section id="group-container">
         <Search setMyGroups={setMyGroups} myGroups={myGroups} />
-        <div id="divider" />
-      </div>
-      <div id="groups">
-        <For each={groups()} fallback={<div>Loading...</div>}>
-          {(item) => <GroupCard group={item} userId={currentUser.user?.id}/>}
-        </For>
-      </div>
+        <div id="groups">
+          <For each={groups()} fallback={<div>Loading...</div>}>
+            {(item) => <GroupCard group={item} userId={currentUser.user?.id} />}
+          </For>
+        </div>
+      </section>
     </PageLayout>
   );
 };

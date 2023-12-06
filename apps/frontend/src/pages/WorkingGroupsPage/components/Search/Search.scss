@@ -1,9 +1,59 @@
 @use "@style/colours";
 @use "@style/layouts";
 @use "@style/spacings";
-@use "@style/font-sizes";
+@use "sass:math";
 
-#search {
+$header-size: 100px;
+
+#search-section {
   @include layouts.flex(column, flex-start, flex-start);
-  padding: spacings.$l spacings.$xl spacings.$s spacings.$xl;
+  row-gap: spacings.$l;
+  padding: 40px 40px 0px 40px;
+  position: sticky;
+  background-color: none;
+  z-index: 2;
+  top: $header-size;
+
+  #my-groups-container {
+    @include layouts.flex(column, center, flex-start);
+    background-color: white;
+    border-radius: 5px;
+    row-gap: spacings.$m;
+    padding: spacings.$m;
+    width: 100%;
+    h1 {
+      margin: 0;
+    }
+  }
+
+  #search-container {
+    @include layouts.flex(column, center, flex-start);
+    background-color: white;
+    border-radius: 5px;
+    row-gap: spacings.$m;
+    padding: spacings.$m;
+    width: 100%;
+    h1 {
+      margin: 0;
+    }
+  }
+  #tag-container {
+    @include layouts.flex(column, center, flex-start);
+    background-color: white;
+    border-radius: 5px;
+    row-gap: spacings.$m;
+    padding: spacings.$m;
+    width: 100%;
+  }
+
+  #search-input {
+    width: 400px;
+    height: 40px;
+    font-size: 18px;
+    border-radius: 50px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    color: black;
+  }
 }

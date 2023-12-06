@@ -1,4 +1,4 @@
-import { Route, Router, Routes } from "@solidjs/router";
+import { Navigate, Route, Router, Routes } from "@solidjs/router";
 import type { Component } from "solid-js";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import registryPage from "./pages/RegistryPage/RegistryPage";
@@ -17,6 +17,7 @@ const App: Component = () => {
       <UserProvider>
       <Routes>
         <Route path="/login" component={LoginPage} />
+        <Route path="/" element={<Navigate href="/login" />} />
         <Route path="/signup" component={SignUp} />
         <Route path="/registry" component={registryPage} />
         <Route path="/working-groups" component={workingGroupsPage} />
