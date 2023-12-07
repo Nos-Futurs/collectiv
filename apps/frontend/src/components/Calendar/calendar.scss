@@ -1,0 +1,57 @@
+@use "@style/layouts";
+@use "@style/colours";
+@use "@style/font-sizes";
+@use "@style/spacings";
+
+#calendar {
+  @include layouts.grid(1fr 4fr 2fr, 1fr);
+  padding: spacings.$l;
+  width: 100%;
+  height: 100%;
+  #date-selector{
+    grid-column: 1;
+    height: 100%;
+    width: 100%;
+    background-color: colours.$green-blue;
+    @include layouts.flex(column, flex-start, center);
+    padding: spacings.$m;
+    #year-selector{
+      @include layouts.flex(row, center, center);
+      column-gap: spacings.$xs;
+      button {
+        font-size: font-sizes.$m;
+        background-color: transparent;
+        color: white
+      }
+      span {
+        font-size: font-sizes.$m;
+        color: white
+      }
+    }
+    #month-selector{
+      @include layouts.flex(column);
+      row-gap: spacings.$xs;
+      padding-top: spacings.$m;
+      .month{
+        font-weight: normal;
+        background-color: transparent;
+        color: white
+      }
+      .selected {
+        font-weight: bold;
+      }
+    }
+  }
+  #date-calendar{
+    height: 100%;
+    width: 100%;
+    grid-column: 2;
+    background-color: colours.$grey;
+  }
+  #event-container{
+    height: 100%;
+    width: 100%;
+    grid-column: 3;
+    background-color: colours.$light-blue;
+  }
+}
