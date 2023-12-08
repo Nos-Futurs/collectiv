@@ -33,7 +33,7 @@
       @include layouts.flex(column);
       row-gap: spacings.$xs;
       padding-top: spacings.$m;
-      .month {
+      button {
         font-weight: normal;
         background-color: transparent;
         color: white;
@@ -83,6 +83,9 @@
           }
           .current-month {
             color: black;
+          }
+          .selected {
+            background-color: colours.$transparent-purple;
           }
           button:hover {
             border: 1px solid colours.$purple;

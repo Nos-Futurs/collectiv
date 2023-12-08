@@ -50,8 +50,7 @@ const Selector: Component<SelectorProps> = (props: SelectorProps) => {
               onClick={() => {
                 props.setMonth(index());
               }}
-
-              class={index() === props.month() ? "month selected" : "month"}
+              class={index() === props.month() ? "selected" : ""}
             >
               {month}
             </button>

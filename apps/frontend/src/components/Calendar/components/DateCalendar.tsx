@@ -1,23 +1,31 @@
-import { Accessor, Component, For, createEffect, createSignal } from "solid-js";
+import {
+  Accessor,
+  Component,
+  For,
+  JSX,
+  Setter,
+  createEffect,
+  createSignal,
+} from "solid-js";
+import CalendarRow from "./CalendarRow.jsx";
+import CalendarColumns from "./CalendarColumn.jsx";
 
 interface DateCalendarProps {
   year: Accessor<number>;
   month: Accessor<number>;
+  date: Accessor<Date>;
+  setDate: Setter<Date>;
 }
 
 const DateCalendar: Component<DateCalendarProps> = (
   props: DateCalendarProps
 ) => {
   const [dayInMonth, setDayInMonth] = createSignal<
-    { day: number; date: number; currentMonth: boolean }[]
+    { day: number; date: number; currentMonth: boolean; fullDate: Date }[]
   >(getAllDatesInMonth(props.year(), props.month()));
 
-  const [htmlTable, setHtmlTable] = createSignal<string>(
-    constructCalendar(dayInMonth())
-  );
   createEffect(() => {
     setDayInMonth(getAllDatesInMonth(props.year(), props.month()));
-    setHtmlTable(constructCalendar(dayInMonth()));
   });
 
   const months = [
@@ -50,7 +58,13 @@ const DateCalendar: Component<DateCalendarProps> = (
             <th>Dimanche</th>
           </tr>
         </thead>
-        <tbody innerHTML={htmlTable()} />
+        <tbody>
+          <CalendarColumns
+            dates={dayInMonth()}
+            dateSelected={props.date}
+            setDate={props.setDate}
+          />
+        </tbody>
       </table>
     </div>
   );
@@ -62,11 +76,9 @@ export default DateCalendar;
 function getAllDatesInMonth(
   year: number,
   month: number
-): { day: number; date: number; currentMonth: boolean }[] {
+): { day: number; date: number; currentMonth: boolean; fullDate: Date }[] {
   // Create a Date object for the first day of the specified month
-  console.log(month, year);
   const startDate = new Date(year, month, 1);
-  console.log(startDate);
   // Create a Date object for the last day of the specified month
   const endDate = new Date(year, month + 1, 0);
 
@@ -81,7 +93,13 @@ function getAllDatesInMonth(
     // Push the current date into the array
     // Get day : 0 is sunday
     const day = currentDate.getDay() === 0 ? 7 : currentDate.getDay();
-    allDates.push({ day, date: currentDate.getDate(), currentMonth: true });
+
+    allDates.push({
+      day,
+      date: currentDate.getDate(),
+      currentMonth: true,
+      fullDate: new Date(currentDate),
+    });
   }
 
   // complet before
@@ -98,6 +116,7 @@ function getAllDatesInMonth(
       day,
       date: currentDate.getDate(),
       currentMonth: false,
+      fullDate: new Date(currentDate),
     });
     indexPreviousMonth += 1;
   }
@@ -115,38 +134,10 @@ function getAllDatesInMonth(
       day,
       date: currentDate.getDate(),
       currentMonth: false,
+      fullDate: new Date(currentDate),
     });
     indexNextsMonth += 1;
   }
 
   return allDates;
-}
-
-function constructCalendar(
-  dates: { day: number; date: number; currentMonth: boolean }[]
-): string {
-  let html = "";
-  dates.map((date) => {
-    if (date.day === 1) {
-      html =
-        html +
-        `<tr><td><button ${date.currentMonth ? "class='current-month'" : ""}>${
-          date.date
-        }</button></td>`;
-    } else if (date.day === 7) {
-      html =
-        html +
-        `<td><button ${date.currentMonth ? "class='current-month'" : ""}>${
-          date.date
-        }</button></td></tr>`;
-    } else {
-      html =
-        html +
-        `<td><button ${date.currentMonth ? "class='current-month'" : ""}>${
-          date.date
-        }</button></td>`;
-    }
-  });
-
-  return html;
 }
