@@ -1,0 +1,23 @@
+import { WorkingGroup }from "./working-groups"
+import { Tag }from "./tag"
+
+model Event {
+    id             Int          @id @default(autoincrement())
+    createdAt      DateTime     @default(now())
+    updatedAt      DateTime     @updatedAt
+    startDate      DateTime
+    endDate        DateTime
+    /// @description The working group link to this event
+    /// @DtoCreateOptional
+    /// @DtoRelationCanConnectOnCreate
+    /// @DtoRelationCanConnectOnUpdate
+    workingGroup   WorkingGroup @relation(fields: [workingGroupId], references: [id]) // One to many relation with workingGroup
+    workingGroupId Int
+    name           String
+    /// @description The tags link to this event
+    /// @DtoRelationCanConnectOnCreate
+    /// @DtoRelationCanConnectOnUpdate
+    /// @DtoRelationCanDisconnectOnUpdate
+    tags           Tag[]
+}
+

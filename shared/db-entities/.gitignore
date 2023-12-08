@@ -1,0 +1,25 @@
+# This a reversed .gitignore. We ignore everything and only add what we need.
+/*
+!/.gitignore
+!/.gitmodules
+
+# ------------------------------------ App ----------------------------------- #
+!/*env.dist
+!/prisma
+/prisma/schema.prisma
+!/types
+
+# ---------------------------------- Docker ---------------------------------- #
+!/.dockerignore
+!/Dockerfile
+
+# ---------------------------------- ESlint ---------------------------------- #
+!/.eslintignore
+!/.eslintrc.cjs
+
+# ----------------------------------- PNPM ----------------------------------- #
+!/.npmrc
+!/package.json
+
+# -------------------------------- Typescript -------------------------------- #
+!/tsconfig*.json

@@ -1,16 +1,19 @@
 @use "@style/spacings";
-
+@use "@style/font-sizes";
 
 .form-group {
-    margin: spacings.$s 0 spacings.$xs 0;
-    textarea {
-        min-height: spacings.$xxl;
-        resize: vertical;
-    }
+  margin-bottom: 0;
+  textarea {
+    min-height: spacings.$xxl;
+    resize: vertical;
+  }
+  input {
+    font-size: font-sizes.$m;
+  }
 }
-  
+
 label {
-    display: block;
-    margin-bottom: spacings.$xs;
+  display: block;
+  margin-bottom: spacings.$xs;
+  font-size: font-sizes.$m;
 }
-  

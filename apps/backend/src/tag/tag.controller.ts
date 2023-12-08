@@ -8,9 +8,9 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
-import { Tag } from '@prisma/client';
-import PrismaService from '../database/prisma.service';
-import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
+import PrismaService from '../database/prisma.service.js';
+import JwtAuthGuard from '../auth/guard/jwt-auth.guard.js';
+import { CreateTagDto, Tag } from '@collectiv/db-entities/backend';
 
 
 @UseGuards(JwtAuthGuard)
@@ -31,7 +31,7 @@ export class TagController {
   }
 
   @Post()
-  async create(@Body() tagData: Omit<Tag, 'id'>): Promise<Tag> {
+  async create(@Body() tagData: CreateTagDto): Promise<Tag> {
     return this.prisma.tag.create({
       data: tagData,
     });
@@ -40,7 +40,7 @@ export class TagController {
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() tagData: Partial<Tag>,
+    @Body() tagData: Partial<CreateTagDto>,
   ): Promise<Tag> {
     return this.prisma.tag.update({
       where: { id: Number(id) },

@@ -1,0 +1,109 @@
+@use "@style/layouts";
+@use "@style/colours";
+@use "@style/font-sizes";
+@use "@style/spacings";
+
+#calendar {
+  @include layouts.grid(1fr 4fr 2fr, 1fr);
+  padding: spacings.$l;
+  width: 100%;
+  height: 100%;
+  #date-selector {
+    grid-column: 1;
+    height: 100%;
+    width: 100%;
+    background-color: colours.$green-blue;
+    @include layouts.flex(column, flex-start, center);
+    padding: spacings.$m;
+    box-shadow: 5px 0 5px 0px rgba(0, 0, 0, 0.5);
+    #year-selector {
+      @include layouts.flex(row, center, center);
+      column-gap: spacings.$xs;
+      button {
+        font-size: font-sizes.$m;
+        background-color: transparent;
+        color: white;
+      }
+      span {
+        font-size: font-sizes.$m;
+        color: white;
+      }
+    }
+    #month-selector {
+      @include layouts.flex(column);
+      row-gap: spacings.$xs;
+      padding-top: spacings.$m;
+      button {
+        font-weight: normal;
+        background-color: transparent;
+        color: white;
+      }
+      .selected {
+        font-weight: bold;
+      }
+    }
+  }
+  #date-calendar {
+    height: 100%;
+    width: 100%;
+    padding: 0 spacings.$l;
+    grid-column: 2;
+    background-color: transparent;
+    #month {
+      font-size: font-sizes.$m;
+      width: 100%;
+      text-align: center;
+    }
+    table {
+      padding-top: spacings.$l;
+      width: 100%;
+      tr {
+        text-align: center;
+        td {
+          button {
+            position: relative;
+            padding: 15px;
+            height: 60px;
+            width: 60px;
+            margin: 0 auto;
+            border-radius: 50%;
+            text-align: center;
+            color: #767676;
+            border: 1px solid transparent;
+            -webkit-transition: all 0.3s ease, -webkit-transform 0.5s ease;
+            transition: all 0.3s ease, -webkit-transform 0.5s ease;
+            -o-transition: all 0.3s ease, transform 0.5s ease;
+            transition: all 0.3s ease, transform 0.5s ease;
+            transition: all 0.3s ease, transform 0.5s ease,
+              -webkit-transform 0.5s ease;
+            cursor: pointer;
+            font-weight: normal;
+            font-size: 17px;
+            margin: spacings.$s 0 0 0;
+          }
+          .current-month {
+            color: black;
+          }
+          .selected {
+            background-color: colours.$transparent-purple;
+          }
+          button:hover {
+            border: 1px solid colours.$purple;
+          }
+        }
+      }
+    }
+  }
+  #event-container {
+    height: 100%;
+    width: 100%;
+    grid-column: 3;
+    background-color: colours.$light-blue;
+    padding: spacings.$m;
+    #day {
+      font-size: font-sizes.$m;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

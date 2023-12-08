@@ -1,4 +1,5 @@
 @use "../spacings";
+@use "../font-sizes";
 
 %rounded-button {
   padding: 8px 16px;
@@ -6,7 +7,7 @@
   border-radius: 30px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 15px;
+  font-size: font-sizes.$m;
 }
 
 button {
@@ -18,5 +19,5 @@ a {
   cursor: pointer;
   font-weight: bold;
   text-decoration: none;
-  font-size: 15px;
+  font-size: font-sizes.$m;
 }

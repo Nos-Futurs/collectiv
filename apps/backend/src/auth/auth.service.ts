@@ -1,11 +1,11 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
-import PrismaService from '../database/prisma.service';
-import { UserService } from '../user/user.service';
-import authConfigService from './config/auth.config';
+import PrismaService from '../database/prisma.service.js';
+import { UserService } from '../user/user.service.js';
+import authConfigService from './config/auth.config.js';
+import { CreateUserDto, User } from '@collectiv/db-entities/backend';
 
 @Injectable()
 export class AuthService {
@@ -33,6 +33,9 @@ export class AuthService {
   }
 
   async login(user: User): Promise<{ accessToken: string; user: User }> {
+    if (!user.validated || !user.verified){
+      throw new HttpException({ reason: 'The user is not validated yet' }, HttpStatus.UNAUTHORIZED);
+    }
     const payload = { username: user.email, sub: user.id };
     return {
       accessToken: this.jwtService.sign(payload, {
@@ -42,13 +45,23 @@ export class AuthService {
     };
   }
 
-  async signUp(userData: Omit<User, 'id'>): Promise<User> {
-    const hashedPassword = await this.hashPassword(userData.password);
-    const { password, ...dataRest } = userData;
+  async signUp(dto: Omit<CreateUserDto, "validated" | "verified">): Promise<User> {
+    const hashedPassword = await this.hashPassword(dto.password);
+    const { password, ...dataRest } = dto;
+    const connectCompany = dto.company
+    ? {
+        connect: {
+          id: dto.company.connect.id,
+        },
+      }
+    : undefined;
     return this.prisma.user.create({
       data: {
         password: hashedPassword,
         ...dataRest,
+        company: connectCompany,
+        validated: false,
+        verified: false
       },
     });
   }

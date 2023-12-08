@@ -4,7 +4,7 @@
 @use "@style/font-sizes";
 
 #switch-button {
-  @include layouts.flex(row, center, center);
+  @include layouts.flex(row, flex-start, center);
   column-gap: spacings.$s;
   row-gap: spacings.$s;
 
@@ -70,5 +70,6 @@
   p {
     padding: 0px;
     font-size: font-sizes.$m;
+    margin: 0;
   }
 }

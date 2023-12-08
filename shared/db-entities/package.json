@@ -1,0 +1,76 @@
+{
+  "name": "@collectiv/db-entities",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared library for Zeus' db entities and types",
+  "author": {
+    "name": "Nos Futurs",
+    "email": "nos-futurs@proton.me",
+    "url": "https://github.com/Nos-Futurs"
+  },
+  "type": "module",
+  "exports": {
+    "./backend": {
+      "import": "./dist/types/backend/index.js",
+      "types": "./dist/types/backend/index.d.ts"
+    },
+    "./frontend": {
+      "import": "./dist/types/frontend/index.js",
+      "types": "./dist/types/frontend/index.d.ts"
+    },
+    "./prisma": {
+      "import": "./dist/generated/prisma/index.js",
+      "types": "./dist/generated/prisma/index.d.ts"
+    }
+  },
+  "files": [
+    "./dist",
+    "./package.json",
+    "./README.md"
+  ],
+  "scripts": {
+    "barrels": "barrelsby -c .barrelsby.json",
+    "build": "pnpm clean && pnpm build:db && pnpm prisma:copy && pnpm build:backend && pnpm build:frontend",
+    "build:backend": "tsc -p tsconfig.backend.json",
+    "build:db": "pnpm db:merge && pnpm db:generate",
+    "build:frontend": "tsc -p tsconfig.frontend.json",
+    "clean": "rimraf ./dist && rimraf ./generated",
+    "db:generate": "pnpm clean && pnpm db:merge && prisma generate",
+    "db:merge": "prisma-import --force -o prisma/schema.prisma -s \"prisma/modules/*.prisma\"",
+    "db:migrate:dev": "pnpm db:merge && prisma migrate dev",
+    "db:migrate:seed": "pnpm db:merge && prisma migrate reset",
+    "db:seed": "pnpm db:merge && prisma migrate reset",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx --fix ./prisma",
+    "prisma:copy": "pnpm cpy ./generated/prisma ./dist"
+  },
+  "dependencies": {
+    "@nos-futurs/prisma-types-generator": "^1.5.3",
+    "@prisma/client": "^5.3.1",
+    "class-transformer": "^0.5.1",
+    "rimraf": "^5.0.1"
+  },
+  "devDependencies": {
+    "@nestjs/swagger": "7.0.12",
+    "@ngneat/falso": "^6.4.0",
+    "@types/bcrypt": "^5.0.0",
+    "@types/node": "^20.9.4",
+    "bcrypt": "^5.1.0",
+    "cpy-cli": "^5.0.0",
+    "prisma": "^5.3.1",
+    "prisma-dbml-generator": "^0.10.0",
+    "prisma-import": "^1.0.4",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "9.3.9",
+    "@nestjs/swagger": "7.0.12",
+    "class-validator": "^0.14.0"
+  },
+  "optionalDependencies": {
+    "husky": "^8.0.3"
+  },
+  "prisma": {
+    "seed": "node --loader ts-node/esm prisma/seed.ts"
+  }
+}

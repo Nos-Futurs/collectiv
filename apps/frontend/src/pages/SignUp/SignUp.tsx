@@ -1,73 +1,94 @@
 import { createSignal, type Component } from "solid-js";
 
 import "./SignUp.scss";
-import { signup } from "../../api/authApi";
 import { useNavigate } from "@solidjs/router";
 import Input from "../../components/Input/Input";
+import { createStore } from "solid-js/store";
+import { signUpUser } from "../../api/userApi";
 
 const SignUp: Component = () => {
-  const [lastName, setLastName] = createSignal("");
-  const [firstName, setFirstName] = createSignal("");
-  const [password, setPassword] = createSignal("");
-  const [email, setEmail] = createSignal("");
-  const [region, setRegion] = createSignal("");
-  const [description, setDescription] = createSignal("");
+  const [form, setForm] = createStore({
+    lastName: "",
+    firstName: "",
+    structure: "",
+    email: "",
+    region: "",
+    description: "",
+    password: "",
+  });
   const navigate = useNavigate();
 
-
   const handleSignupSubmit = () => {
-    signup(
-      email(),
-      firstName(),
-      lastName(),
-      password(),
-      region(),
-      description()
-    ).then(() => {
+    signUpUser(form).then(() => {
       navigate("/login");
     });
     return false;
   };
 
   return (
-    <div class="container">
+    <section id="section-signup">
       <div id="signup-form">
-        <h2 class="login-title">Créez votre compte</h2>
+        <h2 id="login-title">Créez votre compte</h2>
         <Input
           label="Nom"
           id="lastName"
-          value={lastName}
-          setValue={setLastName}
+          value={form.lastName}
+          setValue={(value: string) => {
+            setForm("lastName", value);
+          }}
         />
         <Input
           label="Prénom"
           id="firstName"
-          value={firstName}
-          setValue={setFirstName}
+          value={form.firstName}
+          setValue={(value: string) => {
+            setForm("firstName", value);
+          }}
         />
         <Input
           label="Email"
           id="email"
-          value={email}
-          setValue={setEmail}
+          value={form.email}
+          setValue={(value: string) => {
+            setForm("email", value);
+          }}
           type="email"
         />
         <Input
-          label="Mot de passe"
+          label="Password"
           id="password"
-          value={password}
-          setValue={setPassword}
+          value={form.password}
+          setValue={(value: string) => {
+            setForm("password", value);
+          }}
           type="password"
         />
-        <Input label="Région" id="area" value={region} setValue={setRegion} />
+        <Input
+          label="Votre Structure"
+          id="structure"
+          value={form.structure}
+          setValue={(value: string) => {
+            setForm("structure", value);
+          }}
+        />
+        <Input
+          label="Région"
+          id="area"
+          value={form.region}
+          setValue={(value: string) => {
+            setForm("region", value);
+          }}
+        />
         <Input
           label="Description"
           id="description"
-          value={description}
-          setValue={setDescription}
+          value={form.description}
+          setValue={(value: string) => {
+            setForm("description", value);
+          }}
           largeInput={true}
         />
-        <div class="button-container">
+        <div id="button-container">
           <button type="submit" id="signup-button" onClick={handleSignupSubmit}>
             S'inscrire
           </button>
@@ -76,7 +97,7 @@ const SignUp: Component = () => {
           </a>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

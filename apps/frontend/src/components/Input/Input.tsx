@@ -3,8 +3,8 @@ import { createSignal, type Component, Accessor, Setter } from "solid-js";
 import "./Input.scss";
 
 interface InputProps {
-  value: Accessor<string>;
-  setValue: Setter<string>;
+  value: string;
+  setValue: (value: string) => void;
   label: string;
   type?: string;
   id: string;
@@ -19,7 +19,7 @@ const Input: Component<InputProps> = (props: InputProps) => (
         maxlength="1000"
         placeholder="Limiter à 1000 charactères"
         id={props.id}
-        value={props.value()}
+        value={props.value}
         onInput={(e: Event) =>
           props.setValue((e.target as HTMLInputElement).value)
         }
@@ -28,7 +28,7 @@ const Input: Component<InputProps> = (props: InputProps) => (
       <input
         id={props.id}
         type={props.type ? props.type : "text"}
-        value={props.value()}
+        value={props.value}
         onInput={(e: Event) =>
           props.setValue((e.target as HTMLInputElement).value)
         }

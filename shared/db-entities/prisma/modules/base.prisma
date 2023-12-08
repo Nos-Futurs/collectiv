@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Generates Prisma JS Client types
+generator client {
+  binaryTargets   = ["native", "linux-arm64-openssl-1.1.x", "linux-arm64-openssl-3.0.x"]
+  output          = "../generated/prisma"
+  previewFeatures = ["fullTextSearch"]
+  provider        = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+
+// Generates DTOs with OpenAPI and class-validator decorators.
+// See https://github.com/yanmarinich/prisma-types-generator
+generator typesBackend {
+  classValidation                 = "true"
+  createDtoPrefix                 = "Create"
+  definiteAssignmentAssertion     = "true"
+  dtoSuffix                       = "Dto"
+  entityPrefix                    = ""
+  entitySuffix                    = ""
+  excludeConnectDto               = "false"
+  excludeCreateDto                = "false"
+  excludeEntity                   = "false"
+  excludePlainDto                 = "false"
+  excludeUpdateDto                = "false"
+  exportRelationModifierClasses   = "true"
+  fileNamingStyle                 = "kebab"
+  flatResourceStructure           = "false"
+  noDependencies                  = "false"
+  output                          = "../generated/types/backend"
+  outputToNestJsResourceStructure = "false"
+  outputType                      = "class"
+  prismaClientImport              = "../../prisma/index.js"
+  provider                        = "prisma-types-generator"
+  reExport                        = "true"
+  updateDtoPrefix                 = "Update"
+}
+
+generator typesFrontend {
+  classValidation                 = "false"
+  createDtoPrefix                 = "Create"
+  definiteAssignmentAssertion     = "false"
+  dtoSuffix                       = "Dto"
+  entityPrefix                    = ""
+  entitySuffix                    = ""
+  excludeConnectDto               = "false"
+  excludeCreateDto                = "false"
+  excludeEntity                   = "false"
+  excludePlainDto                 = "false"
+  excludeUpdateDto                = "false"
+  exportRelationModifierClasses   = "true"
+  fileNamingStyle                 = "kebab"
+  flatResourceStructure           = "false"
+  noDependencies                  = "true"
+  output                          = "../generated/types/frontend"
+  outputToNestJsResourceStructure = "false"
+  outputType                      = "interface"
+  prismaClientImport              = "../../prisma/index.js"
+  provider                        = "prisma-types-generator"
+  reExport                        = "true"
+  updateDtoPrefix                 = "Update"
+}
+
+//Generate prisma schema
+generator dbml {
+  provider   = "prisma-dbml-generator"
+  output     = "../dbml"
+  outputName = "schema.dbml"
+}

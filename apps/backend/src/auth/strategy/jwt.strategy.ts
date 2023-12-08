@@ -1,11 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
-import { User } from '@prisma/client';
 import { Request } from 'express';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { UserService } from 'src/user/user.service';
-import authConfigService from '../config/auth.config';
+import { UserService } from '../../user/user.service.js';
+import authConfigService from '../config/auth.config.js';
+import { User } from '@collectiv/db-entities/backend';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {

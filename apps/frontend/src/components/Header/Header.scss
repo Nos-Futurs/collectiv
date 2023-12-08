@@ -12,7 +12,7 @@
   top: 0;
   padding: 0 spacings.$xxl;
   column-gap: spacings.$xl;
-  min-height: 100px;
+  height: 150px;
   background-color: colours.$light-blue;
 
   .selected {
@@ -27,7 +27,7 @@
 
   #logo{
     margin-right: auto;
-    height: 60%;
+    height: 30%;
   }
 
   #profil-button {

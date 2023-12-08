@@ -1,0 +1,16 @@
+import { User } from "./user"
+import { Company } from "./company"
+import { Event } from "./event"
+import { WorkingGroup } from "./working-groups"
+import { Company } from "company"
+
+model Tag {
+    id           Int            @id @default(autoincrement())
+    name         String         @unique
+    color        String?
+    createdAt    DateTime       @default(now())
+    Event        Event[]
+    Compnay      Company[]
+    User         User[]
+    WorkingGroup WorkingGroup[]
+}

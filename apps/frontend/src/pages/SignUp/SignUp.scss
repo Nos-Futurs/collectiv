@@ -1,77 +1,48 @@
 @use "@style/colours";
 @use "@style/spacings";
+@use "@style/layouts";
+@use "@style/font-sizes";
+@use "@style/components/button";
 
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-  
-#signup-form {
+#section-signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: colours.$green-blue;
+  height: 100vh;
+  #signup-form {
+    @include layouts.grid(1fr, repeat(8, auto));
     background-color: #f0f0f0;
-    padding: 20px;
+    padding: spacings.$xl spacings.$l;
     border-radius: 8px;
-    width: 300px;
-}
-  
-.login-form.hidden {
-    display: none;
-}
-  
-.login-title {
-    margin-bottom: 16px;
-    text-align: center;
-}
-
-
-#signup-button {
-    background-color: #FFBC42;
-    color: black;
-    width: 60%;
-}
-  
-#cancel-button {
-    background-color: #f44336;
-    color: white;
-}
-
-.button-container {
-    display: flex;
-    margin: spacings.$l 0 spacings.$s 0;
-    justify-content: space-between;
-}
-
-.forgot-password-link {
-    margin-top: 10px;
-    color: #D81159;
-    cursor: pointer;
-    font-size: 90%;
-    font-style: italic;
-}
-
-
-.forgot-password-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
     width: 30%;
-    height: 40%;
+    max-width: 700px;
+    row-gap: spacings.$m;
+    #login-title {
+      margin: 0 0 spacings.$m 0;
+      text-align: center;
+      font-size: font-sizes.$l;
+    }
+    #button-container {
+      @include layouts.flex(column);
+      row-gap: spacings.$s;
+      margin: spacings.$s 0;
+      justify-content: space-between;
+      #signup-button {
+        @extend %rounded-button;
+        padding: spacings.$s 0;
+        background-color: colours.$yellow;
+        color: black;
+        width: 100%;
+      }
+      #cancel-button {
+        @extend %rounded-button;
+        padding: spacings.$s 0;
+        background-color: colours.$purple;
+        color: white;
+        text-align: center;
+        width: 100%;
+      }
+    }
+  }
 }
-  
-.forgot-password-title {
-    margin-bottom: 20px;
-    margin-top: 50px;
-}
-  
-.reset-password-button {
-    margin-top: 20px;
-}
-
-
-.email_address {
-    margin-top: 30px;
-}
-  

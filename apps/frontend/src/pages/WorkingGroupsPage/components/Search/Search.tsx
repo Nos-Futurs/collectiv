@@ -1,35 +1,126 @@
-import { Setter, type Component, Accessor, createSignal } from "solid-js";
-import { createStore } from "solid-js/store";
-
-
-import "./Search.scss";
-import { A } from "@solidjs/router";
+import {
+  type Component,
+  createResource,
+  Accessor,
+  Setter,
+  Show,
+  createEffect,
+} from "solid-js";
 import SwitchButton from "../../../../components/buttons/SwitchButton/SwitchButton";
 import SearchBar from "../../../../components/SearchBar/SearchBar";
-import TagSelector from "../../../../components/TagSelector/TagSelector";
-import { Tag } from "@collectiv/shared-types";
+import "./Search.scss";
+import TagSearch from "../../../../components/TagSearch/TagSearch.jsx";
+import { getTags } from "../../../../api/tagApi.js";
+import { Tag } from "@collectiv/db-entities/frontend";
+import { createStore, produce } from "solid-js/store";
 
-interface SearchProps {
+// Aller chercher les utilisateurs dans le back
+
+interface SearchRegistryProps {
   setMyGroups: Setter<boolean>;
   myGroups: Accessor<boolean>;
 }
 
-const Search: Component<SearchProps> = (props: SearchProps) => {
-  const [selectedTags, setSelectedTags] = createStore<Array<Tag>>([]);
+const SearchRegistry: Component<SearchRegistryProps> = (
+  props: SearchRegistryProps
+) => {
+  const [selectedTags, setSelectedTags] = createStore<{ tags: Tag[] }>({
+    tags: [],
+  });
+  const [optionTags, setOptionTags] = createStore<{ tags: Tag[] }>({
+    tags: [],
+  });
+  const [tags] = createResource(getTags);
+
+  const handleAddTag = (tag: Tag): void => {
+    const indexSelected = selectedTags.tags.findIndex((item) => {
+      return item.id === tag.id;
+    });
+    const indexOptions = optionTags.tags.findIndex((item) => {
+      return item.id === tag.id;
+    });
+    setSelectedTags(
+      produce((draft) => {
+        // Add the item if it doesn't exist
+        if (indexSelected === -1) {
+          draft.tags.push(tag);
+        }
+      })
+    );
+    setOptionTags(
+      produce((draft) => {
+        // Add the item if it doesn't exist
+        if (indexOptions !== -1) {
+          draft.tags.splice(indexOptions, 1);
+        }
+      })
+    );
+  };
+
+  const handleDeleteTag = (tag: Tag): void => {
+    const indexSelected = selectedTags.tags.findIndex((item) => {
+      return item.id === tag.id;
+    });
+    const indexOptions = optionTags.tags.findIndex((item) => {
+      return item.id === tag.id;
+    });
+    setSelectedTags(
+      produce((draft) => {
+        if (indexSelected > -1) {
+          // Remove the item if it exists
+          draft.tags.splice(indexSelected, 1);
+        }
+      })
+    );
+    setOptionTags(
+      produce((draft) => {
+        // Add the item if it doesn't exist
+        if (indexOptions === -1) {
+          draft.tags.push(tag);
+        }
+      })
+    );
+  };
+
+  createEffect(() => {
+    if (!tags.loading) {
+      tags()!.map((tag) => {
+        setOptionTags(
+          produce((draft) => {
+            // Add the item if it doesn't exist
+            draft.tags.push(tag);
+          })
+        );
+      });
+    }
+  });
+
   return (
-    <div id="search">
-      <SwitchButton
-        setValue={props.setMyGroups}
-        value={props.myGroups}
-        label={"Mes groupes uniquements"}
-      />
-      <SearchBar onClick={() => {}} />
-      <TagSelector
-        selectedTags={selectedTags}
-        setSelectedTags={setSelectedTags}
-      />
+    <div id="search-section">
+      <div id="my-groups-container">
+        <h1>Mes groupes uniquement</h1>
+        <SwitchButton
+          setValue={props.setMyGroups}
+          value={props.myGroups}
+          label={"Ne montrer que mes groupes"}
+        />
+      </div>
+      <div id="search-container">
+        <h1>Chercher un groupe</h1>
+        <SearchBar onClick={() => {}} />
+      </div>
+      <div id="tag-container">
+        <Show when={!tags.loading} fallback={<>Loading tags...</>}>
+          <TagSearch
+            values={selectedTags.tags}
+            options={optionTags.tags}
+            handleDeleteTag={handleDeleteTag}
+            handleAddTag={handleAddTag}
+          />
+        </Show>
+      </div>
     </div>
   );
 };
 
-export default Search;
+export default SearchRegistry;

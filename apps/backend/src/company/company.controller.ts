@@ -8,9 +8,9 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
-import { Company } from '@prisma/client';
-import PrismaService from '../database/prisma.service';
-import JwtAuthGuard from 'src/auth/guard/jwt-auth.guard';
+import PrismaService from '../database/prisma.service.js';
+import JwtAuthGuard from '../auth/guard/jwt-auth.guard.js';
+import { CompanyDto } from '@collectiv/db-entities/backend';
 
 
 @UseGuards(JwtAuthGuard)
@@ -19,12 +19,12 @@ export class CompanyController {
   constructor(private readonly prisma: PrismaService) {}
 
   @Get()
-  async findAll(): Promise<Company[]> {
+  async findAll(): Promise<CompanyDto[]> {
     return this.prisma.company.findMany({include: { tags: true }});
   }
 
   @Get(':id')
-  async findById(@Param('id') id: string): Promise<Company> {
+  async findById(@Param('id') id: string): Promise<CompanyDto> {
     return this.prisma.company.findUnique({
       where: { id: Number(id) },
       include: { tags: true }
@@ -32,7 +32,7 @@ export class CompanyController {
   }
 
   @Post()
-  async create(@Body() companyData: Omit<Company, 'id'>): Promise<Company> {
+  async create(@Body() companyData: Omit<CompanyDto, 'id'>): Promise<CompanyDto> {
     return this.prisma.company.create({
       data: companyData,
     });
@@ -41,8 +41,8 @@ export class CompanyController {
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() companyData: Partial<Company>,
-  ): Promise<Company> {
+    @Body() companyData: Partial<CompanyDto>,
+  ): Promise<CompanyDto> {
     return this.prisma.company.update({
       where: { id: Number(id) },
       data: companyData,
@@ -50,7 +50,7 @@ export class CompanyController {
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<Company> {
+  async delete(@Param('id') id: string): Promise<CompanyDto> {
     return this.prisma.company.delete({
       where: { id: Number(id) },
     });

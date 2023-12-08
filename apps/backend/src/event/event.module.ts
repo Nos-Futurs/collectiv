@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import DatabaseModule from '../database/database.module';
-import { EventController } from './event.controller';
+import DatabaseModule from '../database/database.module.js';
+import { EventController } from './event.controller.js';
 
 @Module({
   imports: [DatabaseModule],

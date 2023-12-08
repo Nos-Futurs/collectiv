@@ -1,4 +1,4 @@
-import { Route, Router, Routes } from "@solidjs/router";
+import { Navigate, Route, Router, Routes } from "@solidjs/router";
 import type { Component } from "solid-js";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import registryPage from "./pages/RegistryPage/RegistryPage";
@@ -9,6 +9,7 @@ import MyProfil from "./pages/MyProfil/MyProfil";
 import UserProfil from "./pages/UserProfil/UserProfil";
 import Group from "./pages/Group/Group";
 import { UserProvider } from "./context/userContext";
+import Admin from "./pages/Admin/Admin";
 
 const App: Component = () => {
   return (
@@ -16,6 +17,7 @@ const App: Component = () => {
       <UserProvider>
       <Routes>
         <Route path="/login" component={LoginPage} />
+        <Route path="/" element={<Navigate href="/login" />} />
         <Route path="/signup" component={SignUp} />
         <Route path="/registry" component={registryPage} />
         <Route path="/working-groups" component={workingGroupsPage} />
@@ -23,6 +25,7 @@ const App: Component = () => {
         <Route path="/users/:id" component={UserProfil}/>
         <Route path="/groups/:id" component={Group}/>
         <Route path="/events" component={Events} />
+        <Route path="/admin" component={Admin} />
       </Routes>
       </UserProvider>
     </Router>
