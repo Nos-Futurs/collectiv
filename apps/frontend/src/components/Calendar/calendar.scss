@@ -99,5 +99,11 @@
     width: 100%;
     grid-column: 3;
     background-color: colours.$light-blue;
+    padding: spacings.$m;
+    #day {
+      font-size: font-sizes.$m;
+      width: 100%;
+      text-align: center;
+    }
   }
 }
