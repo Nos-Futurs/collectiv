@@ -1,0 +1,14 @@
+@use "@style/layouts";
+@use "@style/spacings";
+
+.profil-item {
+  @include layouts.flex(row, center, center);
+  column-gap: spacings.$m;
+  p {
+    margin: 0;
+    width: 150px;
+  }
+  input {
+    padding: spacings.$m;
+  }
+}

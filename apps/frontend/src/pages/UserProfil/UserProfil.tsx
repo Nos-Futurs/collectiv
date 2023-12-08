@@ -9,6 +9,7 @@ import { useParams } from "@solidjs/router";
 
 const UserProfil: Component = () => {
   const params = useParams<{ id: string }>();
+  
   return (
     <PageLayout id="events" protected={true}>
       <h1 id="callendar">

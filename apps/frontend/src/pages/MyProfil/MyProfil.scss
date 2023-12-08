@@ -1,10 +1,19 @@
+@use "@style/layouts";
+@use "@style/spacings";
 @use "@style/colours";
 
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#information-container {
+  @include layouts.flex(column, center, center);
+  width: 100%;
+  #information {
+    @include layouts.flex(column);
+    row-gap: spacings.$m;
+    padding: spacings.$m;
+    margin-top: spacings.$l;
+  }
+  button {
+    margin-top: spacings.$l;
     background-color: colours.$green-blue;
-    height: 100vh;
+    padding: spacings.$m spacings.$l;
+  }
 }

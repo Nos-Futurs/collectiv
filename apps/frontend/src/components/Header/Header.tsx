@@ -40,7 +40,7 @@ const Header: Component<HeaderProps> = (props: HeaderProps) => {
           Admin
         </A>
       )}
-      <A href="/my-profil" id="profil-button">
+      <A href="/my-profil" id="profil-link">
         <img alt="profil" id="profil" src={profil} />
       </A>
     </section>
