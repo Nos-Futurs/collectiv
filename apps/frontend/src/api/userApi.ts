@@ -63,3 +63,13 @@ export async function updateUser(dto: {
     data,
   }).then((resp) => resp.data);
 }
+
+export async function getUser(id: number): Promise<User> {
+  return axios({
+    method: "get",
+    url: `${baseApiUrl}/user/${id}`,
+    withCredentials: true,
+  }).then((resp) => {
+    return resp.data;
+  });
+}
