@@ -1,7 +1,8 @@
 import { createSignal, type Component } from "solid-js";
 import "./UserCard.scss";
 import { A } from "@solidjs/router";
-import { User } from "@collectiv/shared-types";
+import { User } from "@collectiv/db-entities/frontend";
+
 
 interface userCardProps {
   user: User;
@@ -17,7 +18,7 @@ const UserCard: Component<userCardProps> = (props: userCardProps) => {
         <button
           id="card"
           onClick={() => setSelected(!selected())}
-          class={selected() ? "selected" : "unselected"}
+          class={selected() ? "selected-card" : "unselected-card"}
         >
           <img
             id="user-photo"
