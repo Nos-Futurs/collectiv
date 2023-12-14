@@ -7,6 +7,7 @@ import Participants from "./Components/Participants/Participants.jsx";
 import { getGroup } from "../../api/workingGroupsApi.js";
 import GroupEvent from "./Components/GroupEvent/GroupEvent.jsx";
 import Documents from "./Components/Documents/Documents.jsx";
+import Description from "./Components/Description/Description.jsx";
 
 const Group: Component = () => {
   const params = useParams<{ id: string }>();
@@ -21,7 +22,7 @@ const Group: Component = () => {
               owner={group()?.owner}
             />
           </div>
-          <div id="description">Description</div>
+          <div id="description-container"><Description group={group()}/></div>
           <div id="events-container">
             <GroupEvent events={group()?.Event} />
           </div>
