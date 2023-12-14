@@ -9,6 +9,7 @@
   border: solid 1.5px colours.$dark-grey;
   border-radius: 10px;
   margin: 0 0 spacings.$l 0;
+  width: 100%;
 
   #group-header {
     @include layouts.flex(row, space-between, center);

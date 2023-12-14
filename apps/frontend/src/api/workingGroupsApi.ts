@@ -13,6 +13,15 @@ export async function getGroups(): Promise<Array<WorkingGroup>> {
   });
 }
 
+export async function getGroup(id: number): Promise<WorkingGroup> {
+  return axios({
+    method: "get",
+    url: `${baseApiUrl}/working-group/${id}`,
+    withCredentials: true,
+  }).then((resp) => {
+    return resp.data;
+  });
+}
 
 export async function getTags(): Promise<{data: Tag[]}> {
   return axios({

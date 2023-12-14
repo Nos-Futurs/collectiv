@@ -1,11 +1,19 @@
 @use "@style/colours";
+@use "@style/layouts";
 @use "@style/spacings";
 
 $header-size: 100px;
 
 #working-groups {
-  #groups {
-    overflow-y: scroll;
-    padding: spacings.$m spacings.$xl;
+  #group-container{
+    @include layouts.grid(1fr 3fr, auto);
+    #groups {
+      @include layouts.flex(column);
+      width: 100%;
+      overflow-y: scroll;
+      gap: spacings.$l;
+      padding: spacings.$xl;
+    }
   }
+  
 }

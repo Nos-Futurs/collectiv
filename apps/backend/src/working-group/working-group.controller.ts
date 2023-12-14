@@ -12,6 +12,7 @@ import PrismaService from '../database/prisma.service.js';
 import JwtAuthGuard from '../auth/guard/jwt-auth.guard.js';
 import {
   CreateWorkingGroupDto,
+  UpdateWorkingGroupDto,
   WorkingGroup,
 } from '@collectiv/db-entities/backend';
 
@@ -31,7 +32,7 @@ export class WorkingGroupController {
   async findById(@Param('id') id: string): Promise<WorkingGroup> {
     return this.prisma.workingGroup.findUnique({
       where: { id: Number(id) },
-      include: { tags: true },
+      include: { tags: true, users: true, Event: true, owner: true },
     });
   }
 
@@ -44,15 +45,20 @@ export class WorkingGroupController {
           },
         }
       : undefined;
+    const connectUsers = {
+      connect: dto.users?.connect.map((connectDto) => ({
+        id: connectDto.id,
+      })),
+    };
     return this.prisma.workingGroup.create({
-      data: {...dto, owner: connectOwner}
+      data: { ...dto, owner: connectOwner, users: connectUsers },
     });
   }
 
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() dto: Partial<CreateWorkingGroupDto>,
+    @Body() dto: UpdateWorkingGroupDto,
   ): Promise<WorkingGroup> {
     const connectOwner = dto.owner
       ? {
@@ -61,9 +67,24 @@ export class WorkingGroupController {
           },
         }
       : undefined;
+    const connectUsers = dto.users
+      ? dto.users.connect
+        ? {
+            connect: dto.users.connect.map((connectDto) => ({
+              id: connectDto.id,
+            })),
+          }
+        : dto.users.disconnect
+        ? {
+            disconnect: dto.users.disconnect.map((disconnectDto) => ({
+              id: disconnectDto.id,
+            })),
+          }
+        : undefined
+      : undefined;
     return this.prisma.workingGroup.update({
       where: { id: Number(id) },
-      data: {...dto, owner: connectOwner}
+      data: { ...dto, owner: connectOwner, users: connectUsers },
     });
   }
 

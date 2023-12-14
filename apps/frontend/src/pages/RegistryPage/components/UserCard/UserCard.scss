@@ -2,45 +2,47 @@
 @use "@style/layouts";
 @use "@style/spacings";
 
+#card {
+  @include layouts.flex(column, center, center);
+  padding: 0;
+  align-self: center;
+  margin: auto;
+  position: relative;
+  height: 200px;
+  width: 200px;
+ 
+  background-color: colours.$dark-grey;
+  border-radius: 5px;
+}
 
-  #card {
-    @include layouts.flex(column, center, center);
-    padding: 0;
-    align-self: center;
-    margin: auto;
-    position: relative;
-    height: 200px;
-    width: 200px;
-    border: none;
-    background-color: colours.$dark-grey;
-    border-radius: 5px;
-  }
+.selected-card {
+  border: 4px solid;
+  border-color: colours.$purple;
+}
+.unselected-card {
+  border: none;
+}
 
-  #card.selected{
-    border-color: colours.$purple ;
-  }
+#user-photo {
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+}
 
-  #user-photo {
-    height: 100%;
-    position: absolute;
-    z-index: 1;
-  }
+#user-name-container {
+  margin-top: auto;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+}
 
-  #user-name-container {
-    margin-top: auto;
-    z-index: 2;
-    text-align: center;
-    width: 100%;
-  }
+#user-name-background {
+  background-color: #ffbc42;
 
-  #user-name-background {
-    background-color: #ffbc42;
+  padding: 8px;
+}
 
-    padding: 8px;
-  }
-
-  #user-name-text {
-    color: black;
-    font-weight: bold;
-  }
-
+#user-name-text {
+  color: black;
+  font-weight: bold;
+}

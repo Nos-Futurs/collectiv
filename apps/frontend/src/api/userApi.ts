@@ -12,7 +12,7 @@ export async function getMe(): Promise<User | undefined> {
     .then((resp) => {
       return resp.data;
     })
-    .catch((err) => {
+    .catch(() => {
       return undefined;
     });
 }
@@ -62,4 +62,14 @@ export async function updateUser(dto: {
     withCredentials: true,
     data,
   }).then((resp) => resp.data);
+}
+
+export async function getUser(id: number): Promise<User> {
+  return axios({
+    method: "get",
+    url: `${baseApiUrl}/user/${id}`,
+    withCredentials: true,
+  }).then((resp) => {
+    return resp.data;
+  });
 }

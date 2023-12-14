@@ -5,6 +5,9 @@
 
 #registry-container {
   @include layouts.grid(1fr 3fr, auto);
+  position: relative;
+  height: 100%;
+
   #user-cards {
     display: grid;
     height: fit-content;

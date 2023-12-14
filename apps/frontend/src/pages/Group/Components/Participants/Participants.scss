@@ -1,0 +1,41 @@
+@use "@style/colours";
+@use "@style/spacings";
+@use "@style/layouts";
+
+#participants {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  padding: spacings.$m;
+  h1 {
+    margin: spacings.$m 0 spacings.$xs 0;
+  }
+  #referents {
+    @include layouts.flex(column);
+    padding-bottom: 20px;
+    border-bottom: solid 1px;
+    .owner {
+      background-color: colours.$green-blue;
+      color: white;
+      padding: spacings.$xs;
+      margin: spacings.$xs 0;
+      border-radius: 5px;
+    }
+  }
+
+  #users {
+    @include layouts.flex(column);
+    #users-list {
+      @include layouts.flex(column);
+      overflow-y: scroll;
+      .user {
+        border-radius: 5px;
+        color: black;
+        padding: spacings.$xs;
+        border: 2px solid #218381;
+        margin: spacings.$xs 0;
+      }
+    }
+  }
+}
