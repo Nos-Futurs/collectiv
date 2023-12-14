@@ -3,7 +3,7 @@ variable "TAG" {
 }
 
 group "default" {
-  targets = ["frontend"]
+  targets = ["backend", "frontend"]
 }
 
 

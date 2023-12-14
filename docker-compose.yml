@@ -10,7 +10,21 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
+      - "5432:5432"
 
-volumes: 
+  backend:
+    image: collectiv/backend:latest
+    environment:
+      - GITHUB_PACKAGES_TOKEN=${GITHUB_PACKAGES_TOKEN}
+    env_file: ./apps/backend/.docker.env
+    #restart: unless-stopped
+
+  frontend:
+    image: collectiv/frontend:latest
+    environment:
+      - GITHUB_PACKAGES_TOKEN=${GITHUB_PACKAGES_TOKEN}
+    env_file: ./apps/frontend/.docker.env
+    #restart: unless-stopped
+
+volumes:
   db-data:
