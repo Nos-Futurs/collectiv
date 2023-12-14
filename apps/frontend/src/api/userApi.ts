@@ -12,7 +12,7 @@ export async function getMe(): Promise<User | undefined> {
     .then((resp) => {
       return resp.data;
     })
-    .catch((err) => {
+    .catch(() => {
       return undefined;
     });
 }
