@@ -32,7 +32,7 @@ export class WorkingGroupController {
   async findById(@Param('id') id: string): Promise<WorkingGroup> {
     return this.prisma.workingGroup.findUnique({
       where: { id: Number(id) },
-      include: { tags: true },
+      include: { tags: true, users: true, Event: true, owner: true },
     });
   }
 
@@ -68,20 +68,20 @@ export class WorkingGroupController {
         }
       : undefined;
     const connectUsers = dto.users
-    ? dto.users.connect
+      ? dto.users.connect
         ? {
             connect: dto.users.connect.map((connectDto) => ({
-                id: connectDto.id,
+              id: connectDto.id,
             })),
-        }
+          }
         : dto.users.disconnect
-            ? {
-                disconnect: dto.users.disconnect.map((disconnectDto) => ({
-                    id: disconnectDto.id,
-                })),
-            }
-            : undefined
-    : undefined;
+        ? {
+            disconnect: dto.users.disconnect.map((disconnectDto) => ({
+              id: disconnectDto.id,
+            })),
+          }
+        : undefined
+      : undefined;
     return this.prisma.workingGroup.update({
       where: { id: Number(id) },
       data: { ...dto, owner: connectOwner, users: connectUsers },

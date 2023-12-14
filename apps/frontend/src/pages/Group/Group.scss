@@ -3,30 +3,24 @@
 @use "@style/spacings";
 
 #group {
-  @include layouts.grid(2fr 1fr, repeat(4, auto));
+  @include layouts.grid(1fr 3fr, 2fr 1fr);
   height: calc(100vh - 200px);
   width: 100%;
 
   #description {
     @include layouts.flex(row, center, center);
     background-color: colours.$grey;
-    grid-column: span 2;
   }
-  #chat {
+  #participants-container {
     @include layouts.flex(row, center, center);
-    background-color: red;
-    grid-row: span 3;
+    padding: spacings.$s;
   }
-  #participants {
+  #documents-container {
     @include layouts.flex(row, center, center);
-    background-color: blue;
+    padding: spacings.$s;
   }
-  #documents {
+  #events-container {
     @include layouts.flex(row, center, center);
-    background-color: green;
-  }
-  #events {
-    @include layouts.flex(row, center, center);
-    background-color: yellow;
+    padding: spacings.$s;
   }
 }

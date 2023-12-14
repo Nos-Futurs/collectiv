@@ -3,7 +3,7 @@ import minus from "../../../../assets/minus.svg";
 import plus from "../../../../assets/plus.svg";
 import "./GroupCard.scss";
 import { A } from "@solidjs/router";
-import { WorkingGroup } from "@collectiv/shared-types";
+import { WorkingGroup } from "@collectiv/db-entities/frontend";
 
 interface GroupCardProps {
   group: WorkingGroup;
@@ -12,8 +12,8 @@ interface GroupCardProps {
 
 const GroupCard: Component<GroupCardProps> = (props: GroupCardProps) => {
   const [showDetails, setShowDetails] = createSignal(false);
-  const usersId = props.group.users.map((userRelation) => userRelation.userId);
-  const isParticipant = props.userId
+  const usersId = props.group.users?.map((user) => user.id);
+  const isParticipant = props.userId && usersId
     ? usersId.includes(props.userId)
     : undefined;
 

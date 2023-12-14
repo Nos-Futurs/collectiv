@@ -9,8 +9,8 @@ import {
 } from "solid-js";
 import "./TagSelector.scss";
 import { getTags } from "../../api/tagApi";
-import { Tag } from "@collectiv/shared-types";
 import { SetStoreFunction } from "solid-js/store";
+import { Tag } from "@collectiv/db-entities/frontend";
 
 interface TagProp {
   tag: Tag;
@@ -22,7 +22,13 @@ const TagComponent: Component<TagProp> = (props: TagProp) => {
   return (
     <button
       id="tag"
-      style={{ "background-color": props.selected ? props.tag.color : "" }}
+      style={{
+        "background-color": props.selected
+          ? props.tag.color
+            ? props.tag.color
+            : ""
+          : "",
+      }}
       onClick={() => props.onClick()}
     >
       {props.tag.name}
@@ -51,10 +57,6 @@ const checkInclude = (
 //https://github.com/solidjs/solid/issues/1164
 const TagSelector: Component<TagSelectorProp> = (props: TagSelectorProp) => {
   const [tags] = createResource(getTags);
-
-  createEffect(() => {
-    console.log([...props.selectedTags]);
-  });
   return (
     <div id="tag-selector">
       <For each={tags()} fallback={<>loading</>}>
