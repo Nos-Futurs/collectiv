@@ -28,6 +28,10 @@ services:
     image: collectiv/frontend:latest
     environment:
       - GITHUB_PACKAGES_TOKEN=${GITHUB_PACKAGES_TOKEN}
+    ports:
+      - "3000:3000"
+    networks: 
+      - webproxy
     env_file: ./apps/frontend/.docker.env
     #restart: unless-stopped
 

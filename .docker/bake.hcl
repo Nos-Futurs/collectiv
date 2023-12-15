@@ -3,7 +3,7 @@ variable "TAG" {
 }
 
 group "default" {
-  targets = ["backend", "frontend"]
+  targets = ["frontend", "backend"]
 }
 
 
@@ -42,5 +42,6 @@ target "frontend" {
     tags =  ["collectiv/frontend:${TAG}"]
     args = {
       GITHUB_PACKAGES_TOKEN: "${GITHUB_PACKAGES_TOKEN}"
+      VITE_BASE_API_URL: "${VITE_BASE_API_URL}"
     }
 }
