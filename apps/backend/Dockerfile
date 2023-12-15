@@ -25,7 +25,7 @@ RUN pnpm --filter=@collectiv/backend deploy --prod ./backend
 # ---------------------------------------------------------------------------- #
 #                                      APP                                     #
 # ---------------------------------------------------------------------------- #
-FROM gcr.io/distroless/nodejs18-debian11 as backend
+FROM node:18 as backend
 
 WORKDIR /usr/src/app
 
@@ -33,5 +33,5 @@ WORKDIR /usr/src/app
 COPY --from=backend-builder /usr/src/app/backend /usr/src/app/
 
 # Step 2 - Expose the port and start the application
-EXPOSE 20001
-CMD [ "dist/main.js" ]
+EXPOSE 3001
+CMD ["dist/main.js" ]

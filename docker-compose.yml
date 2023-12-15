@@ -16,7 +16,12 @@ services:
     image: collectiv/backend:latest
     environment:
       - GITHUB_PACKAGES_TOKEN=${GITHUB_PACKAGES_TOKEN}
+    ports:
+      - "3001:3001"
+    networks: 
+      - webproxy
     env_file: ./apps/backend/.docker.env
+  
     #restart: unless-stopped
 
   frontend:
@@ -25,6 +30,14 @@ services:
       - GITHUB_PACKAGES_TOKEN=${GITHUB_PACKAGES_TOKEN}
     env_file: ./apps/frontend/.docker.env
     #restart: unless-stopped
+
+
+networks:
+  # external network
+  webproxy:
+    name: webproxy
+    external: true
+  
 
 volumes:
   db-data:
