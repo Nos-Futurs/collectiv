@@ -7,10 +7,11 @@ import { UserModule } from './user/user.module.js';
 import { WorkingGroupModule } from './working-group/working-group.module.js';
 import DatabaseModule from './database/database.module.js';
 import { ConfigModule } from '@nestjs/config';
+import serverConfig from './config/server.config.js';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ load: [serverConfig] }),
     AuthModule,
     CompanyModule,
     EventModule,

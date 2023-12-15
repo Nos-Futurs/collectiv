@@ -1,0 +1,9 @@
+# This a reversed .dockerignore. We ignore everything and only add what we need.
+# There are nested .dockerignore in all applications and libraries to copy only the necessary files when using COPY on the whole folder
+/*
+
+# ----------------------------------- PNPM ----------------------------------- #
+!/.npmrc
+!/package.json
+!/pnpm-lock.yaml
+!/pnpm-workspace.yaml

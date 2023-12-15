@@ -3,8 +3,10 @@ node_modules/
 
 # dotenv environment variables file
 apps/**/.env
+apps/**/.docker.env
 apps/**/node_modules/
 .env.test
+.env
 
 # Nuxt.js build / generate output
 dist

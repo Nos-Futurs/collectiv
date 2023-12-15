@@ -10,7 +10,38 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
+      - "5432:5432"
 
-volumes: 
+  backend:
+    image: collectiv/backend:latest
+    environment:
+      - GITHUB_PACKAGES_TOKEN=${GITHUB_PACKAGES_TOKEN}
+    ports:
+      - "3001:3001"
+    networks: 
+      - webproxy
+    env_file: ./apps/backend/.docker.env
+  
+    #restart: unless-stopped
+
+  frontend:
+    image: collectiv/frontend:latest
+    environment:
+      - GITHUB_PACKAGES_TOKEN=${GITHUB_PACKAGES_TOKEN}
+    ports:
+      - "3000:3000"
+    networks: 
+      - webproxy
+    env_file: ./apps/frontend/.docker.env
+    #restart: unless-stopped
+
+
+networks:
+  # external network
+  webproxy:
+    name: webproxy
+    external: true
+  
+
+volumes:
   db-data:

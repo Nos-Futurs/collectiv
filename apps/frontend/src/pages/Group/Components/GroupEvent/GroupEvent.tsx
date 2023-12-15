@@ -11,7 +11,7 @@ const Participants: Component<ParticipantsProps> = (
   props: ParticipantsProps
 ) => {
   return (
-    <div id="events">
+    <div id="group-events">
       <h1>Events</h1>
       <Show
         when={props.events && props.events.length > 0}
