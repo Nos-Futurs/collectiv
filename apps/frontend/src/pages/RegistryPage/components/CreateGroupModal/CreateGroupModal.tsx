@@ -3,6 +3,7 @@ import "./CreateGroupModal.scss";
 import { A } from "@solidjs/router";
 import { User } from "@collectiv/db-entities/frontend";
 import Participants from "../../../Group/Components/Participants/Participants.jsx";
+import TipTapEditor from "../../../../components/TipTapEditor/TipTapEditor.jsx";
 
 interface CreateGroupModalProps {
   users: User[];
@@ -24,6 +25,7 @@ const CreateGroupModal: Component<CreateGroupModalProps> = (
           X
         </button>
         <Participants participants={props.users} owner={props.currentUser}/>
+        <TipTapEditor />
       </div>
     </div>
   );

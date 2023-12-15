@@ -13,6 +13,10 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   #group-modal {
+    position: relative;
+    @include layouts.grid(1fr 2fr, 1fr);
+    padding: spacings.$s;
+    column-gap: spacings.$s;
     z-index: 3;
     background-color: white;
     width: 80%;
@@ -21,6 +25,9 @@
     justify-self: center;
     border-radius: 10px;
     button {
+      position: absolute;
+      top: 0;
+      left: 0;
       background-color: transparent;
     }
   }

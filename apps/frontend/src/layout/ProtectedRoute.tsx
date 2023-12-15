@@ -20,6 +20,7 @@ const ProtectedRoute: Component<ProtectedProps> = (props: ProtectedProps) => {
   const navigate = useNavigate();
 
   //TODO: This is not working when the children component calls createRessource - it seems to override de getMe Ressource
+  //https://github.com/solidjs/solid/issues/188
   createEffect(() => {
     if (!getCurrentUser.loading) {
       const user = getCurrentUser();
