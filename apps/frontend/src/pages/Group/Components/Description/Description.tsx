@@ -15,7 +15,8 @@ const Description: Component<DescriptionProps> = (props: DescriptionProps) => {
         <TipTapEditor
           editable={true}
           owner={true}
-          content={props.group?.name}
+          content={props.group?.description}
+          setter={(value) => console.log(value)}
         />
       </Show>
     </div>

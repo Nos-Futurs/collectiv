@@ -7,8 +7,8 @@ import "./TipTapEditor.scss";
 import ToolbarMenu from "./Components/ToolBarMenu/ToolBarMenu.jsx";
 
 const CONTENT = `
-  <h1>Groupe TEST,</h1>
-  <h2>Objet du groupe</h2>
+  <h1>Groupe NAME,</h1>
+  <h2>Description du groupe pour les participants</h2>
   <p>
   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Im Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
   </p>
@@ -22,6 +22,7 @@ interface TipTapEditorProps {
   editable: boolean;
   owner: boolean;
   content?: string;
+  setter: (value: string) => void;
 }
 
 const TipTapEditor: Component<TipTapEditorProps> = (
@@ -60,6 +61,9 @@ const TipTapEditor: Component<TipTapEditorProps> = (
         element: menu()!,
       }),
     ],
+    onUpdate({ editor }) {
+      props.setter(editor.getHTML());
+    },
     editorProps: {
       attributes: {
         class: editMode()
@@ -71,6 +75,8 @@ const TipTapEditor: Component<TipTapEditorProps> = (
     content: props.content ? props.content : CONTENT,
     editable: editMode(),
   }));
+
+
 
   return (
     <div id="editor">

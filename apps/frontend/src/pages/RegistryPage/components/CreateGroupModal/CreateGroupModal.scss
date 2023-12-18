@@ -14,9 +14,10 @@
   background-color: rgba(0, 0, 0, 0.5);
   #group-modal {
     position: relative;
-    @include layouts.grid(1fr 2fr, 1fr);
-    padding: spacings.$s;
-    column-gap: spacings.$s;
+    @include layouts.grid(1fr 2fr, auto 2fr 1fr);
+    padding: spacings.$m;
+    column-gap: spacings.$m;
+    row-gap: spacings.$m;
     z-index: 3;
     background-color: white;
     width: 80%;
@@ -24,11 +25,32 @@
     height: 80%;
     justify-self: center;
     border-radius: 10px;
+    #group-name {
+      grid-column: 2;
+      height: 60px;
+      width: 100%;
+      justify-self: center;
+      border: 2px solid black;
+    }
     button {
       position: absolute;
       top: 0;
       left: 0;
       background-color: transparent;
+    }
+    #validate-button {
+      height: 60px;
+      width: fit-content;
+      padding: 0 spacings.$m;
+      align-self: center;
+      position: relative;
+      background-color: colours.$light-blue;
+    }
+    textarea {
+      width: 100%;
+      resize: none;
+      border: 2px solid black;
+      border-radius: 5px;
     }
   }
 }
