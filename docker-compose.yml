@@ -1,6 +1,33 @@
 version: "3.9"
 
 services:
+  web-proxy:
+    #####################
+    image: caddy:2-alpine
+    cpus: 0.55
+    mem_limit: 1G
+    #####################
+    # depends_on:
+    # - docker-proxy
+    env_file:
+      - ./caddy.env
+    networks:
+      - webproxy_external_net
+      - webproxy_net
+    ports:
+      - 80:10080
+      - 443:10443
+      - 443:10443/udp
+    restart: unless-stopped
+    # security_opt:
+    #   - no-new-privileges:true
+    # user: "2000:2000"                                   # user 'caddy' has to be created on the host system: `sudo useradd -u 2000 -M -s /usr/sbin/nologin caddy`
+    volumes:
+      - "./data/caddy-data/Caddyfile:/etc/caddy/Caddyfile" # convenient Caddy configuration for humans
+      # CHANGE FOLDERS TO ALLOW NON-ROOT. SEE XDG-DATA
+      - "./data/caddy-data/data:/data" # TLS certificates, private keys, OCSP staples, and other necessary information
+      - "./data/caddy-data/config:/config" # persists the last active configuration, which is useful for caddy reload
+
   postgres:
     image: postgres:10.3
     restart: always
@@ -11,6 +38,8 @@ services:
       - db-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - db_net
 
   backend:
     image: collectiv/backend:latest
@@ -18,10 +47,11 @@ services:
       - GITHUB_PACKAGES_TOKEN=${GITHUB_PACKAGES_TOKEN}
     ports:
       - "3001:3001"
-    networks: 
-      - webproxy
+    networks:
+      - webproxy_net
+      - db_net
     env_file: ./apps/backend/.docker.env
-  
+
     #restart: unless-stopped
 
   frontend:
@@ -30,18 +60,20 @@ services:
       - GITHUB_PACKAGES_TOKEN=${GITHUB_PACKAGES_TOKEN}
     ports:
       - "3000:3000"
-    networks: 
-      - webproxy
+    networks:
+      - webproxy_net
     env_file: ./apps/frontend/.docker.env
     #restart: unless-stopped
 
-
 networks:
   # external network
-  webproxy:
-    name: webproxy
-    external: true
-  
+  webproxy_external_net:
+    driver: bridge
+  webproxy_net:
+    driver: bridge
+    internal: true
+  db_net:
+    driver: bridge
 
 volumes:
   db-data:

@@ -1,0 +1,48 @@
+{"level":"info","ts":1702906783.3999414,"logger":"admin","msg":"admin endpoint started","address":"localhost:2019","enforce_origin":false,"origins":["//localhost:2019","//[::1]:2019","//127.0.0.1:2019"]}
+{"level":"info","ts":1702906783.4026783,"logger":"tls.cache.maintenance","msg":"started background certificate maintenance","cache":"0x40006be000"}
+{"level":"info","ts":1702906783.4094288,"logger":"http.auto_https","msg":"server is listening only on the HTTPS port but has no TLS connection policies; adding one to enable TLS","server_name":"srv0","https_port":10443}
+{"level":"info","ts":1702906783.4095623,"logger":"http.auto_https","msg":"enabling automatic HTTP->HTTPS redirects","server_name":"srv0"}
+{"level":"info","ts":1702906783.4106596,"logger":"http.log","msg":"server running","name":"remaining_auto_https_redirects","protocols":["h1","h2","h3"]}
+{"level":"info","ts":1702906783.4108584,"logger":"http","msg":"enabling HTTP/3 listener","addr":":10443"}
+{"level":"info","ts":1702906783.4121196,"logger":"http.log","msg":"server running","name":"srv0","protocols":["h1","h2","h3"]}
+{"level":"info","ts":1702906783.4122941,"logger":"http","msg":"enabling automatic TLS certificate management","domains":["api.collectiv.test","collectiv.test"]}
+{"level":"info","ts":1702906783.4153311,"logger":"tls.obtain","msg":"acquiring lock","identifier":"collectiv.test"}
+{"level":"info","ts":1702906783.4155457,"logger":"tls.obtain","msg":"acquiring lock","identifier":"api.collectiv.test"}
+{"level":"info","ts":1702906783.4174173,"logger":"tls.obtain","msg":"lock acquired","identifier":"collectiv.test"}
+{"level":"info","ts":1702906783.4174218,"logger":"tls.obtain","msg":"lock acquired","identifier":"api.collectiv.test"}
+{"level":"info","ts":1702906783.4177248,"logger":"tls.obtain","msg":"obtaining certificate","identifier":"collectiv.test"}
+{"level":"info","ts":1702906783.4181304,"logger":"tls.obtain","msg":"obtaining certificate","identifier":"api.collectiv.test"}
+{"level":"info","ts":1702906783.4278865,"logger":"tls.obtain","msg":"certificate obtained successfully","identifier":"collectiv.test"}
+{"level":"info","ts":1702906783.4281359,"logger":"tls.obtain","msg":"releasing lock","identifier":"collectiv.test"}
+{"level":"info","ts":1702906783.427997,"logger":"tls.obtain","msg":"certificate obtained successfully","identifier":"api.collectiv.test"}
+{"level":"info","ts":1702906783.4285235,"logger":"tls.obtain","msg":"releasing lock","identifier":"api.collectiv.test"}
+{"level":"warn","ts":1702906783.43008,"logger":"tls","msg":"stapling OCSP","error":"no OCSP stapling for [collectiv.test]: no OCSP server specified in certificate","identifiers":["collectiv.test"]}
+{"level":"warn","ts":1702906783.4316618,"logger":"tls","msg":"stapling OCSP","error":"no OCSP stapling for [api.collectiv.test]: no OCSP server specified in certificate","identifiers":["api.collectiv.test"]}
+{"level":"warn","ts":1702906783.4620879,"logger":"pki.ca.local","msg":"installing root certificate (you might be prompted for password)","path":"storage:pki/authorities/local/root.crt"}
+{"level":"info","ts":1702906783.5167835,"logger":"tls","msg":"cleaning storage unit","description":"FileStorage:/data/caddy"}
+{"level":"info","ts":1702906783.5201733,"msg":"autosaved config (load with --resume flag)","file":"/config/caddy/autosave.json"}
+{"level":"info","ts":1702906783.520378,"msg":"serving initial configuration"}
+{"level":"info","ts":1702906783.5237367,"logger":"tls","msg":"finished cleaning storage units"}
+{"level":"info","ts":1702907100.7259881,"msg":"shutting down apps, then terminating","signal":"SIGTERM"}
+{"level":"warn","ts":1702907100.7261999,"msg":"exiting; byeee!! 👋","signal":"SIGTERM"}
+{"level":"info","ts":1702907100.7264416,"logger":"http","msg":"servers shutting down with eternal grace period"}
+{"level":"info","ts":1702907100.7273219,"logger":"admin","msg":"stopped previous server","address":"localhost:2019"}
+{"level":"info","ts":1702907100.7274735,"msg":"shutdown complete","signal":"SIGTERM","exit_code":0}
+{"level":"info","ts":1702907111.5438395,"logger":"admin","msg":"admin endpoint started","address":"localhost:2019","enforce_origin":false,"origins":["//localhost:2019","//[::1]:2019","//127.0.0.1:2019"]}
+{"level":"info","ts":1702907111.5452592,"logger":"tls.cache.maintenance","msg":"started background certificate maintenance","cache":"0x40003b0000"}
+{"level":"info","ts":1702907111.5476737,"logger":"http.auto_https","msg":"server is listening only on the HTTPS port but has no TLS connection policies; adding one to enable TLS","server_name":"srv0","https_port":10443}
+{"level":"info","ts":1702907111.5478117,"logger":"http.auto_https","msg":"enabling automatic HTTP->HTTPS redirects","server_name":"srv0"}
+{"level":"warn","ts":1702907111.5553849,"logger":"pki.ca.local","msg":"installing root certificate (you might be prompted for password)","path":"storage:pki/authorities/local/root.crt"}
+{"level":"info","ts":1702907111.6043115,"logger":"tls","msg":"cleaning storage unit","description":"FileStorage:/data/caddy"}
+{"level":"info","ts":1702907111.6043239,"logger":"http","msg":"enabling HTTP/3 listener","addr":":10443"}
+{"level":"info","ts":1702907111.6048598,"logger":"http.log","msg":"server running","name":"srv0","protocols":["h1","h2","h3"]}
+{"level":"info","ts":1702907111.6054912,"logger":"http.log","msg":"server running","name":"remaining_auto_https_redirects","protocols":["h1","h2","h3"]}
+{"level":"info","ts":1702907111.6062074,"logger":"http","msg":"enabling automatic TLS certificate management","domains":["api.collectiv.test","collectiv.test"]}
+{"level":"warn","ts":1702907111.6085186,"logger":"tls","msg":"stapling OCSP","error":"no OCSP stapling for [api.collectiv.test]: no OCSP server specified in certificate","identifiers":["api.collectiv.test"]}
+{"level":"warn","ts":1702907111.6100733,"logger":"tls","msg":"stapling OCSP","error":"no OCSP stapling for [collectiv.test]: no OCSP server specified in certificate","identifiers":["collectiv.test"]}
+{"level":"info","ts":1702907111.6115654,"logger":"tls","msg":"finished cleaning storage units"}
+{"level":"info","ts":1702907111.6117404,"msg":"autosaved config (load with --resume flag)","file":"/config/caddy/autosave.json"}
+{"level":"info","ts":1702907111.6118648,"msg":"serving initial configuration"}
+{"level":"info","ts":1702907529.7163866,"logger":"admin.api","msg":"received request","method":"POST","host":"localhost:2019","uri":"/load","remote_ip":"127.0.0.1","remote_port":"40380","headers":{"Accept-Encoding":["gzip"],"Content-Length":["1546"],"Content-Type":["application/json"],"Origin":["http://localhost:2019"],"User-Agent":["Go-http-client/1.1"]}}
+{"level":"info","ts":1702907529.7167256,"msg":"config is unchanged"}
+{"level":"info","ts":1702907529.7168589,"logger":"admin.api","msg":"load complete"}
