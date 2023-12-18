@@ -1,6 +1,6 @@
 import { createTiptapEditor } from "solid-tiptap";
 import StarterKit from "@tiptap/starter-kit";
-import { createSignal, JSX, Show } from "solid-js";
+import { Component, createEffect, createSignal, JSX, Show } from "solid-js";
 import BubbleMenu from "@tiptap/extension-bubble-menu";
 import "./TipTapEditor.scss";
 
@@ -18,9 +18,39 @@ const CONTENT = `
   <p><strong>Canal de communication whatsapp ?</strong></p>
 `;
 
-export default function TipTapEditor(): JSX.Element {
+interface TipTapEditorProps {
+  editable: boolean;
+  owner: boolean;
+  content?: string;
+}
+
+const TipTapEditor: Component<TipTapEditorProps> = (
+  props: TipTapEditorProps
+) => {
   const [container, setContainer] = createSignal<HTMLDivElement>();
+  const [editableEditor, setEditableEditor] = createSignal<boolean>();
+  const [editMode, setEditMode] = createSignal<boolean>(false);
   const [menu, setMenu] = createSignal<HTMLDivElement>();
+
+  createEffect(() => {
+    /**
+     * Updates the editable state of the editor based on the provided props.
+     * If `editable` is false, sets `editableEditor` and `editMode` to false.
+     * If `editable` is true and `owner` is false, sets `editableEditor` to false and `editMode` to the value of `editable`.
+     * If `editable` is true and `owner` is true, sets `editableEditor` to true. Let editMode to false because the default view isn't editable
+     */
+    if (!props.editable) {
+      setEditableEditor(false);
+      setEditMode(false);
+    } else {
+      if (!props.owner) {
+        setEditableEditor(false);
+        setEditMode(props.editable);
+      } else {
+        setEditableEditor(true);
+      }
+    }
+  });
 
   const editor = createTiptapEditor(() => ({
     element: container()!,
@@ -32,14 +62,28 @@ export default function TipTapEditor(): JSX.Element {
     ],
     editorProps: {
       attributes: {
-        class: "editor-content",
+        class: editMode()
+          ? "editor-content editable"
+          : "editor-content non-editable",
+        spellcheck: "false",
       },
     },
-    content: CONTENT,
+    content: props.content ? props.content : CONTENT,
+    editable: editMode(),
   }));
 
   return (
     <div id="editor">
+      {editableEditor() && (
+        <button
+          id="edit-button"
+          onClick={() => {
+            setEditMode(!editMode());
+          }}
+        >
+          edit
+        </button>
+      )}
       <div ref={setMenu}>
         <Show when={editor()} keyed>
           {(instance) => <ToolbarMenu editor={instance} />}
@@ -48,4 +92,6 @@ export default function TipTapEditor(): JSX.Element {
       <div id="tiptap-editor" ref={setContainer} />
     </div>
   );
-}
+};
+
+export default TipTapEditor;

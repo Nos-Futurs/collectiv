@@ -25,7 +25,7 @@ const CreateGroupModal: Component<CreateGroupModalProps> = (
           X
         </button>
         <Participants participants={props.users} owner={props.currentUser}/>
-        <TipTapEditor />
+        <TipTapEditor editable={true} owner={false}/>
       </div>
     </div>
   );
