@@ -1,0 +1,56 @@
+@use "@style/spacings";
+@use "@style/layouts";
+@use "@style/font-sizes";
+
+#editor {
+  height: 100%;
+  width: 100%;
+  @include layouts.flex(column);
+  #edit-button{
+    margin-left: auto;
+    margin-bottom: spacings.$s;
+  }
+  #tiptap-editor {
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    .editor-content {
+      height: 400px;
+      overflow-y: scroll;
+      padding: spacings.$s;
+      border: solid 2px;
+      width: 100%;
+      border-radius: 5px;
+      &:focus {
+        outline: none;
+      }
+      h1 {
+        font-size: 25px;
+        font-weight: bold;
+      }
+      h2 {
+        font-size: 19px;
+        font-weight: bold;
+      }
+      p {
+        font-size: 15px;
+      }
+      blockquote {
+        color: black;
+        font-style: italic;
+      }
+      blockquote:after {
+        content: close-quote;
+        vertical-align: bottom;
+      }
+
+      blockquote:before {
+        content: open-quote;
+        vertical-align: top;
+      }
+    }
+    .non-editable {
+      border: none;
+    }
+  }
+}

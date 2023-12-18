@@ -1,0 +1,34 @@
+@use "@style/layouts";
+@use "@style/spacings";
+@use "@style/colours";
+
+#tool-bar-menu {
+  @include layouts.flex(row, center, center);
+  background-color: colours.$green-blue;
+  padding: spacings.$xs spacings.$s;
+  width: fit-content;
+  border-radius: 10px;
+  .submenu {
+    @include layouts.flex(row, center, center);
+    padding: 0 spacings.$xs;
+    .menu-item {
+      @include layouts.flex(row, center, center);
+      padding: spacings.$xs;
+    }
+    #font-bold-button {
+      font-weight: bold;
+    }
+    #heading-1-button {
+      font-weight: bold;
+    }
+    #heading-2-button {
+      font-weight: bold;
+    }
+    #italic-button {
+      font-style: italic;
+    }
+  }
+  .submenu:not(:last-child) {
+    border-right: solid 1px black;
+  }
+}

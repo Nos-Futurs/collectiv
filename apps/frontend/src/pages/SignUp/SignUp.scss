@@ -9,14 +9,13 @@
   justify-content: center;
   align-items: center;
   background-color: colours.$green-blue;
-  height: 100vh;
+  padding: spacings.$xxl 0;
   #signup-form {
     @include layouts.grid(1fr, repeat(8, auto));
     background-color: #f0f0f0;
     padding: spacings.$xl spacings.$l;
     border-radius: 8px;
-    width: 30%;
-    max-width: 700px;
+    width: 60%;
     row-gap: spacings.$m;
     #login-title {
       margin: 0 0 spacings.$m 0;
@@ -26,6 +25,7 @@
     #button-container {
       @include layouts.flex(column);
       row-gap: spacings.$s;
+      padding: spacings.$m 0 0 0;
       margin: spacings.$s 0;
       justify-content: space-between;
       #signup-button {

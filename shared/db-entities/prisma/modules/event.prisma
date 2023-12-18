@@ -1,12 +1,22 @@
 import { WorkingGroup }from "./working-groups"
 import { Tag }from "./tag"
 
+model Calendar { // VCALENDAR ICALENDAR CONVENTION
+    id     Int     @id @default(autoincrement())
+    name   String
+    events Event[]
+}
+
 model Event {
     id             Int          @id @default(autoincrement())
+    uid            String       @unique  // VEVENT ICALENDAR CONVENTION
+    summary        String       // VEVENT ICALENDAR CONVENTION
+    description    String?      // VEVENT ICALENDAR CONVENTION
+    location       String?      // VEVENT ICALENDAR CONVENTION
     createdAt      DateTime     @default(now())
     updatedAt      DateTime     @updatedAt
-    startDate      DateTime
-    endDate        DateTime
+    dtStart        DateTime     // VEVENT ICALENDAR CONVENTION
+    dtEnd          DateTime     // VEVENT ICALENDAR CONVENTION
     /// @description The working group link to this event
     /// @DtoCreateOptional
     /// @DtoRelationCanConnectOnCreate
@@ -19,5 +29,8 @@ model Event {
     /// @DtoRelationCanConnectOnUpdate
     /// @DtoRelationCanDisconnectOnUpdate
     tags           Tag[]
+    /// @DtoRelationCanConnectOnCreate
+    /// @DtoRelationCanConnectOnUpdate
+    Calendar       Calendar?    @relation(fields: [calendarId], references: [id])
+    calendarId     Int?
 }
-

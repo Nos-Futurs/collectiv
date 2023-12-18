@@ -21,4 +21,9 @@
   "javascript.preferences.importModuleSpecifierEnding": "js",
   "markdown.extension.toc.levels": "2..6",
   "typescript.preferences.importModuleSpecifierEnding": "js",
+  "[javascript][typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    }
+  },
 }
