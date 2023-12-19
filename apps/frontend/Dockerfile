@@ -21,7 +21,7 @@ RUN pnpm --filter=@collectiv/frontend deploy --prod ./frontend
 # ---------------------------------------------------------------------------- #
 #                                      APP                                     #
 # ---------------------------------------------------------------------------- #
-FROM node:18 as frontend
+FROM node:18 as collectiv_frontend
 
 WORKDIR /usr/src/app
 

@@ -3,7 +3,7 @@ variable "TAG" {
 }
 
 group "default" {
-  targets = ["frontend", "backend"]
+  targets = ["collectiv_frontend", "collectiv_backend"]
 }
 
 
@@ -15,9 +15,10 @@ target "monorepo-dependencies" {
     args = {
       GITHUB_PACKAGES_TOKEN: "${GITHUB_PACKAGES_TOKEN}"
     }
+    platforms = ["linux/amd64"]
 }
 
-target "backend" {
+target "collectiv_backend" {
     context = "apps/backend"
     contexts = {
         base = "target:monorepo-dependencies"
@@ -29,9 +30,10 @@ target "backend" {
     args = {
       GITHUB_PACKAGES_TOKEN: "${GITHUB_PACKAGES_TOKEN}"
     }
+    platforms = ["linux/amd64"]
 }
 
-target "frontend" {
+target "collectiv_frontend" {
     context = "apps/frontend"
     contexts = {
         base = "target:monorepo-dependencies"
@@ -44,4 +46,5 @@ target "frontend" {
       GITHUB_PACKAGES_TOKEN: "${GITHUB_PACKAGES_TOKEN}"
       VITE_BASE_API_URL: "${VITE_BASE_API_URL}"
     }
+    platforms = ["linux/amd64"]
 }
