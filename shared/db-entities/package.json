@@ -36,6 +36,7 @@
     "build:frontend": "tsc -p tsconfig.frontend.json",
     "clean": "rimraf ./dist && rimraf ./generated",
     "db:generate": "pnpm clean && pnpm db:merge && prisma generate",
+    "db:generate:sql": "pnpm dlx prisma migrate diff --from-empty --to-schema-datasource prisma/schema.prisma --script > prisma/generated.sql",
     "db:merge": "prisma-import --force -o prisma/schema.prisma -s \"prisma/modules/*.prisma\"",
     "db:migrate:dev": "pnpm db:merge && prisma migrate dev",
     "db:migrate:seed": "pnpm db:merge && prisma migrate reset",

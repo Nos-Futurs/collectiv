@@ -28,12 +28,18 @@ services:
       - "./data/caddy-data/data:/data" # TLS certificates, private keys, OCSP staples, and other necessary information
       - "./data/caddy-data/config:/config" # persists the last active configuration, which is useful for caddy reload
 
-  postgres:
-    image: postgres:10.3
+  collectiv_db:
+    image: postgres:15
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=database
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
@@ -41,7 +47,7 @@ services:
     networks:
       - db_net
 
-  backend:
+  collectiv_backend:
     image: collectiv/backend:latest
     environment:
       - GITHUB_PACKAGES_TOKEN=${GITHUB_PACKAGES_TOKEN}
@@ -50,11 +56,14 @@ services:
     networks:
       - webproxy_net
       - db_net
+    depends_on:
+      collectiv_db:
+        condition: service_healthy
     env_file: ./apps/backend/.docker.env
 
     #restart: unless-stopped
 
-  frontend:
+  collectiv_frontend:
     image: collectiv/frontend:latest
     environment:
       - GITHUB_PACKAGES_TOKEN=${GITHUB_PACKAGES_TOKEN}
