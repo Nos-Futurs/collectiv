@@ -25,7 +25,7 @@ RUN pnpm --filter=@collectiv/backend deploy --prod ./backend
 # ---------------------------------------------------------------------------- #
 #                                      APP                                     #
 # ---------------------------------------------------------------------------- #
-FROM gcr.io/distroless/nodejs18-debian11 as backend
+FROM gcr.io/distroless/nodejs18-debian11 as collectiv_backend
 
 WORKDIR /usr/src/app
 

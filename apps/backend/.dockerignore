@@ -14,3 +14,5 @@
 # -------------------------------- Typescript -------------------------------- #
 !/tsconfig.build.json
 !/tsconfig.json
+
+!/.docker.env

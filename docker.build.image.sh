@@ -14,5 +14,9 @@ script_path=$(
 
 cd "$script_path"
 echo -e "${BLUE}Building docker images...${NC}"
+# required platform to build correct image for server
 docker buildx bake -f .docker/bake.hcl -f .env
 
+# once the image is build you can upload it to the server using : 
+docker save collectiv/frontend | ssh -C ovh docker load
+# Temporary solution to upload the image to the server / because you can't diff so you remove and reupload the image

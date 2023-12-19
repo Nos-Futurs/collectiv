@@ -46,3 +46,23 @@
 {"level":"info","ts":1702907529.7163866,"logger":"admin.api","msg":"received request","method":"POST","host":"localhost:2019","uri":"/load","remote_ip":"127.0.0.1","remote_port":"40380","headers":{"Accept-Encoding":["gzip"],"Content-Length":["1546"],"Content-Type":["application/json"],"Origin":["http://localhost:2019"],"User-Agent":["Go-http-client/1.1"]}}
 {"level":"info","ts":1702907529.7167256,"msg":"config is unchanged"}
 {"level":"info","ts":1702907529.7168589,"logger":"admin.api","msg":"load complete"}
+{"level":"info","ts":1702916731.1591704,"logger":"admin","msg":"admin endpoint started","address":"localhost:2019","enforce_origin":false,"origins":["//localhost:2019","//[::1]:2019","//127.0.0.1:2019"]}
+{"level":"info","ts":1702916731.1607962,"logger":"tls.cache.maintenance","msg":"started background certificate maintenance","cache":"0x40000b6980"}
+{"level":"info","ts":1702916731.1624484,"logger":"http.auto_https","msg":"server is listening only on the HTTPS port but has no TLS connection policies; adding one to enable TLS","server_name":"srv0","https_port":10443}
+{"level":"info","ts":1702916731.1625612,"logger":"http.auto_https","msg":"enabling automatic HTTP->HTTPS redirects","server_name":"srv0"}
+{"level":"info","ts":1702916731.1642826,"logger":"http","msg":"enabling HTTP/3 listener","addr":":10443"}
+{"level":"info","ts":1702916731.1643274,"logger":"tls","msg":"cleaning storage unit","description":"FileStorage:/data/caddy"}
+{"level":"info","ts":1702916731.1661878,"logger":"http.log","msg":"server running","name":"srv0","protocols":["h1","h2","h3"]}
+{"level":"info","ts":1702916731.166508,"logger":"http.log","msg":"server running","name":"remaining_auto_https_redirects","protocols":["h1","h2","h3"]}
+{"level":"info","ts":1702916731.1666744,"logger":"http","msg":"enabling automatic TLS certificate management","domains":["api.collectiv.test","collectiv.test"]}
+{"level":"warn","ts":1702916731.1681123,"logger":"tls","msg":"stapling OCSP","error":"no OCSP stapling for [api.collectiv.test]: no OCSP server specified in certificate","identifiers":["api.collectiv.test"]}
+{"level":"warn","ts":1702916731.1691844,"logger":"tls","msg":"stapling OCSP","error":"no OCSP stapling for [collectiv.test]: no OCSP server specified in certificate","identifiers":["collectiv.test"]}
+{"level":"info","ts":1702916731.1694632,"logger":"tls","msg":"finished cleaning storage units"}
+{"level":"info","ts":1702916731.2110512,"logger":"pki.ca.local","msg":"root certificate is already trusted by system","path":"storage:pki/authorities/local/root.crt"}
+{"level":"info","ts":1702916731.2119222,"msg":"autosaved config (load with --resume flag)","file":"/config/caddy/autosave.json"}
+{"level":"info","ts":1702916731.2120197,"msg":"serving initial configuration"}
+{"level":"info","ts":1702916749.805176,"msg":"shutting down apps, then terminating","signal":"SIGTERM"}
+{"level":"warn","ts":1702916749.80543,"msg":"exiting; byeee!! 👋","signal":"SIGTERM"}
+{"level":"info","ts":1702916749.805646,"logger":"http","msg":"servers shutting down with eternal grace period"}
+{"level":"info","ts":1702916749.80691,"logger":"admin","msg":"stopped previous server","address":"localhost:2019"}
+{"level":"info","ts":1702916749.8070464,"msg":"shutdown complete","signal":"SIGTERM","exit_code":0}
